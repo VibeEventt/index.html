@@ -1,0 +1,272 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>DJ TINA - OPEN YOUR EYES | Vibe Event</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  
+  <style>
+    :root {
+      --bg-color: #f4f6f9;
+      --card-bg: #ffffff;
+      --text-main: #0f172a;
+      --text-muted: #64748b;
+      --accent-color: #6366f1;
+      --accent-hover: #4f46e5;
+      --border-color: #e2e8f0;
+      --shadow-sm: 0 1px 3px rgba(0,0,0,0.05);
+      --shadow-md: 0 10px 25px -5px rgba(0,0,0,0.05), 0 8px 10px -6px rgba(0,0,0,0.01);
+      --radius: 16px;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+      font-family: 'Plus Jakarta Sans', sans-serif;
+    }
+
+    body {
+      background-color: var(--bg-color);
+      color: var(--text-main);
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      min-height: 100vh;
+      padding: 20px;
+    }
+
+    .container {
+      width: 100%;
+      max-width: 480px;
+      margin: 0 auto;
+    }
+
+    /* Logo Header */
+    .logo-header-box {
+      text-align: center;
+      margin-bottom: 20px;
+    }
+
+    .logo-header-box img {
+      max-width: 180px;
+      height: auto;
+      object-fit: contain;
+    }
+
+    /* Poster Card */
+    .hero-poster-card {
+      background: var(--card-bg);
+      border-radius: var(--radius);
+      overflow: hidden;
+      box-shadow: var(--shadow-md);
+      border: 1px solid var(--border-color);
+      margin-bottom: 24px;
+    }
+
+    .hero-poster-card img {
+      width: 100%;
+      height: auto;
+      display: block;
+      object-fit: cover;
+    }
+
+    /* Main Form Card */
+    .ticket-card {
+      background: var(--card-bg);
+      border-radius: var(--radius);
+      padding: 28px 24px;
+      box-shadow: var(--shadow-md);
+      border: 1px solid var(--border-color);
+    }
+
+    .event-title {
+      font-size: 1.5rem;
+      font-weight: 800;
+      letter-spacing: -0.02em;
+      color: var(--text-main);
+      margin-bottom: 6px;
+      text-align: center;
+    }
+
+    .event-subtitle {
+      font-size: 0.9rem;
+      color: var(--text-muted);
+      text-align: center;
+      margin-bottom: 24px;
+      font-weight: 500;
+    }
+
+    /* Form Fields */
+    .form-group {
+      margin-bottom: 18px;
+    }
+
+    .form-group label {
+      display: block;
+      font-size: 0.85rem;
+      font-weight: 600;
+      margin-bottom: 6px;
+      color: var(--text-main);
+    }
+
+    .form-group input, 
+    .form-group select {
+      width: 100%;
+      padding: 12px 14px;
+      border: 1px solid var(--border-color);
+      border-radius: 10px;
+      background-color: #f8fafc;
+      font-size: 0.95rem;
+      color: var(--text-main);
+      transition: all 0.2s ease;
+      outline: none;
+    }
+
+    .form-group input:focus, 
+    .form-group select:focus {
+      border-color: var(--accent-color);
+      background-color: #ffffff;
+      box-shadow: 0 0 0 3px rgba(99, 102, 241, 0.15);
+    }
+
+    /* Submit Button */
+    .submit-btn {
+      width: 100%;
+      padding: 14px;
+      background-color: var(--accent-color);
+      color: #ffffff;
+      border: none;
+      border-radius: 10px;
+      font-size: 1rem;
+      font-weight: 700;
+      cursor: pointer;
+      transition: background-color 0.2s ease, transform 0.1s ease;
+      margin-top: 10px;
+    }
+
+    .submit-btn:hover {
+      background-color: var(--accent-hover);
+    }
+
+    .submit-btn:active {
+      transform: scale(0.99);
+    }
+
+    /* Ticket Result Box */
+    .ticket-result {
+      display: none;
+      margin-top: 24px;
+      padding: 20px;
+      border-radius: 12px;
+      background: #f0fdf4;
+      border: 1px solid #bbf7d0;
+      text-align: center;
+    }
+
+    .ticket-result h3 {
+      color: #166534;
+      font-size: 1.1rem;
+      margin-bottom: 8px;
+    }
+
+    .ticket-result p {
+      color: #15803d;
+      font-size: 0.9rem;
+      margin-bottom: 4px;
+    }
+
+    .ticket-code {
+      display: inline-block;
+      margin-top: 10px;
+      padding: 6px 12px;
+      background: #ffffff;
+      border: 1px dashed #22c55e;
+      border-radius: 6px;
+      font-weight: 700;
+      letter-spacing: 0.05em;
+      color: #15803d;
+    }
+  </style>
+</head>
+<body>
+
+  <div class="container">
+    
+    <!-- Vibe Logo Header -->
+    <div class="logo-header-box">
+      <img src="Paragraf metniniz.png" alt="Vibe Event Logo">
+    </div>
+
+    <!-- DJ TINA Poster -->
+    <div class="hero-poster-card">
+      <img src="DJ TINA - 1.jpeg" alt="DJ TINA Open Your Eyes Poster">
+    </div>
+
+    <!-- Bilet Formu -->
+    <div class="ticket-card">
+      <h1 class="event-title">OPEN YOUR EYES</h1>
+      <p class="event-subtitle">DJ TINA Performance • Bilet Kayıt Formu</p>
+
+      <form id="ticketForm">
+        <div class="form-group">
+          <label for="fullName">Ad Soyad</label>
+          <input type="text" id="fullName" placeholder="Aykut Yılmaz" required>
+        </div>
+
+        <div class="form-group">
+          <label for="email">E-Posta Adresi</label>
+          <input type="email" id="email" placeholder="ornek@email.com" required>
+        </div>
+
+        <div class="form-group">
+          <label for="phone">Telefon Numarası</label>
+          <input type="tel" id="phone" placeholder="05XX XXX XX XX" required>
+        </div>
+
+        <div class="form-group">
+          <label for="ticketType">Bilet Türü</label>
+          <select id="ticketType" required>
+            <option value="" disabled selected>Lütfen seçiniz</option>
+            <option value="Standard Pass">Standard Pass</option>
+            <option value="VIP Backstage">VIP Backstage</option>
+            <option value="Early Bird">Early Bird</option>
+          </select>
+        </div>
+
+        <button type="submit" class="submit-btn">Bileti Oluştur</button>
+      </form>
+
+      <!-- Oluşturulan Bilet Bilgisi -->
+      <div id="ticketResult" class="ticket-result">
+        <h3>🎉 Biletiniz Hazır!</h3>
+        <p><strong id="resName"></strong> adına kaydınız alınmıştır.</p>
+        <p>Tür: <span id="resType"></span></p>
+        <div class="ticket-code" id="resCode">VIBE-000000</div>
+      </div>
+    </div>
+
+  </div>
+
+  <script>
+    document.getElementById('ticketForm').addEventListener('submit', function(e) {
+      e.preventDefault();
+
+      const name = document.getElementById('fullName').value;
+      const ticketType = document.getElementById('ticketType').value;
+      const randomCode = 'VIBE-' + Math.floor(100000 + Math.random() * 900000);
+
+      document.getElementById('resName').textContent = name;
+      document.getElementById('resType').textContent = ticketType;
+      document.getElementById('resCode').textContent = randomCode;
+
+      document.getElementById('ticketResult').style.display = 'block';
+      this.reset();
+    });
+  </script>
+
+</body>
+</html>
