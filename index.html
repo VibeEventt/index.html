@@ -1,272 +1,1341 @@
 <!DOCTYPE html>
 <html lang="tr">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>DJ TINA - OPEN YOUR EYES | Vibe Event</title>
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
-  
-  <style>
-    :root {
-      --bg-color: #f4f6f9;
-      --card-bg: #ffffff;
-      --text-main: #0f172a;
-      --text-muted: #64748b;
-      --accent-color: #6366f1;
-      --accent-hover: #4f46e5;
-      --border-color: #e2e8f0;
-      --shadow-sm: 0 1px 3px rgba(0,0,0,0.05);
-      --shadow-md: 0 10px 25px -5px rgba(0,0,0,0.05), 0 8px 10px -6px rgba(0,0,0,0.01);
-      --radius: 16px;
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>DJ TINA — OPEN YOUR EYES</title>
+
+<style>
+
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap');
+
+:root{
+    --pink:#ff149f;
+    --magenta:#ff00c8;
+    --purple:#7c2cff;
+    --blue:#00aaff;
+    --cyan:#00e5ff;
+    --black:#030107;
+}
+
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+}
+
+html,
+body{
+    width:100%;
+    height:100%;
+    overflow:hidden;
+    background:#030107;
+    font-family:Inter,Arial,sans-serif;
+}
+
+body{
+    color:white;
+}
+
+/* =========================================================
+   ANA SAHNE
+========================================================= */
+
+.scene{
+    position:relative;
+    width:100vw;
+    height:100vh;
+    overflow:hidden;
+    background:
+        radial-gradient(
+            ellipse at 50% 52%,
+            rgba(116,0,255,.22) 0%,
+            rgba(30,0,65,.20) 27%,
+            rgba(3,1,7,1) 72%
+        );
+}
+
+/* =========================================================
+   CANVAS IŞIK SİSTEMİ
+========================================================= */
+
+#lights{
+    position:absolute;
+    inset:0;
+    width:100%;
+    height:100%;
+    z-index:1;
+}
+
+/* =========================================================
+   MERKEZ GLOW
+========================================================= */
+
+.centerGlow{
+    position:absolute;
+    z-index:2;
+
+    left:50%;
+    top:50%;
+
+    width:55vw;
+    height:55vw;
+
+    transform:translate(-50%,-50%);
+
+    border-radius:50%;
+
+    background:
+        radial-gradient(
+            circle,
+            rgba(255,0,180,.16) 0%,
+            rgba(124,44,255,.09) 32%,
+            transparent 68%
+        );
+
+    filter:blur(30px);
+
+    animation:centerPulse 4s ease-in-out infinite alternate;
+}
+
+@keyframes centerPulse{
+
+    from{
+        transform:translate(-50%,-50%) scale(.92);
+        opacity:.65;
     }
 
-    * {
-      box-sizing: border-box;
-      margin: 0;
-      padding: 0;
-      font-family: 'Plus Jakarta Sans', sans-serif;
+    to{
+        transform:translate(-50%,-50%) scale(1.08);
+        opacity:1;
     }
 
-    body {
-      background-color: var(--bg-color);
-      color: var(--text-main);
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      min-height: 100vh;
-      padding: 20px;
+}
+
+/* =========================================================
+   ROTATING RINGS
+========================================================= */
+
+.ring{
+    position:absolute;
+    z-index:2;
+
+    left:50%;
+    top:50%;
+
+    width:65vw;
+    height:65vw;
+
+    max-width:1050px;
+    max-height:1050px;
+
+    transform:translate(-50%,-50%);
+
+    border-radius:50%;
+
+    border:1px solid rgba(255,0,195,.12);
+
+    box-shadow:
+        0 0 35px rgba(255,0,180,.04),
+        inset 0 0 35px rgba(0,150,255,.03);
+
+    animation:rotate 24s linear infinite;
+}
+
+.ring::before{
+    content:"";
+
+    position:absolute;
+
+    inset:9%;
+
+    border-radius:50%;
+
+    border:1px solid rgba(0,190,255,.10);
+}
+
+.ring::after{
+    content:"";
+
+    position:absolute;
+
+    inset:23%;
+
+    border-radius:50%;
+
+    border:1px solid rgba(160,0,255,.10);
+}
+
+.ring2{
+    width:48vw;
+    height:48vw;
+
+    animation:
+        rotateReverse 18s linear infinite;
+}
+
+.ring3{
+    width:82vw;
+    height:82vw;
+
+    opacity:.35;
+
+    animation-duration:36s;
+}
+
+@keyframes rotate{
+
+    from{
+        transform:translate(-50%,-50%) rotate(0deg);
     }
 
-    .container {
-      width: 100%;
-      max-width: 480px;
-      margin: 0 auto;
+    to{
+        transform:translate(-50%,-50%) rotate(360deg);
     }
 
-    /* Logo Header */
-    .logo-header-box {
-      text-align: center;
-      margin-bottom: 20px;
+}
+
+@keyframes rotateReverse{
+
+    from{
+        transform:translate(-50%,-50%) rotate(360deg);
     }
 
-    .logo-header-box img {
-      max-width: 180px;
-      height: auto;
-      object-fit: contain;
+    to{
+        transform:translate(-50%,-50%) rotate(0deg);
     }
 
-    /* Poster Card */
-    .hero-poster-card {
-      background: var(--card-bg);
-      border-radius: var(--radius);
-      overflow: hidden;
-      box-shadow: var(--shadow-md);
-      border: 1px solid var(--border-color);
-      margin-bottom: 24px;
+}
+
+/* =========================================================
+   GRAIN
+========================================================= */
+
+.grain{
+    position:absolute;
+    inset:-50%;
+
+    z-index:20;
+
+    pointer-events:none;
+
+    opacity:.045;
+
+    background-image:url("data:image/svg+xml,%3Csvg viewBox='0 0 180 180' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='.8'/%3E%3C/svg%3E");
+
+    animation:grainMove .18s steps(2) infinite;
+}
+
+@keyframes grainMove{
+
+    0%{transform:translate(0,0)}
+    25%{transform:translate(2%,-2%)}
+    50%{transform:translate(-2%,1%)}
+    75%{transform:translate(1%,2%)}
+    100%{transform:translate(-1%,-1%)}
+
+}
+
+/* =========================================================
+   ÜST BAR
+========================================================= */
+
+.topBar{
+    position:absolute;
+
+    left:0;
+    right:0;
+    top:0;
+
+    height:90px;
+
+    padding:0 4vw;
+
+    z-index:15;
+
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+
+    border-bottom:1px solid rgba(255,255,255,.07);
+
+    background:linear-gradient(
+        to bottom,
+        rgba(0,0,0,.38),
+        transparent
+    );
+}
+
+.logo{
+    font-size:14px;
+    font-weight:800;
+    letter-spacing:5px;
+}
+
+.logo span{
+    color:var(--pink);
+
+    text-shadow:
+        0 0 12px var(--pink),
+        0 0 30px rgba(255,0,180,.7);
+}
+
+.live{
+    display:flex;
+    align-items:center;
+    gap:9px;
+
+    font-size:10px;
+    font-weight:700;
+
+    letter-spacing:3px;
+
+    color:rgba(255,255,255,.55);
+}
+
+.liveDot{
+    width:6px;
+    height:6px;
+
+    border-radius:50%;
+
+    background:#ff159f;
+
+    box-shadow:
+        0 0 8px #ff159f,
+        0 0 18px #ff159f;
+
+    animation:livePulse 1s infinite alternate;
+}
+
+@keyframes livePulse{
+
+    from{
+        opacity:.3;
+        transform:scale(.7);
     }
 
-    .hero-poster-card img {
-      width: 100%;
-      height: auto;
-      display: block;
-      object-fit: cover;
+    to{
+        opacity:1;
+        transform:scale(1.2);
     }
 
-    /* Main Form Card */
-    .ticket-card {
-      background: var(--card-bg);
-      border-radius: var(--radius);
-      padding: 28px 24px;
-      box-shadow: var(--shadow-md);
-      border: 1px solid var(--border-color);
+}
+
+/* =========================================================
+   HERO
+========================================================= */
+
+.hero{
+    position:absolute;
+
+    z-index:10;
+
+    inset:0;
+
+    display:flex;
+    flex-direction:column;
+
+    justify-content:center;
+    align-items:center;
+
+    text-align:center;
+
+    perspective:1000px;
+}
+
+.eyebrow{
+    position:relative;
+
+    margin-bottom:22px;
+
+    font-size:10px;
+    font-weight:700;
+
+    letter-spacing:8px;
+
+    color:rgba(255,255,255,.62);
+
+    text-transform:uppercase;
+
+    animation:fadeIn 1.5s ease both;
+}
+
+.eyebrow::before,
+.eyebrow::after{
+    content:"";
+
+    position:absolute;
+
+    top:50%;
+
+    width:80px;
+    height:1px;
+
+    background:linear-gradient(
+        90deg,
+        transparent,
+        rgba(255,0,190,.7)
+    );
+}
+
+.eyebrow::before{
+    right:calc(100% + 20px);
+}
+
+.eyebrow::after{
+    left:calc(100% + 20px);
+
+    transform:rotate(180deg);
+}
+
+/* =========================================================
+   DEV DJ TINA
+========================================================= */
+
+.titleWrap{
+    position:relative;
+
+    display:flex;
+    justify-content:center;
+    align-items:center;
+
+    transform-style:preserve-3d;
+}
+
+.title{
+
+    position:relative;
+
+    font-size:clamp(90px,15.8vw,290px);
+
+    line-height:.78;
+
+    font-weight:900;
+
+    letter-spacing:-.075em;
+
+    white-space:nowrap;
+
+    color:#fff;
+
+    transform:translateZ(40px);
+
+    text-shadow:
+
+        0 1px 0 #fff,
+
+        0 0 5px rgba(255,255,255,.95),
+
+        0 0 15px rgba(255,0,200,.95),
+
+        0 0 35px rgba(255,0,180,.75),
+
+        0 0 75px rgba(124,44,255,.55),
+
+        0 0 130px rgba(0,170,255,.25);
+
+    animation:titleBreath 3.2s ease-in-out infinite alternate;
+
+}
+
+@keyframes titleBreath{
+
+    from{
+
+        filter:brightness(.92);
+
+        text-shadow:
+            0 0 5px rgba(255,255,255,.95),
+            0 0 15px rgba(255,0,200,.9),
+            0 0 35px rgba(255,0,180,.65),
+            0 0 70px rgba(124,44,255,.45),
+            0 0 120px rgba(0,170,255,.18);
+
     }
 
-    .event-title {
-      font-size: 1.5rem;
-      font-weight: 800;
-      letter-spacing: -0.02em;
-      color: var(--text-main);
-      margin-bottom: 6px;
-      text-align: center;
+    to{
+
+        filter:brightness(1.22);
+
+        text-shadow:
+            0 0 5px white,
+            0 0 18px #ff00c8,
+            0 0 45px #ff009d,
+            0 0 90px #7c2cff,
+            0 0 150px rgba(0,180,255,.4);
+
     }
 
-    .event-subtitle {
-      font-size: 0.9rem;
-      color: var(--text-muted);
-      text-align: center;
-      margin-bottom: 24px;
-      font-weight: 500;
+}
+
+/* RGB GHOST */
+
+.title::before,
+.title::after{
+
+    content:"DJ TINA";
+
+    position:absolute;
+
+    inset:0;
+
+    pointer-events:none;
+
+    opacity:.15;
+
+}
+
+.title::before{
+
+    color:#00d9ff;
+
+    transform:translate(-4px,1px);
+
+    mix-blend-mode:screen;
+
+}
+
+.title::after{
+
+    color:#ff008c;
+
+    transform:translate(4px,-1px);
+
+    mix-blend-mode:screen;
+
+}
+
+/* =========================================================
+   ALT YAZI
+========================================================= */
+
+.subtitle{
+
+    margin-top:35px;
+
+    font-size:clamp(11px,1.1vw,17px);
+
+    font-weight:600;
+
+    letter-spacing:11px;
+
+    color:rgba(255,255,255,.78);
+
+    text-transform:uppercase;
+
+    text-shadow:
+        0 0 12px rgba(255,0,200,.8),
+        0 0 28px rgba(124,44,255,.5);
+
+    animation:fadeIn 1.5s .4s ease both;
+
+}
+
+/* =========================================================
+   EVENT INFO
+========================================================= */
+
+.eventInfo{
+
+    margin-top:48px;
+
+    display:flex;
+
+    align-items:center;
+
+    gap:18px;
+
+    animation:fadeIn 1.5s .7s ease both;
+
+}
+
+.infoItem{
+
+    min-width:125px;
+
+    padding:12px 22px;
+
+    border:1px solid rgba(255,255,255,.11);
+
+    background:rgba(255,255,255,.035);
+
+    backdrop-filter:blur(14px);
+
+    border-radius:50px;
+
+    font-size:10px;
+
+    font-weight:700;
+
+    letter-spacing:2px;
+
+    color:rgba(255,255,255,.72);
+
+}
+
+.infoItem strong{
+
+    color:white;
+
+    font-size:12px;
+
+}
+
+.separator{
+
+    width:4px;
+    height:4px;
+
+    border-radius:50%;
+
+    background:var(--pink);
+
+    box-shadow:0 0 12px var(--pink);
+
+}
+
+/* =========================================================
+   BUTTON
+========================================================= */
+
+.cta{
+
+    position:absolute;
+
+    bottom:7vh;
+
+    left:50%;
+
+    transform:translateX(-50%);
+
+    z-index:15;
+
+    display:flex;
+
+    align-items:center;
+
+    gap:14px;
+
+    padding:16px 26px;
+
+    border-radius:100px;
+
+    border:1px solid rgba(255,255,255,.18);
+
+    color:white;
+
+    text-decoration:none;
+
+    font-size:10px;
+
+    font-weight:800;
+
+    letter-spacing:3px;
+
+    background:rgba(255,255,255,.055);
+
+    backdrop-filter:blur(16px);
+
+    box-shadow:
+        0 0 25px rgba(255,0,170,.10),
+        inset 0 0 20px rgba(255,255,255,.025);
+
+    transition:
+        transform .3s ease,
+        box-shadow .3s ease,
+        background .3s ease;
+
+}
+
+.cta:hover{
+
+    transform:translateX(-50%) translateY(-4px);
+
+    background:rgba(255,0,170,.14);
+
+    box-shadow:
+        0 0 20px rgba(255,0,180,.45),
+        0 0 55px rgba(124,44,255,.25);
+
+}
+
+.ctaDot{
+
+    width:7px;
+    height:7px;
+
+    border-radius:50%;
+
+    background:var(--pink);
+
+    box-shadow:
+        0 0 8px var(--pink),
+        0 0 18px var(--pink);
+
+}
+
+/* =========================================================
+   FULLSCREEN
+========================================================= */
+
+.fullscreen{
+
+    position:absolute;
+
+    z-index:20;
+
+    right:4vw;
+    bottom:30px;
+
+    width:42px;
+    height:42px;
+
+    display:grid;
+    place-items:center;
+
+    border:1px solid rgba(255,255,255,.12);
+
+    border-radius:50%;
+
+    color:rgba(255,255,255,.65);
+
+    background:rgba(0,0,0,.22);
+
+    backdrop-filter:blur(10px);
+
+    cursor:pointer;
+
+    transition:.3s;
+
+}
+
+.fullscreen:hover{
+
+    color:white;
+
+    border-color:rgba(255,0,180,.5);
+
+    box-shadow:
+        0 0 20px rgba(255,0,180,.25);
+
+}
+
+/* =========================================================
+   SCREEN EDGES
+========================================================= */
+
+.edge{
+
+    position:absolute;
+
+    z-index:5;
+
+    pointer-events:none;
+
+}
+
+.edge.left{
+
+    left:0;
+    top:0;
+    bottom:0;
+
+    width:17vw;
+
+    background:
+        linear-gradient(
+            90deg,
+            rgba(255,0,160,.08),
+            transparent
+        );
+
+}
+
+.edge.right{
+
+    right:0;
+    top:0;
+    bottom:0;
+
+    width:17vw;
+
+    background:
+        linear-gradient(
+            270deg,
+            rgba(0,130,255,.08),
+            transparent
+        );
+
+}
+
+/* =========================================================
+   FADE
+========================================================= */
+
+@keyframes fadeIn{
+
+    from{
+        opacity:0;
+        transform:translateY(12px);
     }
 
-    /* Form Fields */
-    .form-group {
-      margin-bottom: 18px;
+    to{
+        opacity:1;
+        transform:translateY(0);
     }
 
-    .form-group label {
-      display: block;
-      font-size: 0.85rem;
-      font-weight: 600;
-      margin-bottom: 6px;
-      color: var(--text-main);
+}
+
+/* =========================================================
+   MOBILE
+========================================================= */
+
+@media(max-width:700px){
+
+    .topBar{
+        height:65px;
+        padding:0 22px;
     }
 
-    .form-group input, 
-    .form-group select {
-      width: 100%;
-      padding: 12px 14px;
-      border: 1px solid var(--border-color);
-      border-radius: 10px;
-      background-color: #f8fafc;
-      font-size: 0.95rem;
-      color: var(--text-main);
-      transition: all 0.2s ease;
-      outline: none;
+    .logo{
+        font-size:10px;
+        letter-spacing:3px;
     }
 
-    .form-group input:focus, 
-    .form-group select:focus {
-      border-color: var(--accent-color);
-      background-color: #ffffff;
-      box-shadow: 0 0 0 3px rgba(99, 102, 241, 0.15);
+    .live{
+        font-size:8px;
+        letter-spacing:2px;
     }
 
-    /* Submit Button */
-    .submit-btn {
-      width: 100%;
-      padding: 14px;
-      background-color: var(--accent-color);
-      color: #ffffff;
-      border: none;
-      border-radius: 10px;
-      font-size: 1rem;
-      font-weight: 700;
-      cursor: pointer;
-      transition: background-color 0.2s ease, transform 0.1s ease;
-      margin-top: 10px;
+    .title{
+        font-size:21vw;
+        letter-spacing:-.09em;
     }
 
-    .submit-btn:hover {
-      background-color: var(--accent-hover);
+    .eyebrow{
+        font-size:8px;
+        letter-spacing:5px;
     }
 
-    .submit-btn:active {
-      transform: scale(0.99);
+    .eyebrow::before,
+    .eyebrow::after{
+        width:35px;
     }
 
-    /* Ticket Result Box */
-    .ticket-result {
-      display: none;
-      margin-top: 24px;
-      padding: 20px;
-      border-radius: 12px;
-      background: #f0fdf4;
-      border: 1px solid #bbf7d0;
-      text-align: center;
+    .subtitle{
+        font-size:8px;
+        letter-spacing:5px;
+        margin-top:25px;
     }
 
-    .ticket-result h3 {
-      color: #166534;
-      font-size: 1.1rem;
-      margin-bottom: 8px;
+    .eventInfo{
+        margin-top:30px;
+        gap:7px;
     }
 
-    .ticket-result p {
-      color: #15803d;
-      font-size: 0.9rem;
-      margin-bottom: 4px;
+    .infoItem{
+        min-width:auto;
+        padding:9px 12px;
+        font-size:7px;
     }
 
-    .ticket-code {
-      display: inline-block;
-      margin-top: 10px;
-      padding: 6px 12px;
-      background: #ffffff;
-      border: 1px dashed #22c55e;
-      border-radius: 6px;
-      font-weight: 700;
-      letter-spacing: 0.05em;
-      color: #15803d;
+    .infoItem strong{
+        font-size:9px;
     }
-  </style>
+
+    .separator{
+        display:none;
+    }
+
+    .cta{
+        bottom:45px;
+        padding:13px 20px;
+        font-size:8px;
+    }
+
+    .fullscreen{
+        right:18px;
+        bottom:18px;
+        width:36px;
+        height:36px;
+    }
+
+    .ring{
+        width:130vw;
+        height:130vw;
+    }
+
+}
+
+/* =========================================================
+   REDUCED MOTION
+========================================================= */
+
+@media(prefers-reduced-motion:reduce){
+
+    *,
+    *::before,
+    *::after{
+
+        animation-duration:.01ms !important;
+        animation-iteration-count:1 !important;
+        transition:none !important;
+
+    }
+
+}
+
+</style>
 </head>
+
 <body>
 
-  <div class="container">
-    
-    <!-- Vibe Logo Header -->
-    <div class="logo-header-box">
-      <img src="Paragraf metniniz.png" alt="Vibe Event Logo">
+<div class="scene">
+
+    <canvas id="lights"></canvas>
+
+    <div class="centerGlow"></div>
+
+    <div class="ring ring1"></div>
+    <div class="ring ring2"></div>
+    <div class="ring ring3"></div>
+
+    <div class="edge left"></div>
+    <div class="edge right"></div>
+
+    <div class="topBar">
+
+        <div class="logo">
+            VIBE <span>EVENT</span>
+        </div>
+
+        <div class="live">
+            <span class="liveDot"></span>
+            OPEN YOUR EYES
+        </div>
+
     </div>
 
-    <!-- DJ TINA Poster -->
-    <div class="hero-poster-card">
-      <img src="DJ TINA - 1.jpeg" alt="DJ TINA Open Your Eyes Poster">
-    </div>
+    <main class="hero">
 
-    <!-- Bilet Formu -->
-    <div class="ticket-card">
-      <h1 class="event-title">OPEN YOUR EYES</h1>
-      <p class="event-subtitle">DJ TINA Performance • Bilet Kayıt Formu</p>
-
-      <form id="ticketForm">
-        <div class="form-group">
-          <label for="fullName">Ad Soyad</label>
-          <input type="text" id="fullName" placeholder="Aykut Yılmaz" required>
+        <div class="eyebrow">
+            VIBE EVENT PRESENTS
         </div>
 
-        <div class="form-group">
-          <label for="email">E-Posta Adresi</label>
-          <input type="email" id="email" placeholder="ornek@email.com" required>
+        <div class="titleWrap">
+
+            <h1 class="title">
+                DJ TINA
+            </h1>
+
         </div>
 
-        <div class="form-group">
-          <label for="phone">Telefon Numarası</label>
-          <input type="tel" id="phone" placeholder="05XX XXX XX XX" required>
+        <div class="subtitle">
+            OPEN YOUR EYES
         </div>
 
-        <div class="form-group">
-          <label for="ticketType">Bilet Türü</label>
-          <select id="ticketType" required>
-            <option value="" disabled selected>Lütfen seçiniz</option>
-            <option value="Standard Pass">Standard Pass</option>
-            <option value="VIP Backstage">VIP Backstage</option>
-            <option value="Early Bird">Early Bird</option>
-          </select>
+        <div class="eventInfo">
+
+            <div class="infoItem">
+                <strong>22 EYLÜL</strong>
+            </div>
+
+            <div class="separator"></div>
+
+            <div class="infoItem">
+                <strong>19:30</strong>
+            </div>
+
+            <div class="separator"></div>
+
+            <div class="infoItem">
+                <strong>KIRIKKALE</strong>
+            </div>
+
         </div>
 
-        <button type="submit" class="submit-btn">Bileti Oluştur</button>
-      </form>
+    </main>
 
-      <!-- Oluşturulan Bilet Bilgisi -->
-      <div id="ticketResult" class="ticket-result">
-        <h3>🎉 Biletiniz Hazır!</h3>
-        <p><strong id="resName"></strong> adına kaydınız alınmıştır.</p>
-        <p>Tür: <span id="resType"></span></p>
-        <div class="ticket-code" id="resCode">VIBE-000000</div>
-      </div>
-    </div>
+    <a href="#" class="cta">
+        <span class="ctaDot"></span>
+        ENTER THE NIGHT
+    </a>
 
-  </div>
+    <button class="fullscreen" id="fullscreenBtn" aria-label="Tam ekran">
+        ⛶
+    </button>
 
-  <script>
-    document.getElementById('ticketForm').addEventListener('submit', function(e) {
-      e.preventDefault();
+    <div class="grain"></div>
 
-      const name = document.getElementById('fullName').value;
-      const ticketType = document.getElementById('ticketType').value;
-      const randomCode = 'VIBE-' + Math.floor(100000 + Math.random() * 900000);
+</div>
 
-      document.getElementById('resName').textContent = name;
-      document.getElementById('resType').textContent = ticketType;
-      document.getElementById('resCode').textContent = randomCode;
 
-      document.getElementById('ticketResult').style.display = 'block';
-      this.reset();
-    });
-  </script>
+<script>
+
+/* =========================================================
+   PREMIUM LIGHT BEAMS
+========================================================= */
+
+const canvas = document.getElementById("lights");
+const ctx = canvas.getContext("2d");
+
+let W;
+let H;
+
+function resize(){
+
+    W = canvas.width = window.innerWidth * devicePixelRatio;
+    H = canvas.height = window.innerHeight * devicePixelRatio;
+
+    canvas.style.width = window.innerWidth + "px";
+    canvas.style.height = window.innerHeight + "px";
+
+    ctx.setTransform(
+        devicePixelRatio,
+        0,
+        0,
+        devicePixelRatio,
+        0,
+        0
+    );
+
+}
+
+resize();
+
+window.addEventListener("resize",resize);
+
+
+/* LIGHT OBJECTS */
+
+const beams = [
+
+    {
+        x:.18,
+        color:"#ff009d",
+        width:.16,
+        speed:.00055,
+        phase:0
+    },
+
+    {
+        x:.31,
+        color:"#7c2cff",
+        width:.11,
+        speed:-.00042,
+        phase:2
+    },
+
+    {
+        x:.52,
+        color:"#00aaff",
+        width:.13,
+        speed:.00030,
+        phase:4
+    },
+
+    {
+        x:.68,
+        color:"#8a2cff",
+        width:.12,
+        speed:-.00047,
+        phase:1
+    },
+
+    {
+        x:.84,
+        color:"#ff00c8",
+        width:.17,
+        speed:.00050,
+        phase:3
+    }
+
+];
+
+
+let time = 0;
+
+
+/* =========================================================
+   BEAM DRAW
+========================================================= */
+
+function drawBeam(beam){
+
+    const x =
+        W / devicePixelRatio *
+        beam.x;
+
+    const center =
+        W / devicePixelRatio / 2;
+
+    const angle =
+        Math.sin(
+            time * beam.speed * 1000 +
+            beam.phase
+        ) * .65;
+
+    const length =
+        H / devicePixelRatio * 1.5;
+
+    const spread =
+        Math.sin(
+            time * beam.speed * 700 +
+            beam.phase
+        ) * 150;
+
+    ctx.save();
+
+    ctx.translate(x,0);
+
+    ctx.rotate(angle * .22);
+
+    const gradient =
+        ctx.createLinearGradient(
+            0,
+            H / devicePixelRatio,
+            spread,
+            0
+        );
+
+    gradient.addColorStop(
+        0,
+        beam.color.replace(")",", .0)") 
+    );
+
+    /* custom transparent gradients */
+
+    const g =
+        ctx.createLinearGradient(
+            0,
+            H / devicePixelRatio,
+            spread,
+            0
+        );
+
+    g.addColorStop(0,"rgba(255,255,255,0)");
+    g.addColorStop(.15,beam.color);
+    g.addColorStop(.45,"rgba(255,255,255,0)");
+    g.addColorStop(1,"rgba(255,255,255,0)");
+
+    ctx.globalCompositeOperation="screen";
+
+    ctx.globalAlpha=.16;
+
+    ctx.fillStyle=g;
+
+    ctx.beginPath();
+
+    ctx.moveTo(-250,H/devicePixelRatio);
+    ctx.lineTo(250,H/devicePixelRatio);
+
+    ctx.lineTo(
+        spread + 100,
+        -100
+    );
+
+    ctx.lineTo(
+        spread - 100,
+        -100
+    );
+
+    ctx.closePath();
+
+    ctx.fill();
+
+    ctx.restore();
+
+}
+
+
+/* =========================================================
+   SOFT LIGHT CLOUDS
+========================================================= */
+
+function drawGlow(x,y,r,color,alpha){
+
+    const gradient =
+        ctx.createRadialGradient(
+            x,
+            y,
+            0,
+            x,
+            y,
+            r
+        );
+
+    gradient.addColorStop(
+        0,
+        color
+    );
+
+    gradient.addColorStop(
+        1,
+        "rgba(0,0,0,0)"
+    );
+
+    ctx.globalCompositeOperation="screen";
+
+    ctx.globalAlpha=alpha;
+
+    ctx.fillStyle=gradient;
+
+    ctx.beginPath();
+
+    ctx.arc(x,y,r,0,Math.PI*2);
+
+    ctx.fill();
+
+}
+
+
+/* =========================================================
+   ANIMATION
+========================================================= */
+
+function animate(){
+
+    time++;
+
+    ctx.clearRect(
+        0,
+        0,
+        W / devicePixelRatio,
+        H / devicePixelRatio
+    );
+
+    const width =
+        W / devicePixelRatio;
+
+    const height =
+        H / devicePixelRatio;
+
+    /* atmospheric glow */
+
+    drawGlow(
+        width*.20,
+        height*.35,
+        width*.35,
+        "rgba(255,0,170,.35)",
+        .25
+    );
+
+    drawGlow(
+        width*.82,
+        height*.42,
+        width*.38,
+        "rgba(0,120,255,.30)",
+        .22
+    );
+
+    drawGlow(
+        width*.50,
+        height*.62,
+        width*.30,
+        "rgba(110,0,255,.30)",
+        .18
+    );
+
+    beams.forEach(drawBeam);
+
+    ctx.globalAlpha=1;
+
+    requestAnimationFrame(animate);
+
+}
+
+animate();
+
+
+/* =========================================================
+   MOUSE PARALLAX
+========================================================= */
+
+const title =
+    document.querySelector(".title");
+
+const rings =
+    document.querySelectorAll(".ring");
+
+let mouseX=0;
+let mouseY=0;
+
+window.addEventListener("mousemove",(e)=>{
+
+    mouseX =
+        (e.clientX / window.innerWidth - .5);
+
+    mouseY =
+        (e.clientY / window.innerHeight - .5);
+
+    title.style.transform =
+        `
+        translate3d(
+            ${mouseX * 14}px,
+            ${mouseY * 9}px,
+            40px
+        )
+        `;
+
+});
+
+
+/* =========================================================
+   FULLSCREEN
+========================================================= */
+
+const fullscreenBtn =
+    document.getElementById("fullscreenBtn");
+
+fullscreenBtn.addEventListener("click",async()=>{
+
+    try{
+
+        if(!document.fullscreenElement){
+
+            await document.documentElement.requestFullscreen();
+
+        }else{
+
+            await document.exitFullscreen();
+
+        }
+
+    }catch(error){
+
+        console.log(error);
+
+    }
+
+});
+
+
+/* =========================================================
+   DOUBLE CLICK = FULLSCREEN
+========================================================= */
+
+document.querySelector(".scene")
+.addEventListener("dblclick",async()=>{
+
+    try{
+
+        if(!document.fullscreenElement){
+
+            await document.documentElement.requestFullscreen();
+
+        }
+
+    }catch(error){
+
+        console.log(error);
+
+    }
+
+});
+
+</script>
 
 </body>
 </html>
