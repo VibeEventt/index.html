@@ -2,1993 +2,2459 @@
 <html lang="tr">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport"
-      content="width=device-width, initial-scale=1.0">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>VIBE EVENT — DJ TINA</title>
+<title>DJ TINA - VIBE EVENT</title>
 
 <style>
-
 *{
-    margin:0;
-    padding:0;
-    box-sizing:border-box;
+  box-sizing:border-box;
+  margin:0;
+  padding:0;
 }
 
 html,
 body{
-    width:100%;
-    height:100%;
-    overflow:hidden;
-    background:#000;
-    font-family:Arial,Helvetica,sans-serif;
+  width:100%;
+  height:100%;
+  overflow:hidden;
+  background:#000;
+  font-family:Arial, Helvetica, sans-serif;
 }
 
-/* =====================================================
-   ANA SAHNE
-===================================================== */
+body{
+  cursor:default;
+}
+
+/* =========================================================
+   MAIN STAGE
+========================================================= */
 
 .stage{
-    position:fixed;
-    inset:0;
-    overflow:hidden;
-
-    background:
-        radial-gradient(
-            ellipse at 50% 50%,
-            #16002e 0%,
-            #07000e 38%,
-            #010103 78%
-        );
+  position:fixed;
+  inset:0;
+  width:100vw;
+  height:100vh;
+  overflow:hidden;
+  background:
+    radial-gradient(
+      circle at 50% 50%,
+      #18002f 0%,
+      #090014 35%,
+      #020006 70%,
+      #000 100%
+    );
 }
 
-/* =====================================================
-   CANVAS
-===================================================== */
-
-#visual{
-    position:absolute;
-    inset:0;
-
-    width:100%;
-    height:100%;
-
-    z-index:1;
+canvas{
+  position:absolute;
+  inset:0;
+  width:100%;
+  height:100%;
 }
 
-/* =====================================================
-   ATMOSFER
-===================================================== */
+/* =========================================================
+   ATMOSPHERE
+========================================================= */
 
 .atmosphere{
-    position:absolute;
-    inset:-20%;
+  position:absolute;
+  inset:-20%;
+  pointer-events:none;
 
-    z-index:2;
-    pointer-events:none;
+  background:
+    radial-gradient(
+      ellipse at 50% 50%,
+      rgba(255,0,180,.18),
+      transparent 28%
+    ),
+    radial-gradient(
+      ellipse at 20% 50%,
+      rgba(0,180,255,.14),
+      transparent 28%
+    ),
+    radial-gradient(
+      ellipse at 80% 50%,
+      rgba(130,0,255,.15),
+      transparent 28%
+    );
 
-    background:
-        radial-gradient(
-            ellipse at 20% 45%,
-            rgba(255,0,174,.16),
-            transparent 32%
-        ),
-        radial-gradient(
-            ellipse at 80% 45%,
-            rgba(0,170,255,.15),
-            transparent 32%
-        ),
-        radial-gradient(
-            ellipse at 50% 65%,
-            rgba(110,0,255,.14),
-            transparent 35%
-        );
-
-    filter:blur(35px);
-
-    animation:
-        atmosphereMove 8s ease-in-out infinite alternate;
+  animation:
+    atmosphereMove 6s ease-in-out infinite alternate,
+    atmospherePulse 2.2s ease-in-out infinite;
 }
 
 @keyframes atmosphereMove{
+  0%{
+    transform:translate(-3%,-2%) scale(1);
+  }
 
-    0%{
-        transform:scale(1);
-    }
+  50%{
+    transform:translate(2%,2%) scale(1.08);
+  }
 
-    100%{
-        transform:scale(1.12) rotate(2deg);
-    }
+  100%{
+    transform:translate(-2%,1%) scale(1.15);
+  }
 }
 
-/* =====================================================
-   PORTAL
-===================================================== */
+@keyframes atmospherePulse{
+  0%,100%{
+    opacity:.65;
+  }
+
+  50%{
+    opacity:1;
+  }
+}
+
+/* =========================================================
+   NEON PORTALS
+========================================================= */
 
 .portal{
+  position:absolute;
 
-    position:absolute;
+  width:62vw;
+  height:62vw;
 
-    width:min(72vw,1100px);
-    height:min(72vw,1100px);
+  max-width:1000px;
+  max-height:1000px;
 
-    left:50%;
-    top:50%;
+  min-width:420px;
+  min-height:420px;
 
-    transform:
-        translate(-50%,-50%)
-        rotateX(64deg);
+  left:50%;
+  top:50%;
 
-    border-radius:50%;
+  transform:
+    translate(-50%,-50%)
+    perspective(800px)
+    rotateX(68deg)
+    rotateZ(0deg);
 
-    z-index:3;
+  border-radius:50%;
 
-    border:
-        2px solid rgba(255,0,190,.34);
+  border:
+    3px solid rgba(255,0,220,.8);
 
-    box-shadow:
+  box-shadow:
+    0 0 12px #ff00d9,
+    0 0 35px #ff00d9,
+    0 0 90px rgba(255,0,200,.7),
+    inset 0 0 25px rgba(255,0,200,.8);
 
-        0 0 20px rgba(255,0,190,.45),
+  opacity:.75;
 
-        0 0 60px rgba(255,0,190,.25),
-
-        0 0 120px rgba(120,0,255,.18),
-
-        inset 0 0 50px rgba(0,180,255,.12);
-
-    animation:
-        portalSpin 15s linear infinite,
-        portalPulse 3s ease-in-out infinite alternate;
+  animation:
+    portalSpin 7s linear infinite,
+    portalPulse 1.6s ease-in-out infinite;
 }
 
-.portal::before{
+.portal::before,
+.portal::after{
+  content:"";
+  position:absolute;
+  inset:7%;
 
-    content:"";
+  border-radius:50%;
 
-    position:absolute;
+  border:
+    2px solid rgba(0,210,255,.8);
 
-    inset:6%;
-
-    border-radius:50%;
-
-    border:
-        1px solid rgba(0,210,255,.45);
-
-    box-shadow:
-        0 0 30px rgba(0,190,255,.35),
-        inset 0 0 40px rgba(255,0,180,.16);
+  box-shadow:
+    0 0 15px #00d9ff,
+    0 0 45px rgba(0,220,255,.7),
+    inset 0 0 20px rgba(0,220,255,.8);
 }
 
 .portal::after{
+  inset:15%;
 
-    content:"";
+  border-color:rgba(170,0,255,.9);
 
-    position:absolute;
-
-    inset:17%;
-
-    border-radius:50%;
-
-    border:
-        1px solid rgba(180,0,255,.35);
-
-    box-shadow:
-        0 0 35px rgba(150,0,255,.3);
+  box-shadow:
+    0 0 15px #a000ff,
+    0 0 55px rgba(150,0,255,.8),
+    inset 0 0 20px rgba(170,0,255,.8);
 }
-
-@keyframes portalSpin{
-
-    from{
-        transform:
-            translate(-50%,-50%)
-            rotateX(64deg)
-            rotateZ(0deg);
-    }
-
-    to{
-        transform:
-            translate(-50%,-50%)
-            rotateX(64deg)
-            rotateZ(360deg);
-    }
-}
-
-@keyframes portalPulse{
-
-    from{
-        opacity:.45;
-        filter:brightness:.8;
-    }
-
-    to{
-        opacity:.95;
-        filter:brightness(1.45);
-    }
-}
-
-/* =====================================================
-   İKİNCİ HALKA
-===================================================== */
 
 .portal2{
+  position:absolute;
 
-    position:absolute;
+  width:43vw;
+  height:43vw;
 
-    width:min(45vw,700px);
-    height:min(45vw,700px);
+  min-width:300px;
+  min-height:300px;
 
-    left:50%;
-    top:50%;
+  left:50%;
+  top:50%;
 
-    transform:
-        translate(-50%,-50%)
-        rotateX(70deg);
+  transform:
+    translate(-50%,-50%)
+    perspective(900px)
+    rotateX(72deg);
 
-    border-radius:50%;
+  border-radius:50%;
 
-    border:
-        2px solid rgba(0,210,255,.24);
+  border:
+    2px solid rgba(0,230,255,.75);
 
-    box-shadow:
-        0 0 35px rgba(0,180,255,.35),
-        inset 0 0 35px rgba(255,0,180,.2);
+  box-shadow:
+    0 0 20px #00eaff,
+    0 0 65px rgba(0,200,255,.7),
+    inset 0 0 25px rgba(0,220,255,.7);
 
-    z-index:4;
-
-    animation:
-        portalSpin2 10s linear infinite reverse;
+  animation:
+    portalSpinReverse 4.5s linear infinite,
+    portalPulse 1.2s ease-in-out infinite;
 }
 
-@keyframes portalSpin2{
-
-    from{
-        transform:
-            translate(-50%,-50%)
-            rotateX(70deg)
-            rotateZ(0);
-    }
-
-    to{
-        transform:
-            translate(-50%,-50%)
-            rotateX(70deg)
-            rotateZ(360deg);
-    }
-}
-
-/* =====================================================
-   VIBE EVENT
-===================================================== */
-
-.brand{
-
-    position:absolute;
-
-    z-index:10;
-
-    top:7%;
-
-    left:50%;
-
-    transform:translateX(-50%);
-
-    color:white;
-
-    font-size:
-        clamp(12px,1.2vw,22px);
-
-    font-weight:800;
-
-    letter-spacing:
-        clamp(6px,1vw,15px);
-
-    white-space:nowrap;
-
-    text-transform:uppercase;
-
-    text-shadow:
-        0 0 8px white,
-        0 0 20px #ff00c8,
-        0 0 40px #7d2cff;
-
-    animation:
-        brandPulse 2.8s ease-in-out infinite alternate;
-}
-
-@keyframes brandPulse{
-
-    from{
-        opacity:.55;
-        filter:brightness(.8);
-    }
-
-    to{
-        opacity:1;
-        filter:brightness(1.5);
-    }
-}
-
-/* =====================================================
-   DJ TINA
-===================================================== */
-
-.title{
-
-    position:absolute;
-
-    z-index:8;
-
-    left:50%;
-    top:50%;
-
-    transform:
-        translate(-50%,-50%);
-
-    width:100%;
-
-    text-align:center;
-
-    color:#fff;
-
-    font-size:
-        clamp(80px,16vw,300px);
-
-    line-height:.78;
-
-    font-weight:1000;
-
-    letter-spacing:-.075em;
-
-    white-space:nowrap;
-
-    text-shadow:
-
-        0 0 4px #fff,
-        0 0 10px #fff,
-        0 0 22px #ff00c8,
-        0 0 45px #ff009d,
-        0 0 90px #8c2cff,
-        0 0 150px rgba(0,160,255,.5);
-
-    animation:
-        titlePulse 2.4s ease-in-out infinite alternate;
-}
-
-@keyframes titlePulse{
-
-    0%{
-        transform:
-            translate(-50%,-50%)
-            scale(.98);
-
-        filter:brightness(.88);
-    }
-
-    100%{
-        transform:
-            translate(-50%,-50%)
-            scale(1.035);
-
-        filter:brightness(1.35);
-    }
-}
-
-.title::before{
-
-    content:"DJ TINA";
-
-    position:absolute;
-
-    inset:0;
-
-    color:#00eaff;
-
-    opacity:.17;
-
-    transform:translateX(-5px);
-
-    mix-blend-mode:screen;
-}
-
-.title::after{
-
-    content:"DJ TINA";
-
-    position:absolute;
-
-    inset:0;
-
-    color:#ff008c;
-
-    opacity:.17;
-
-    transform:translateX(5px);
-
-    mix-blend-mode:screen;
-}
-
-/* =====================================================
-   OPEN YOUR EYES
-===================================================== */
-
-.subtitle{
-
-    position:absolute;
-
-    z-index:9;
-
-    left:50%;
-
-    top:67%;
-
-    transform:translateX(-50%);
-
-    color:rgba(255,255,255,.9);
-
-    font-size:
-        clamp(10px,1.1vw,18px);
-
-    font-weight:700;
-
-    letter-spacing:
-        clamp(5px,1vw,13px);
-
-    white-space:nowrap;
-
-    text-shadow:
-
-        0 0 8px white,
-        0 0 20px #ff00c8,
-        0 0 35px #6e2cff;
-
-    animation:
-        subtitlePulse 2s ease-in-out infinite alternate;
-}
-
-@keyframes subtitlePulse{
-
-    from{
-        opacity:.45;
-    }
-
-    to{
-        opacity:1;
-    }
-}
-
-/* =====================================================
-   YAN IŞIKLAR
-===================================================== */
+/* =========================================================
+   SIDE GLOW
+========================================================= */
 
 .sideGlow{
+  position:absolute;
+  top:-20%;
+  width:25vw;
+  height:140%;
 
-    position:absolute;
+  filter:blur(35px);
 
-    top:-20%;
+  opacity:.6;
 
-    width:35vw;
-    height:140vh;
+  pointer-events:none;
 
-    z-index:4;
-
-    pointer-events:none;
-
-    filter:blur(25px);
-
-    opacity:.55;
-
-    transform-origin:bottom center;
+  animation:sideMove 3s ease-in-out infinite alternate;
 }
 
 .sideGlow.left{
+  left:-12%;
 
-    left:-17vw;
+  background:
+    linear-gradient(
+      90deg,
+      transparent,
+      rgba(255,0,190,.55),
+      rgba(160,0,255,.25),
+      transparent
+    );
 
-    background:
-        linear-gradient(
-            20deg,
-            rgba(255,0,170,.75),
-            transparent 65%
-        );
-
-    animation:
-        leftSweep 4.5s ease-in-out infinite alternate;
+  transform:rotate(10deg);
 }
 
 .sideGlow.right{
+  right:-12%;
 
-    right:-17vw;
+  background:
+    linear-gradient(
+      90deg,
+      transparent,
+      rgba(0,200,255,.5),
+      rgba(50,80,255,.3),
+      transparent
+    );
 
-    background:
-        linear-gradient(
-            -20deg,
-            rgba(0,150,255,.75),
-            transparent 65%
-        );
+  transform:rotate(-10deg);
 
-    animation:
-        rightSweep 5s ease-in-out infinite alternate;
+  animation-delay:-1.4s;
 }
 
-@keyframes leftSweep{
+@keyframes sideMove{
+  from{
+    transform:translateX(-4%) rotate(10deg);
+  }
 
-    from{
-        transform:rotate(18deg);
-    }
-
-    to{
-        transform:rotate(-18deg);
-    }
+  to{
+    transform:translateX(9%) rotate(16deg);
+  }
 }
 
-@keyframes rightSweep{
+/* =========================================================
+   CENTER ENERGY
+========================================================= */
 
-    from{
-        transform:rotate(-18deg);
-    }
+.centerEnergy{
+  position:absolute;
 
-    to{
-        transform:rotate(18deg);
-    }
+  left:50%;
+  top:50%;
+
+  width:35vw;
+  height:35vw;
+
+  min-width:280px;
+  min-height:280px;
+
+  transform:translate(-50%,-50%);
+
+  border-radius:50%;
+
+  background:
+    radial-gradient(
+      circle,
+      rgba(255,255,255,.16) 0%,
+      rgba(255,0,210,.12) 12%,
+      rgba(0,200,255,.07) 30%,
+      transparent 65%
+    );
+
+  filter:blur(5px);
+
+  animation:
+    centerPulse 1.2s ease-in-out infinite,
+    centerRotate 10s linear infinite;
+
+  pointer-events:none;
 }
 
-/* =====================================================
-   STROBE
-===================================================== */
+@keyframes centerPulse{
+  0%,100%{
+    transform:translate(-50%,-50%) scale(.85);
+    opacity:.55;
+  }
+
+  50%{
+    transform:translate(-50%,-50%) scale(1.2);
+    opacity:1;
+  }
+}
+
+@keyframes centerRotate{
+  to{
+    rotate:360deg;
+  }
+}
+
+/* =========================================================
+   TEXT
+========================================================= */
+
+.brand{
+  position:absolute;
+
+  top:7%;
+
+  left:50%;
+  transform:translateX(-50%);
+
+  color:#fff;
+
+  font-size:clamp(14px,1.3vw,24px);
+
+  font-weight:700;
+
+  letter-spacing:
+    clamp(6px,1vw,16px);
+
+  text-transform:uppercase;
+
+  text-shadow:
+    0 0 5px #fff,
+    0 0 15px #ff00d9,
+    0 0 35px #ff00d9;
+
+  opacity:.9;
+
+  z-index:20;
+}
+
+.title{
+  position:absolute;
+
+  left:50%;
+  top:50%;
+
+  transform:
+    translate(-50%,-50%)
+    scale(1);
+
+  color:white;
+
+  font-size:
+    clamp(75px,13vw,250px);
+
+  font-weight:1000;
+
+  letter-spacing:
+    clamp(-5px,-.5vw,-2px);
+
+  line-height:.8;
+
+  white-space:nowrap;
+
+  text-align:center;
+
+  z-index:25;
+
+  text-shadow:
+    0 0 5px #fff,
+    0 0 12px #fff,
+    0 0 25px #ff00de,
+    0 0 50px #ff00de,
+    0 0 90px #9b00ff,
+    0 0 150px rgba(0,150,255,.8);
+
+  animation:
+    titlePulse 1.15s ease-in-out infinite,
+    titleGlow 2.2s ease-in-out infinite alternate;
+}
+
+@keyframes titlePulse{
+  0%,100%{
+    transform:
+      translate(-50%,-50%)
+      scale(.96);
+  }
+
+  50%{
+    transform:
+      translate(-50%,-50%)
+      scale(1.035);
+  }
+}
+
+@keyframes titleGlow{
+  0%{
+    filter:
+      brightness(.9)
+      saturate(1);
+  }
+
+  100%{
+    filter:
+      brightness(1.4)
+      saturate(1.6);
+  }
+}
+
+.subtitle{
+  position:absolute;
+
+  left:50%;
+  top:63%;
+
+  transform:translateX(-50%);
+
+  color:#fff;
+
+  font-size:
+    clamp(13px,1.5vw,26px);
+
+  font-weight:800;
+
+  letter-spacing:
+    clamp(5px,1vw,13px);
+
+  white-space:nowrap;
+
+  text-shadow:
+    0 0 5px #fff,
+    0 0 15px #00eaff,
+    0 0 35px #008cff;
+
+  z-index:25;
+
+  animation:
+    subtitlePulse 1.5s ease-in-out infinite;
+}
+
+@keyframes subtitlePulse{
+  0%,100%{
+    opacity:.65;
+  }
+
+  50%{
+    opacity:1;
+  }
+}
+
+/* =========================================================
+   RGB GLITCH
+========================================================= */
+
+.rgb{
+  position:absolute;
+
+  left:50%;
+  top:50%;
+
+  width:100%;
+  height:30%;
+
+  transform:translate(-50%,-50%);
+
+  pointer-events:none;
+
+  z-index:23;
+
+  opacity:.25;
+
+  mix-blend-mode:screen;
+
+  animation:rgbShift 1.8s steps(2,end) infinite;
+}
+
+.rgb::before,
+.rgb::after{
+  content:"DJ TINA";
+
+  position:absolute;
+
+  left:50%;
+  top:50%;
+
+  transform:translate(-50%,-50%);
+
+  font-size:
+    clamp(75px,13vw,250px);
+
+  font-weight:1000;
+
+  line-height:.8;
+
+  white-space:nowrap;
+}
+
+.rgb::before{
+  color:#00ffff;
+  transform:
+    translate(calc(-50% - 6px),-50%);
+}
+
+.rgb::after{
+  color:#ff0066;
+  transform:
+    translate(calc(-50% + 6px),-50%);
+}
+
+@keyframes rgbShift{
+  0%,90%,100%{
+    opacity:0;
+  }
+
+  92%{
+    opacity:.5;
+  }
+
+  94%{
+    opacity:0;
+  }
+
+  96%{
+    opacity:.35;
+  }
+}
+
+/* =========================================================
+   FLASH
+========================================================= */
 
 .flash{
+  position:absolute;
+  inset:0;
 
-    position:absolute;
+  background:#fff;
 
-    inset:0;
+  opacity:0;
 
-    z-index:15;
+  pointer-events:none;
 
-    pointer-events:none;
+  z-index:100;
+}
 
-    background:white;
+.flash.active{
+  animation:flashBoom .65s ease-out;
+}
 
+@keyframes flashBoom{
+  0%{
+    opacity:1;
+  }
+
+  8%{
+    opacity:.15;
+  }
+
+  16%{
+    opacity:.95;
+  }
+
+  25%{
+    opacity:.05;
+  }
+
+  38%{
+    opacity:.7;
+  }
+
+  100%{
     opacity:0;
-
-    animation:
-        randomFlash 7s infinite;
+  }
 }
 
-@keyframes randomFlash{
+/* =========================================================
+   SCREEN SHOCK
+========================================================= */
 
-    0%,
-    88%,
-    90%,
-    94%,
-    100%{
-        opacity:0;
-    }
+.shockwave{
+  position:absolute;
 
-    89%{
-        opacity:.22;
-    }
+  left:50%;
+  top:50%;
 
-    93%{
-        opacity:.10;
-    }
+  width:30px;
+  height:30px;
+
+  transform:
+    translate(-50%,-50%)
+    scale(1);
+
+  border-radius:50%;
+
+  border:5px solid rgba(255,255,255,.9);
+
+  box-shadow:
+    0 0 20px #fff,
+    0 0 60px #ff00d9,
+    0 0 120px #00d9ff;
+
+  opacity:0;
+
+  pointer-events:none;
+
+  z-index:90;
 }
 
-/* =====================================================
+.shockwave.active{
+  animation:shock 1.1s cubic-bezier(.1,.7,.1,1);
+}
+
+@keyframes shock{
+  0%{
+    opacity:1;
+    transform:
+      translate(-50%,-50%)
+      scale(.05);
+  }
+
+  50%{
+    opacity:.7;
+  }
+
+  100%{
+    opacity:0;
+    transform:
+      translate(-50%,-50%)
+      scale(45);
+  }
+}
+
+/* =========================================================
+   VIGNETTE
+========================================================= */
+
+.vignette{
+  position:absolute;
+  inset:0;
+
+  pointer-events:none;
+
+  z-index:70;
+
+  background:
+    radial-gradient(
+      ellipse at center,
+      transparent 35%,
+      rgba(0,0,0,.2) 62%,
+      rgba(0,0,0,.75) 100%
+    );
+}
+
+/* =========================================================
    GRAIN
-===================================================== */
+========================================================= */
 
 .grain{
+  position:absolute;
+  inset:-50%;
 
-    position:absolute;
+  pointer-events:none;
 
-    inset:-50%;
+  z-index:75;
 
-    z-index:30;
+  opacity:.09;
 
-    pointer-events:none;
+  background-image:
+    url("data:image/svg+xml,%3Csvg viewBox='0 0 180 180' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.9' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='.8'/%3E%3C/svg%3E");
 
-    opacity:.055;
-
-    background-image:
-        url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='180' height='180'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
-
-    animation:
-        grainMove .18s steps(2) infinite;
+  animation:grainMove .18s steps(2) infinite;
 }
 
 @keyframes grainMove{
+  0%{
+    transform:translate(0,0);
+  }
 
-    0%{
-        transform:translate(0,0);
-    }
+  25%{
+    transform:translate(2%,-3%);
+  }
 
-    25%{
-        transform:translate(2%,-2%);
-    }
+  50%{
+    transform:translate(-3%,2%);
+  }
 
-    50%{
-        transform:translate(-2%,1%);
-    }
+  75%{
+    transform:translate(3%,3%);
+  }
 
-    75%{
-        transform:translate(1%,2%);
-    }
-
-    100%{
-        transform:translate(-1%,-1%);
-    }
+  100%{
+    transform:translate(-2%,-2%);
+  }
 }
 
-/* =====================================================
-   VIGNETTE
-===================================================== */
-
-.vignette{
-
-    position:absolute;
-
-    inset:0;
-
-    z-index:25;
-
-    pointer-events:none;
-
-    background:
-        radial-gradient(
-            ellipse at center,
-            transparent 42%,
-            rgba(0,0,0,.2) 68%,
-            rgba(0,0,0,.72) 100%
-        );
-}
-
-/* =====================================================
-   FULLSCREEN
-===================================================== */
-
-.fullscreen{
-
-    position:absolute;
-
-    right:20px;
-    bottom:20px;
-
-    z-index:100;
-
-    width:38px;
-    height:38px;
-
-    border:
-        1px solid rgba(255,255,255,.15);
-
-    border-radius:50%;
-
-    color:white;
-
-    background:
-        rgba(0,0,0,.35);
-
-    cursor:pointer;
-
-    opacity:.25;
-
-    transition:.3s;
-}
-
-.fullscreen:hover{
-    opacity:1;
-}
-
-/* =====================================================
-   =====================================================
+/* =========================================================
    INTRO
-   =====================================================
-===================================================== */
+========================================================= */
 
 .intro{
+  position:absolute;
 
-    position:fixed;
+  inset:0;
 
-    inset:0;
+  z-index:200;
 
-    z-index:500;
+  display:flex;
 
-    display:flex;
+  flex-direction:column;
 
-    flex-direction:column;
+  justify-content:center;
 
-    align-items:center;
+  align-items:center;
 
-    justify-content:center;
+  gap:25px;
 
-    text-align:center;
+  background:
+    radial-gradient(
+      circle at center,
+      rgba(25,0,45,.98),
+      rgba(0,0,0,.99) 70%
+    );
 
-    background:
-        radial-gradient(
-            ellipse at center,
-            #19002f 0%,
-            #06000d 48%,
-            #000 100%
-        );
-
-    transition:
-        opacity 1.2s ease,
-        visibility 1.2s ease;
+  transition:
+    opacity .8s ease,
+    visibility .8s ease;
 }
 
 .intro.hide{
-
-    opacity:0;
-
-    visibility:hidden;
-
-    pointer-events:none;
+  opacity:0;
+  visibility:hidden;
 }
-
-/* intro glow */
-
-.introGlow{
-
-    position:absolute;
-
-    width:55vw;
-    height:55vw;
-
-    left:50%;
-    top:50%;
-
-    transform:
-        translate(-50%,-50%);
-
-    border-radius:50%;
-
-    background:
-        radial-gradient(
-            circle,
-            rgba(255,0,190,.18),
-            rgba(90,0,255,.08) 35%,
-            transparent 70%
-        );
-
-    filter:blur(35px);
-
-    animation:
-        introGlow 3s ease-in-out infinite alternate;
-}
-
-@keyframes introGlow{
-
-    from{
-        transform:
-            translate(-50%,-50%)
-            scale(.8);
-    }
-
-    to{
-        transform:
-            translate(-50%,-50%)
-            scale(1.15);
-    }
-}
-
-/* intro brand */
 
 .introBrand{
+  color:#fff;
 
-    position:relative;
+  font-size:
+    clamp(14px,1.4vw,25px);
 
-    z-index:2;
+  letter-spacing:
+    clamp(7px,1.2vw,18px);
 
-    margin-bottom:25px;
+  text-shadow:
+    0 0 8px #fff,
+    0 0 25px #ff00d9,
+    0 0 55px #ff00d9;
 
-    font-size:
-        clamp(12px,1.2vw,20px);
-
-    font-weight:800;
-
-    letter-spacing:
-        clamp(6px,1vw,15px);
-
-    color:white;
-
-    text-shadow:
-        0 0 10px white,
-        0 0 25px #ff00c8,
-        0 0 50px #702cff;
-
-    animation:
-        introBrandPulse 2s infinite alternate;
+  animation:introBrand 2s ease-in-out infinite alternate;
 }
 
-@keyframes introBrandPulse{
+@keyframes introBrand{
+  from{
+    opacity:.65;
+  }
 
-    from{
-        opacity:.45;
-    }
-
-    to{
-        opacity:1;
-    }
+  to{
+    opacity:1;
+  }
 }
-
-/* intro DJ TINA */
 
 .introTitle{
+  color:#fff;
 
-    position:relative;
+  font-size:
+    clamp(70px,14vw,260px);
 
-    z-index:2;
+  line-height:.8;
 
-    font-size:
-        clamp(80px,15vw,270px);
+  font-weight:1000;
 
-    font-weight:1000;
+  letter-spacing:-5px;
 
-    letter-spacing:-.075em;
+  text-shadow:
+    0 0 8px #fff,
+    0 0 20px #ff00dc,
+    0 0 45px #ff00dc,
+    0 0 100px #8700ff,
+    0 0 180px #00c8ff;
 
-    line-height:.8;
-
-    color:white;
-
-    text-shadow:
-
-        0 0 5px white,
-        0 0 15px #ff00c8,
-        0 0 40px #ff009d,
-        0 0 80px #7b2cff,
-        0 0 140px #008cff;
-
-    animation:
-        introTitlePulse 2.5s ease-in-out infinite alternate;
+  animation:
+    introTitlePulse 1.4s ease-in-out infinite;
 }
 
 @keyframes introTitlePulse{
+  0%,100%{
+    transform:scale(.96);
+    filter:brightness(.9);
+  }
 
-    from{
-        transform:scale(.97);
-        filter:brightness(.8);
-    }
-
-    to{
-        transform:scale(1.02);
-        filter:brightness(1.3);
-    }
+  50%{
+    transform:scale(1.04);
+    filter:brightness(1.4);
+  }
 }
 
-/* =====================================================
-   ARE YOU READY BUTTON
-===================================================== */
-
 .readyButton{
+  position:relative;
 
-    position:relative;
+  margin-top:30px;
 
-    z-index:3;
+  padding:
+    18px 38px;
 
-    margin-top:65px;
+  border:
+    1px solid rgba(255,255,255,.8);
 
-    padding:
-        19px 48px;
+  border-radius:999px;
 
-    border:
-        1px solid rgba(255,255,255,.5);
+  background:
+    linear-gradient(
+      90deg,
+      rgba(255,0,190,.18),
+      rgba(0,190,255,.18)
+    );
 
-    border-radius:100px;
+  color:#fff;
 
-    color:white;
+  font-size:
+    clamp(14px,1.4vw,22px);
 
-    background:
-        rgba(255,0,180,.07);
+  font-weight:900;
 
-    backdrop-filter:blur(15px);
+  letter-spacing:
+    4px;
 
-    font-size:
-        clamp(11px,1vw,16px);
+  cursor:pointer;
 
-    font-weight:800;
+  overflow:hidden;
 
-    letter-spacing:
-        clamp(4px,.7vw,9px);
+  box-shadow:
+    0 0 10px rgba(255,0,210,.8),
+    0 0 35px rgba(0,200,255,.5),
+    inset 0 0 20px rgba(255,255,255,.08);
 
-    cursor:pointer;
-
-    box-shadow:
-
-        0 0 15px rgba(255,0,200,.35),
-
-        0 0 40px rgba(120,0,255,.15),
-
-        inset 0 0 20px rgba(255,255,255,.04);
-
-    transition:
-        .35s;
+  transition:
+    transform .2s ease,
+    box-shadow .2s ease;
 }
 
 .readyButton::before{
+  content:"";
 
-    content:"";
+  position:absolute;
 
-    position:absolute;
+  inset:0;
 
-    inset:-2px;
+  background:
+    linear-gradient(
+      110deg,
+      transparent 20%,
+      rgba(255,255,255,.7) 50%,
+      transparent 80%
+    );
 
-    border-radius:100px;
+  transform:translateX(-120%);
 
-    background:
-        linear-gradient(
-            90deg,
-            transparent,
-            rgba(255,0,200,.7),
-            rgba(0,210,255,.7),
-            transparent
-        );
+  animation:
+    buttonShine 2.2s infinite;
+}
 
-    opacity:0;
+@keyframes buttonShine{
+  0%,55%{
+    transform:translateX(-120%);
+  }
 
-    z-index:-1;
-
-    filter:blur(10px);
-
-    transition:.35s;
+  75%,100%{
+    transform:translateX(120%);
+  }
 }
 
 .readyButton:hover{
+  transform:scale(1.08);
 
-    transform:
-        scale(1.08);
-
-    background:
-        rgba(255,0,180,.18);
-
-    border-color:white;
-
-    box-shadow:
-
-        0 0 20px rgba(255,0,200,.7),
-
-        0 0 60px rgba(110,0,255,.35);
+  box-shadow:
+    0 0 20px #ff00d9,
+    0 0 60px #ff00d9,
+    0 0 100px #00cfff,
+    inset 0 0 30px rgba(255,255,255,.15);
 }
 
-.readyButton:hover::before{
-    opacity:1;
-}
-
-/* =====================================================
+/* =========================================================
    COUNTDOWN
-===================================================== */
+========================================================= */
 
 .countdown{
+  position:absolute;
 
-    position:fixed;
+  inset:0;
 
-    inset:0;
+  z-index:190;
 
-    z-index:600;
+  display:flex;
 
-    display:none;
+  align-items:center;
 
-    align-items:center;
-    justify-content:center;
+  justify-content:center;
 
-    background:#000;
+  pointer-events:none;
 
-    text-align:center;
+  opacity:0;
+
+  visibility:hidden;
 }
 
-.countdown.active{
-    display:flex;
+.countdown.show{
+  opacity:1;
+  visibility:visible;
 }
 
 .countNumber{
+  color:#fff;
 
-    font-size:
-        clamp(150px,32vw,600px);
+  font-size:
+    clamp(180px,32vw,620px);
 
-    font-weight:1000;
+  line-height:.8;
 
-    line-height:.7;
+  font-weight:1000;
 
-    color:white;
+  text-shadow:
+    0 0 10px #fff,
+    0 0 30px #ff00dd,
+    0 0 70px #ff00dd,
+    0 0 130px #8c00ff,
+    0 0 220px #00d9ff;
 
-    text-shadow:
+  transform:scale(.5);
 
-        0 0 5px white,
-        0 0 20px #ff00c8,
-        0 0 50px #ff009d,
-        0 0 100px #7c2cff,
-        0 0 180px #009dff;
-
-    animation:
-        numberPop .9s ease both;
+  opacity:0;
 }
 
-@keyframes numberPop{
-
-    0%{
-        opacity:0;
-
-        transform:
-            scale(1.5);
-
-        filter:
-            blur(20px);
-    }
-
-    35%{
-        opacity:1;
-    }
-
-    100%{
-        opacity:0;
-
-        transform:
-            scale(.72);
-
-        filter:
-            blur(0);
-    }
+.countNumber.pop{
+  animation:
+    countPop .8s cubic-bezier(.12,.8,.15,1);
 }
 
-/* =====================================================
+@keyframes countPop{
+  0%{
+    opacity:0;
+    transform:scale(.25) rotate(-4deg);
+    filter:brightness(3);
+  }
+
+  18%{
+    opacity:1;
+  }
+
+  45%{
+    transform:scale(1.12) rotate(1deg);
+    filter:brightness(1.8);
+  }
+
+  100%{
+    opacity:0;
+    transform:scale(1.45);
+    filter:brightness(1);
+  }
+}
+
+/* =========================================================
    BOOM
-===================================================== */
+========================================================= */
 
 .boom{
+  position:absolute;
 
-    position:fixed;
+  inset:0;
 
-    inset:0;
+  z-index:210;
 
-    z-index:700;
+  display:flex;
 
-    display:none;
+  align-items:center;
 
-    align-items:center;
+  justify-content:center;
 
-    justify-content:center;
+  background:#fff;
 
-    background:#fff;
+  opacity:0;
 
-    pointer-events:none;
+  visibility:hidden;
+
+  pointer-events:none;
 }
 
-.boom.active{
-
-    display:flex;
-
-    animation:
-        boomFlash .8s ease forwards;
+.boom.show{
+  visibility:visible;
+  animation:finalBoom 1.25s ease-out forwards;
 }
 
 .boomText{
+  color:#000;
 
-    color:#000;
+  font-size:
+    clamp(65px,14vw,260px);
 
-    font-size:
-        clamp(40px,10vw,180px);
+  font-weight:1000;
 
-    font-weight:1000;
+  letter-spacing:-5px;
 
-    letter-spacing:-.06em;
+  opacity:0;
 
-    animation:
-        boomText .8s ease forwards;
+  transform:scale(.3);
+
+  text-shadow:
+    0 0 5px #fff;
 }
 
-@keyframes boomFlash{
+.boom.show .boomText{
+  animation:boomText .9s ease-out .12s forwards;
+}
 
-    0%{
-        opacity:1;
-    }
+@keyframes finalBoom{
+  0%{
+    opacity:1;
+  }
 
-    12%{
-        opacity:1;
-    }
+  18%{
+    opacity:.85;
+  }
 
-    30%{
-        opacity:.1;
-    }
+  25%{
+    opacity:.05;
+  }
 
-    45%{
-        opacity:.75;
-    }
+  34%{
+    opacity:1;
+  }
 
-    100%{
-        opacity:0;
-    }
+  43%{
+    opacity:.15;
+  }
+
+  100%{
+    opacity:0;
+  }
 }
 
 @keyframes boomText{
+  0%{
+    opacity:0;
+    transform:scale(.2);
+  }
 
-    0%{
-        transform:scale(.4);
-        opacity:0;
-    }
+  35%{
+    opacity:1;
+    transform:scale(1.1);
+  }
 
-    25%{
-        transform:scale(1.15);
-        opacity:1;
-    }
-
-    100%{
-        transform:scale(2.2);
-        opacity:0;
-    }
+  100%{
+    opacity:0;
+    transform:scale(1.5);
+  }
 }
 
-/* =====================================================
-   MOBİL
-===================================================== */
+/* =========================================================
+   FULLSCREEN
+========================================================= */
+
+.fullscreen{
+  position:absolute;
+
+  right:20px;
+  bottom:20px;
+
+  z-index:300;
+
+  padding:10px 14px;
+
+  border:
+    1px solid rgba(255,255,255,.25);
+
+  border-radius:10px;
+
+  color:#fff;
+
+  background:
+    rgba(0,0,0,.25);
+
+  backdrop-filter:blur(10px);
+
+  cursor:pointer;
+
+  font-size:12px;
+
+  opacity:.55;
+
+  transition:.2s ease;
+}
+
+.fullscreen:hover{
+  opacity:1;
+
+  border-color:#ff00d9;
+
+  box-shadow:
+    0 0 20px rgba(255,0,220,.5);
+}
+
+/* =========================================================
+   ANIMATIONS
+========================================================= */
+
+@keyframes portalSpin{
+  to{
+    transform:
+      translate(-50%,-50%)
+      perspective(800px)
+      rotateX(68deg)
+      rotateZ(360deg);
+  }
+}
+
+@keyframes portalSpinReverse{
+  to{
+    transform:
+      translate(-50%,-50%)
+      perspective(900px)
+      rotateX(72deg)
+      rotateZ(-360deg);
+  }
+}
+
+@keyframes portalPulse{
+  0%,100%{
+    opacity:.55;
+    filter:brightness(.8);
+  }
+
+  50%{
+    opacity:1;
+    filter:brightness(1.7);
+  }
+}
+
+/* =========================================================
+   MOBILE / SMALL SCREEN
+========================================================= */
 
 @media(max-width:700px){
 
-    .introTitle{
-        font-size:21vw;
-    }
+  .title{
+    font-size:20vw;
+  }
 
-    .readyButton{
-        margin-top:45px;
-    }
+  .subtitle{
+    top:62%;
+    letter-spacing:4px;
+  }
 
-    .portal{
-        width:110vw;
-        height:110vw;
-    }
+  .portal{
+    width:100vw;
+    height:100vw;
+  }
 
-    .portal2{
-        width:70vw;
-        height:70vw;
-    }
+  .portal2{
+    width:75vw;
+    height:75vw;
+  }
+
+  .brand{
+    top:5%;
+  }
+
+  .readyButton{
+    padding:16px 28px;
+  }
 }
 
 </style>
 </head>
 
-
 <body>
 
 <div class="stage">
 
-    <!-- =================================================
-         ANA VJ
-    ================================================= -->
+  <canvas id="visual"></canvas>
 
-    <canvas id="visual"></canvas>
+  <div class="atmosphere"></div>
 
-    <div class="atmosphere"></div>
+  <div class="sideGlow left"></div>
+  <div class="sideGlow right"></div>
 
-    <div class="sideGlow left"></div>
-    <div class="sideGlow right"></div>
+  <div class="portal"></div>
+  <div class="portal2"></div>
 
-    <div class="portal"></div>
-    <div class="portal2"></div>
+  <div class="centerEnergy"></div>
 
-    <div class="brand">
-        VIBE EVENT
-    </div>
+  <div class="brand">
+    VIBE EVENT
+  </div>
 
-    <div class="title">
-        DJ TINA
-    </div>
+  <div class="title">
+    DJ TINA
+  </div>
 
-    <div class="subtitle">
-        OPEN YOUR EYES
-    </div>
+  <div class="subtitle">
+    OPEN YOUR EYES
+  </div>
 
-    <div class="flash"></div>
+  <div class="rgb"></div>
 
-    <div class="vignette"></div>
+  <div class="flash" id="flash"></div>
 
-    <div class="grain"></div>
+  <div class="shockwave" id="shockwave"></div>
 
-</div>
+  <div class="vignette"></div>
+  <div class="grain"></div>
 
 
-<!-- =====================================================
-     INTRO
-===================================================== -->
+  <!-- INTRO -->
 
-<div class="intro" id="intro">
-
-    <div class="introGlow"></div>
+  <div class="intro" id="intro">
 
     <div class="introBrand">
-        VIBE EVENT
+      VIBE EVENT
     </div>
 
     <div class="introTitle">
-        DJ TINA
+      DJ TINA
     </div>
 
     <button
-        class="readyButton"
-        id="readyButton">
-
-        ARE YOU READY?
-
+      class="readyButton"
+      id="readyButton"
+    >
+      ARE YOU READY?
     </button>
 
-</div>
+  </div>
 
 
-<!-- =====================================================
-     COUNTDOWN
-===================================================== -->
+  <!-- COUNTDOWN -->
 
-<div
+  <div
     class="countdown"
-    id="countdown">
-
+    id="countdown"
+  >
     <div
-        class="countNumber"
-        id="countNumber">
+      class="countNumber"
+      id="countNumber"
+    >
+      10
     </div>
+  </div>
 
-</div>
 
+  <!-- FINAL BOOM -->
 
-<!-- =====================================================
-     BOOM
-===================================================== -->
-
-<div
+  <div
     class="boom"
-    id="boom">
-
+    id="boom"
+  >
     <div class="boomText">
-        DJ TINA
+      DJ TINA
     </div>
+  </div>
+
+
+  <!-- FULLSCREEN -->
+
+  <button
+    class="fullscreen"
+    id="fullscreen"
+  >
+    ⛶ FULLSCREEN
+  </button>
 
 </div>
-
-
-<!-- FULLSCREEN -->
-
-<button
-    class="fullscreen"
-    id="fullscreen">
-
-    ⛶
-
-</button>
 
 
 <script>
 
-/* =====================================================
+/* =========================================================
    CANVAS
-===================================================== */
+========================================================= */
 
 const canvas =
-    document.getElementById("visual");
+  document.getElementById("visual");
 
 const ctx =
-    canvas.getContext("2d");
+  canvas.getContext("2d");
 
-let width;
-let height;
-let dpr;
+let W = 0;
+let H = 0;
+
+let dpr =
+  Math.min(window.devicePixelRatio || 1, 2);
 
 function resize(){
 
-    dpr =
-        Math.min(
-            window.devicePixelRatio || 1,
-            2
-        );
+  W = window.innerWidth;
+  H = window.innerHeight;
 
-    width =
-        window.innerWidth;
+  canvas.width = W * dpr;
+  canvas.height = H * dpr;
 
-    height =
-        window.innerHeight;
+  canvas.style.width = W + "px";
+  canvas.style.height = H + "px";
 
-    canvas.width =
-        width*dpr;
-
-    canvas.height =
-        height*dpr;
-
-    canvas.style.width =
-        width+"px";
-
-    canvas.style.height =
-        height+"px";
-
-    ctx.setTransform(
-        dpr,
-        0,
-        0,
-        dpr,
-        0,
-        0
-    );
+  ctx.setTransform(
+    dpr,
+    0,
+    0,
+    dpr,
+    0,
+    0
+  );
 }
 
 window.addEventListener(
-    "resize",
-    resize
+  "resize",
+  resize
 );
 
 resize();
 
 
-/* =====================================================
-   BEAMS
-===================================================== */
-
-const beams=[
-
-    {
-        x:.04,
-        color:"#ff009d",
-        speed:.0008,
-        phase:0
-    },
-
-    {
-        x:.17,
-        color:"#8c2cff",
-        speed:-.00055,
-        phase:2
-    },
-
-    {
-        x:.31,
-        color:"#00c8ff",
-        speed:.00045,
-        phase:4
-    },
-
-    {
-        x:.47,
-        color:"#ff00c8",
-        speed:-.00038,
-        phase:1
-    },
-
-    {
-        x:.63,
-        color:"#009dff",
-        speed:.0006,
-        phase:5
-    },
-
-    {
-        x:.78,
-        color:"#8a2cff",
-        speed:-.0005,
-        phase:2
-    },
-
-    {
-        x:.94,
-        color:"#ff009d",
-        speed:.0007,
-        phase:3
-    }
-
-];
-
-
-/* =====================================================
+/* =========================================================
    PARTICLES
-===================================================== */
+========================================================= */
 
-const particles=[];
+const particles = [];
 
-for(
-    let i=0;
-    i<180;
-    i++
-){
+const PARTICLE_COUNT = 260;
 
-    particles.push({
+for(let i=0;i<PARTICLE_COUNT;i++){
 
-        x:Math.random(),
-        y:Math.random(),
+  particles.push({
 
-        size:
-            Math.random()*2+.3,
+    x:Math.random(),
+    y:Math.random(),
 
-        speed:
-            Math.random()*.0008+.00015,
+    z:Math.random(),
 
-        alpha:
-            Math.random()*.7+.15,
+    speed:
+      .0004 +
+      Math.random() * .002,
 
-        phase:
-            Math.random()*Math.PI*2
+    size:
+      .4 +
+      Math.random() * 2.8,
 
-    });
+    alpha:
+      .2 +
+      Math.random() * .8,
+
+    hue:
+      Math.random() > .5
+        ? "pink"
+        : "blue"
+
+  });
 
 }
 
 
-/* =====================================================
-   BEAM
-===================================================== */
+/* =========================================================
+   LASERS
+========================================================= */
 
-function drawBeam(
-    beam,
-    time
-){
+const lasers = [];
 
-    const baseX=
-        width*beam.x;
+for(let i=0;i<18;i++){
 
-    const movement=
-        Math.sin(
-            time*beam.speed*1000+
-            beam.phase
-        );
+  lasers.push({
 
-    const targetX=
-        width*.5+
-        movement*width*.38;
+    side:
+      Math.random() > .5
+        ? -1
+        : 1,
 
-    const spread=
-        width*.07;
+    angle:
+      Math.random() * Math.PI * 2,
 
-    const gradient=
-        ctx.createLinearGradient(
-            baseX,
-            height,
-            targetX,
-            0
-        );
+    speed:
+      (.004 + Math.random()*.012) *
+      (Math.random()>.5 ? 1 : -1),
 
-    gradient.addColorStop(
-        0,
-        "rgba(0,0,0,0)"
+    width:
+      1 + Math.random()*3,
+
+    alpha:
+      .25 + Math.random()*.6,
+
+    color:
+      Math.random() > .5
+        ? "cyan"
+        : "pink"
+
+  });
+
+}
+
+
+/* =========================================================
+   BEAMS
+========================================================= */
+
+const beams = [];
+
+for(let i=0;i<14;i++){
+
+  beams.push({
+
+    angle:
+      Math.random()*Math.PI*2,
+
+    speed:
+      .001 +
+      Math.random()*.004,
+
+    width:
+      .02 +
+      Math.random()*.05,
+
+    alpha:
+      .05 +
+      Math.random()*.15,
+
+    color:
+      i%2===0
+        ? "pink"
+        : "blue"
+
+  });
+
+}
+
+
+/* =========================================================
+   GLOBAL EFFECT STATE
+========================================================= */
+
+let energy = 1;
+
+let pulse = 0;
+
+let shake = 0;
+
+let rotation = 0;
+
+let burstParticles = [];
+
+let lastTime = performance.now();
+
+
+/* =========================================================
+   DRAW BACKGROUND
+========================================================= */
+
+function drawBackground(){
+
+  const gradient =
+    ctx.createRadialGradient(
+      W*.5,
+      H*.5,
+      0,
+      W*.5,
+      H*.5,
+      Math.max(W,H)*.75
     );
 
-    gradient.addColorStop(
-        .25,
-        beam.color
+  gradient.addColorStop(
+    0,
+    `rgba(38,0,70,${.55 + pulse*.15})`
+  );
+
+  gradient.addColorStop(
+    .35,
+    "rgba(11,0,32,.75)"
+  );
+
+  gradient.addColorStop(
+    1,
+    "#000"
+  );
+
+  ctx.fillStyle = gradient;
+
+  ctx.fillRect(
+    0,
+    0,
+    W,
+    H
+  );
+}
+
+
+/* =========================================================
+   DRAW ROTATING LIGHT BEAMS
+========================================================= */
+
+function drawBeams(t){
+
+  ctx.save();
+
+  ctx.translate(
+    W/2,
+    H/2
+  );
+
+  ctx.globalCompositeOperation =
+    "screen";
+
+  for(const beam of beams){
+
+    beam.angle +=
+      beam.speed *
+      (1 + energy*.4);
+
+    const length =
+      Math.max(W,H)*1.2;
+
+    const spread =
+      beam.width *
+      (1 + pulse*.8);
+
+    const x1 =
+      Math.cos(beam.angle) *
+      20;
+
+    const y1 =
+      Math.sin(beam.angle) *
+      20;
+
+    const x2 =
+      Math.cos(beam.angle-spread) *
+      length;
+
+    const y2 =
+      Math.sin(beam.angle-spread) *
+      length;
+
+    const x3 =
+      Math.cos(beam.angle+spread) *
+      length;
+
+    const y3 =
+      Math.sin(beam.angle+spread) *
+      length;
+
+    const color =
+      beam.color === "pink"
+        ? `rgba(255,0,210,${beam.alpha*(.5+pulse*.5)})`
+        : `rgba(0,210,255,${beam.alpha*(.5+pulse*.5)})`;
+
+    const grd =
+      ctx.createLinearGradient(
+        x1,
+        y1,
+        x2,
+        y2
+      );
+
+    grd.addColorStop(
+      0,
+      color
     );
 
-    gradient.addColorStop(
-        .55,
-        "rgba(255,255,255,.03)"
+    grd.addColorStop(
+      1,
+      "rgba(0,0,0,0)"
     );
 
-    gradient.addColorStop(
-        1,
-        "rgba(0,0,0,0)"
-    );
-
-    ctx.save();
-
-    ctx.globalCompositeOperation=
-        "screen";
-
-    ctx.globalAlpha=.20;
-
-    ctx.fillStyle=gradient;
+    ctx.fillStyle = grd;
 
     ctx.beginPath();
 
     ctx.moveTo(
-        baseX-spread,
-        height
+      x1,
+      y1
     );
 
     ctx.lineTo(
-        baseX+spread,
-        height
+      x2,
+      y2
     );
 
     ctx.lineTo(
-        targetX+width*.025,
-        0
-    );
-
-    ctx.lineTo(
-        targetX-width*.025,
-        0
+      x3,
+      y3
     );
 
     ctx.closePath();
 
     ctx.fill();
+  }
 
-    ctx.restore();
+  ctx.restore();
 }
 
 
-/* =====================================================
-   LASER
-===================================================== */
+/* =========================================================
+   DRAW LASER FANS
+========================================================= */
 
-function drawLaser(
-    beam,
-    time
-){
+function drawLasers(t){
 
-    const movement=
-        Math.sin(
-            time*.001+
-            beam.phase
-        );
+  ctx.save();
 
-    const startX=
-        width*beam.x;
+  ctx.translate(
+    W/2,
+    H/2
+  );
 
-    const endX=
-        width*.5+
-        movement*width*.38;
+  ctx.globalCompositeOperation =
+    "screen";
 
-    ctx.save();
+  for(const laser of lasers){
 
-    ctx.globalCompositeOperation=
-        "screen";
+    laser.angle +=
+      laser.speed *
+      (1 + energy);
 
-    ctx.globalAlpha=.65;
+    const startX =
+      laser.side *
+      W*.12;
 
-    ctx.shadowBlur=18;
+    const startY =
+      H*.08;
 
-    ctx.shadowColor=
-        beam.color;
+    const length =
+      Math.max(W,H)*1.3;
 
-    ctx.strokeStyle=
-        beam.color;
+    const angle =
+      laser.angle +
+      (laser.side > 0 ? Math.PI : 0);
 
-    ctx.lineWidth=1;
+    const endX =
+      startX +
+      Math.cos(angle)*length;
+
+    const endY =
+      startY +
+      Math.sin(angle)*length;
+
+    const grad =
+      ctx.createLinearGradient(
+        startX,
+        startY,
+        endX,
+        endY
+      );
+
+    if(laser.color==="pink"){
+
+      grad.addColorStop(
+        0,
+        `rgba(255,0,220,${laser.alpha})`
+      );
+
+      grad.addColorStop(
+        .35,
+        `rgba(255,0,220,${laser.alpha*.4})`
+      );
+
+    }else{
+
+      grad.addColorStop(
+        0,
+        `rgba(0,230,255,${laser.alpha})`
+      );
+
+      grad.addColorStop(
+        .35,
+        `rgba(0,230,255,${laser.alpha*.4})`
+      );
+
+    }
+
+    grad.addColorStop(
+      1,
+      "rgba(0,0,0,0)"
+    );
+
+    ctx.strokeStyle = grad;
+
+    ctx.lineWidth =
+      laser.width *
+      (1 + pulse*2);
 
     ctx.beginPath();
 
     ctx.moveTo(
-        startX,
-        height
+      startX,
+      startY
     );
 
     ctx.lineTo(
-        endX,
-        height*.15
+      endX,
+      endY
     );
 
     ctx.stroke();
 
-    ctx.restore();
+    /* laser glow */
+
+    ctx.lineWidth =
+      laser.width * 5;
+
+    ctx.globalAlpha = .08;
+
+    ctx.stroke();
+
+    ctx.globalAlpha = 1;
+  }
+
+  ctx.restore();
 }
 
 
-/* =====================================================
+/* =========================================================
    PARTICLES
-===================================================== */
+========================================================= */
 
-function drawParticles(time){
+function drawParticles(){
 
-    ctx.save();
+  ctx.save();
 
-    ctx.globalCompositeOperation=
-        "screen";
+  ctx.globalCompositeOperation =
+    "screen";
 
-    particles.forEach(p=>{
+  for(const p of particles){
 
-        p.y-=p.speed;
+    p.z -=
+      p.speed *
+      (1 + energy*.8);
 
-        if(p.y<-.02){
+    if(p.z <= 0){
 
-            p.y=1.02;
-            p.x=Math.random();
+      p.z = 1;
 
-        }
+      p.x =
+        Math.random();
 
-        const pulse=
-            .5+
-            Math.sin(
-                time*.002+
-                p.phase
-            )*.5;
+      p.y =
+        Math.random();
 
-        ctx.globalAlpha=
-            p.alpha*pulse;
-
-        ctx.fillStyle=
-            Math.random()>.5
-                ? "#ff00c8"
-                : "#00d9ff";
-
-        ctx.shadowBlur=10;
-
-        ctx.shadowColor=
-            ctx.fillStyle;
-
-        ctx.beginPath();
-
-        ctx.arc(
-            p.x*width,
-            p.y*height,
-            p.size,
-            0,
-            Math.PI*2
-        );
-
-        ctx.fill();
-
-    });
-
-    ctx.restore();
-}
-
-
-/* =====================================================
-   ENERGY
-===================================================== */
-
-function drawEnergy(time){
-
-    const cx=
-        width/2;
-
-    const cy=
-        height/2;
-
-    ctx.save();
-
-    ctx.translate(
-        cx,
-        cy
-    );
-
-    ctx.globalCompositeOperation=
-        "screen";
-
-    for(
-        let i=0;
-        i<7;
-        i++
-    ){
-
-        const radius=
-            Math.min(width,height)*
-            (.18+i*.035);
-
-        const rotation=
-            time*.0004*
-            (i%2===0?1:-1);
-
-        ctx.save();
-
-        ctx.rotate(rotation);
-
-        ctx.strokeStyle=
-            i%2===0
-                ? "rgba(255,0,190,.16)"
-                : "rgba(0,190,255,.13)";
-
-        ctx.lineWidth=
-            i===0 ? 2 : 1;
-
-        ctx.shadowBlur=18;
-
-        ctx.shadowColor=
-            i%2===0
-                ? "#ff00c8"
-                : "#00c8ff";
-
-        ctx.beginPath();
-
-        for(
-            let a=0;
-            a<Math.PI*2;
-            a+=.04
-        ){
-
-            const wave=
-                Math.sin(
-                    a*9+
-                    time*.002+
-                    i
-                )*4;
-
-            const r=
-                radius+wave;
-
-            const x=
-                Math.cos(a)*r;
-
-            const y=
-                Math.sin(a)*r*.35;
-
-            if(a===0){
-
-                ctx.moveTo(
-                    x,
-                    y
-                );
-
-            }else{
-
-                ctx.lineTo(
-                    x,
-                    y
-                );
-
-            }
-
-        }
-
-        ctx.stroke();
-
-        ctx.restore();
     }
 
-    ctx.restore();
+    const dx =
+      p.x - .5;
+
+    const dy =
+      p.y - .5;
+
+    const depth =
+      1 - p.z;
+
+    const spread =
+      1 + depth*4;
+
+    const x =
+      W*.5 +
+      dx*W*spread;
+
+    const y =
+      H*.5 +
+      dy*H*spread;
+
+    const size =
+      p.size *
+      (1 + depth*3);
+
+    const alpha =
+      p.alpha *
+      depth *
+      (.3 + energy*.7);
+
+    if(
+      x < -50 ||
+      x > W+50 ||
+      y < -50 ||
+      y > H+50
+    ){
+      continue;
+    }
+
+    ctx.beginPath();
+
+    ctx.arc(
+      x,
+      y,
+      size,
+      0,
+      Math.PI*2
+    );
+
+    if(p.hue==="pink"){
+
+      ctx.fillStyle =
+        `rgba(255,40,220,${alpha})`;
+
+      ctx.shadowColor =
+        "#ff00d9";
+
+    }else{
+
+      ctx.fillStyle =
+        `rgba(30,220,255,${alpha})`;
+
+      ctx.shadowColor =
+        "#00d9ff";
+    }
+
+    ctx.shadowBlur =
+      10 + depth*20;
+
+    ctx.fill();
+  }
+
+  ctx.restore();
 }
 
 
-/* =====================================================
-   ANIMATION
-===================================================== */
+/* =========================================================
+   BURST PARTICLES
+========================================================= */
 
-let start=
-    performance.now();
+function drawBurstParticles(){
 
-function animate(now){
+  ctx.save();
 
-    const time=
-        now-start;
+  ctx.globalCompositeOperation =
+    "screen";
 
-    ctx.clearRect(
-        0,
-        0,
-        width,
-        height
+  for(let i=burstParticles.length-1;i>=0;i--){
+
+    const p =
+      burstParticles[i];
+
+    p.x += p.vx;
+    p.y += p.vy;
+
+    p.vx *= .985;
+    p.vy *= .985;
+
+    p.life -= .018;
+
+    if(p.life <= 0){
+
+      burstParticles.splice(i,1);
+
+      continue;
+    }
+
+    ctx.beginPath();
+
+    ctx.arc(
+      p.x,
+      p.y,
+      p.size,
+      0,
+      Math.PI*2
     );
 
-    beams.forEach(
-        beam=>
-            drawBeam(
-                beam,
-                time
-            )
+    ctx.fillStyle =
+      `rgba(255,255,255,${p.life})`;
+
+    ctx.shadowColor =
+      p.color;
+
+    ctx.shadowBlur =
+      20;
+
+    ctx.fill();
+  }
+
+  ctx.restore();
+}
+
+
+/* =========================================================
+   CREATE BURST
+========================================================= */
+
+function createBurst(
+  amount = 100
+){
+
+  for(let i=0;i<amount;i++){
+
+    const a =
+      Math.random() *
+      Math.PI * 2;
+
+    const speed =
+      2 +
+      Math.random()*15;
+
+    burstParticles.push({
+
+      x:W/2,
+      y:H/2,
+
+      vx:
+        Math.cos(a)*speed,
+
+      vy:
+        Math.sin(a)*speed,
+
+      life:
+        .5 +
+        Math.random()*.7,
+
+      size:
+        1 +
+        Math.random()*5,
+
+      color:
+        Math.random()>.5
+          ? "#ff00d9"
+          : "#00eaff"
+
+    });
+  }
+}
+
+
+/* =========================================================
+   ENERGY RINGS
+========================================================= */
+
+function drawEnergyRings(t){
+
+  ctx.save();
+
+  ctx.translate(
+    W/2,
+    H/2
+  );
+
+  ctx.globalCompositeOperation =
+    "screen";
+
+  for(let i=0;i<9;i++){
+
+    const radius =
+      80 +
+      i*70 +
+      Math.sin(
+        t*.002 +
+        i
+      )*18;
+
+    ctx.beginPath();
+
+    ctx.arc(
+      0,
+      0,
+      radius *
+      (1 + pulse*.25),
+      0,
+      Math.PI*2
     );
 
-    beams.forEach(
-        beam=>
-            drawLaser(
-                beam,
-                time
-            )
+    const alpha =
+      .03 +
+      pulse*.05;
+
+    if(i%2===0){
+
+      ctx.strokeStyle =
+        `rgba(255,0,210,${alpha})`;
+
+    }else{
+
+      ctx.strokeStyle =
+        `rgba(0,220,255,${alpha})`;
+    }
+
+    ctx.lineWidth =
+      1 +
+      pulse*3;
+
+    ctx.stroke();
+  }
+
+  ctx.restore();
+}
+
+
+/* =========================================================
+   RANDOM FLASH
+========================================================= */
+
+let nextFlash =
+  performance.now() +
+  1200 +
+  Math.random()*2500;
+
+function randomFlash(t){
+
+  if(t < nextFlash){
+    return;
+  }
+
+  nextFlash =
+    t +
+    1000 +
+    Math.random()*3000;
+
+  if(Math.random() < .75){
+
+    flash.classList.remove("active");
+
+    void flash.offsetWidth;
+
+    flash.classList.add("active");
+
+    createBurst(
+      35 +
+      Math.floor(
+        Math.random()*50
+      )
     );
 
-    drawEnergy(time);
+    pulse = 1;
+  }
+}
 
-    drawParticles(time);
 
-    requestAnimationFrame(
-        animate
+/* =========================================================
+   MAIN ANIMATION
+========================================================= */
+
+function animate(t){
+
+  const dt =
+    Math.min(
+      40,
+      t-lastTime
     );
+
+  lastTime = t;
+
+  pulse *= .94;
+
+  energy =
+    .8 +
+    Math.sin(t*.0022)*.2 +
+    pulse*.8;
+
+  rotation +=
+    .0015 *
+    energy;
+
+  let shakeX = 0;
+  let shakeY = 0;
+
+  if(shake > .1){
+
+    shake *= .9;
+
+    shakeX =
+      (Math.random()-.5) *
+      shake;
+
+    shakeY =
+      (Math.random()-.5) *
+      shake;
+  }
+
+  ctx.save();
+
+  ctx.translate(
+    shakeX,
+    shakeY
+  );
+
+  drawBackground();
+
+  drawBeams(t);
+
+  drawLasers(t);
+
+  drawEnergyRings(t);
+
+  drawParticles();
+
+  drawBurstParticles();
+
+  ctx.restore();
+
+  randomFlash(t);
+
+  requestAnimationFrame(
+    animate
+  );
 }
 
 requestAnimationFrame(
-    animate
+  animate
 );
 
 
-/* =====================================================
-   ARE YOU READY
-===================================================== */
+/* =========================================================
+   DOM
+========================================================= */
 
-const readyButton=
-    document.getElementById(
-        "readyButton"
-    );
+const intro =
+  document.getElementById("intro");
 
-const intro=
-    document.getElementById(
-        "intro"
-    );
+const readyButton =
+  document.getElementById("readyButton");
 
-const countdown=
-    document.getElementById(
-        "countdown"
-    );
+const countdown =
+  document.getElementById("countdown");
 
-const countNumber=
-    document.getElementById(
-        "countNumber"
-    );
+const countNumber =
+  document.getElementById("countNumber");
 
-const boom=
-    document.getElementById(
-        "boom"
-    );
+const boom =
+  document.getElementById("boom");
 
+const flash =
+  document.getElementById("flash");
 
-let started=false;
+const shockwave =
+  document.getElementById("shockwave");
+
+const fullscreen =
+  document.getElementById("fullscreen");
 
 
-readyButton.addEventListener(
-    "click",
-    startShow
-);
+/* =========================================================
+   FLASH FUNCTION
+========================================================= */
 
+function triggerFlash(){
 
-function startShow(){
+  flash.classList.remove(
+    "active"
+  );
 
-    if(started)
-        return;
+  void flash.offsetWidth;
 
-    started=true;
-
-    /* INTRO KAYBOLUYOR */
-
-    intro.classList.add(
-        "hide"
-    );
-
-    /* KISA KARANLIK */
-
-    setTimeout(
-        ()=>{
-
-            countdown.classList.add(
-                "active"
-            );
-
-            runCountdown();
-
-        },
-        900
-    );
+  flash.classList.add(
+    "active"
+  );
 }
 
 
-/* =====================================================
-   10'DAN GERİ SAYIM
-===================================================== */
+/* =========================================================
+   SHOCKWAVE
+========================================================= */
 
-function runCountdown(){
+function triggerShockwave(){
 
-    let number=10;
+  shockwave.classList.remove(
+    "active"
+  );
 
-    showNumber(number);
+  void shockwave.offsetWidth;
 
-    const timer=
-        setInterval(
-            ()=>{
-
-                number--;
-
-                if(number>0){
-
-                    showNumber(number);
-
-                }else{
-
-                    clearInterval(timer);
-
-                    countdown.classList.remove(
-                        "active"
-                    );
-
-                    /* BOOM */
-
-                    boom.classList.add(
-                        "active"
-                    );
-
-                    setTimeout(
-                        ()=>{
-                            boom.classList.remove(
-                                "active"
-                            );
-                        },
-                        800
-                    );
-
-                }
-
-            },
-            1000
-        );
+  shockwave.classList.add(
+    "active"
+  );
 }
 
 
-/* =====================================================
-   SAYI
-===================================================== */
+/* =========================================================
+   COUNTDOWN
+========================================================= */
 
-function showNumber(number){
+let countdownRunning = false;
 
-    countNumber.textContent=
-        number;
+async function runCountdown(){
 
-    /* animasyonu yeniden başlat */
+  countdownRunning = true;
 
-    countNumber.style.animation=
-        "none";
+  countdown.classList.add(
+    "show"
+  );
+
+  for(
+    let number = 10;
+    number >= 1;
+    number--
+  ){
+
+    countNumber.textContent =
+      number;
+
+    countNumber.classList.remove(
+      "pop"
+    );
 
     void countNumber.offsetWidth;
 
-    countNumber.style.animation=
-        "numberPop .9s ease both";
+    countNumber.classList.add(
+      "pop"
+    );
+
+    /* Her sayıda kısa flash */
+
+    triggerFlash();
+
+    /* Her sayıda kamera sarsıntısı */
+
+    shake =
+      number <= 3
+        ? 18
+        : 8;
+
+    /* Son üç sayıda parçacık patlaması */
+
+    if(number <= 3){
+
+      createBurst(
+        80
+      );
+    }
+
+    await new Promise(
+      resolve =>
+        setTimeout(
+          resolve,
+          900
+        )
+    );
+  }
+
+  countdown.classList.remove(
+    "show"
+  );
+
+  /* =====================================================
+     FINAL EXPLOSION
+  ===================================================== */
+
+  createBurst(
+    500
+  );
+
+  pulse = 5;
+
+  shake = 45;
+
+  triggerShockwave();
+
+  triggerFlash();
+
+  boom.classList.add(
+    "show"
+  );
+
+  await new Promise(
+    resolve =>
+      setTimeout(
+        resolve,
+        1250
+      )
+  );
+
+  boom.classList.remove(
+    "show"
+  );
+
+  /* Birkaç ekstra patlama */
+
+  setTimeout(
+    ()=>{
+      triggerFlash();
+      createBurst(180);
+      pulse=3;
+    },
+    100
+  );
+
+  setTimeout(
+    ()=>{
+      triggerFlash();
+      createBurst(120);
+      pulse=2;
+    },
+    320
+  );
+
+  countdownRunning = false;
 }
 
 
-/* =====================================================
-   FULLSCREEN
-===================================================== */
+/* =========================================================
+   START SHOW
+========================================================= */
 
-const fullscreen=
-    document.getElementById(
-        "fullscreen"
+readyButton.addEventListener(
+  "click",
+  async ()=>{
+
+    if(countdownRunning){
+      return;
+    }
+
+    /* Button click → fullscreen */
+
+    goFullscreen();
+
+    /* Intro kayboluyor */
+
+    intro.classList.add(
+      "hide"
     );
 
-async function goFullscreen(){
+    /* İlk büyük flash */
 
-    try{
+    setTimeout(
+      ()=>{
+        triggerFlash();
+        createBurst(80);
+        pulse=2;
+      },
+      300
+    );
 
-        if(!document.fullscreenElement){
+    await new Promise(
+      resolve =>
+        setTimeout(
+          resolve,
+          700
+        )
+    );
 
-            await document.documentElement
-                .requestFullscreen();
+    runCountdown();
+  }
+);
 
-        }else{
 
-            await document.exitFullscreen();
+/* =========================================================
+   FULLSCREEN
+========================================================= */
 
-        }
+function goFullscreen(){
 
-    }catch(e){
+  const el =
+    document.documentElement;
 
-        console.log(e);
+  if(
+    !document.fullscreenElement
+  ){
 
+    if(
+      el.requestFullscreen
+    ){
+
+      el.requestFullscreen()
+        .catch(
+          ()=>{}
+        );
     }
+  }
 }
 
 fullscreen.addEventListener(
-    "click",
-    goFullscreen
+  "click",
+  goFullscreen
 );
 
 
-/* =====================================================
-   ÇİFT TIK
-===================================================== */
-
-document
-.querySelector(".stage")
-.addEventListener(
-    "dblclick",
-    goFullscreen
-);
-
-
-/* =====================================================
-   MOUSE PARALLAX
-===================================================== */
+/* =========================================================
+   DOUBLE CLICK
+========================================================= */
 
 document.addEventListener(
-    "mousemove",
-    e=>{
+  "dblclick",
+  ()=>{
+    goFullscreen();
+  }
+);
 
-        const x=
-            e.clientX/
-            window.innerWidth-
-            .5;
 
-        const y=
-            e.clientY/
-            window.innerHeight-
-            .5;
+/* =========================================================
+   MOUSE PARALLAX
+========================================================= */
 
-        const title=
-            document.querySelector(
-                ".title"
-            );
+document.addEventListener(
+  "mousemove",
+  e=>{
 
-        title.style.marginLeft=
-            `${x*12}px`;
+    const x =
+      (e.clientX/W-.5);
 
-        title.style.marginTop=
-            `${y*7}px`;
+    const y =
+      (e.clientY/H-.5);
 
+    const title =
+      document.querySelector(
+        ".title"
+      );
+
+    if(title){
+
+      title.style.marginLeft =
+        `${x*18}px`;
+
+      title.style.marginTop =
+        `${y*10}px`;
     }
+  }
+);
+
+
+/* =========================================================
+   SPACE = FLASH
+========================================================= */
+
+document.addEventListener(
+  "keydown",
+  e=>{
+
+    if(e.code==="Space"){
+
+      e.preventDefault();
+
+      triggerFlash();
+
+      createBurst(
+        120
+      );
+
+      pulse=3;
+
+      shake=25;
+    }
+
+    if(e.code==="Enter"){
+
+      if(!countdownRunning){
+
+        readyButton.click();
+      }
+    }
+  }
 );
 
 </script>
