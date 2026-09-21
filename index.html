@@ -2,22 +2,12 @@
 <html lang="tr">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="viewport"
+      content="width=device-width, initial-scale=1.0">
 
-<title>DJ TINA — OPEN YOUR EYES</title>
+<title>VIBE EVENT — DJ TINA</title>
 
 <style>
-
-@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap');
-
-:root{
-    --pink:#ff149f;
-    --magenta:#ff00c8;
-    --purple:#7c2cff;
-    --blue:#00aaff;
-    --cyan:#00e5ff;
-    --black:#030107;
-}
 
 *{
     margin:0;
@@ -30,449 +20,398 @@ body{
     width:100%;
     height:100%;
     overflow:hidden;
-    background:#030107;
-    font-family:Inter,Arial,sans-serif;
+    background:#000;
 }
 
 body{
-    color:white;
+    font-family:Arial, Helvetica, sans-serif;
 }
 
-/* =========================================================
+/* =====================================================
    ANA SAHNE
-========================================================= */
+===================================================== */
 
-.scene{
-    position:relative;
-    width:100vw;
-    height:100vh;
+.stage{
+    position:fixed;
+    inset:0;
     overflow:hidden;
+
     background:
         radial-gradient(
-            ellipse at 50% 52%,
-            rgba(116,0,255,.22) 0%,
-            rgba(30,0,65,.20) 27%,
-            rgba(3,1,7,1) 72%
+            ellipse at 50% 50%,
+            #16002e 0%,
+            #07000e 38%,
+            #010103 78%
         );
 }
 
-/* =========================================================
-   CANVAS IŞIK SİSTEMİ
-========================================================= */
+/* =====================================================
+   CANVAS
+===================================================== */
 
-#lights{
+#visual{
     position:absolute;
     inset:0;
+
     width:100%;
     height:100%;
+
     z-index:1;
 }
 
-/* =========================================================
-   MERKEZ GLOW
-========================================================= */
+/* =====================================================
+   ATMOSFER
+===================================================== */
 
-.centerGlow{
+.atmosphere{
     position:absolute;
+    inset:-20%;
+
     z-index:2;
-
-    left:50%;
-    top:50%;
-
-    width:55vw;
-    height:55vw;
-
-    transform:translate(-50%,-50%);
-
-    border-radius:50%;
+    pointer-events:none;
 
     background:
         radial-gradient(
-            circle,
-            rgba(255,0,180,.16) 0%,
-            rgba(124,44,255,.09) 32%,
-            transparent 68%
+            ellipse at 20% 45%,
+            rgba(255,0,174,.16),
+            transparent 32%
+        ),
+        radial-gradient(
+            ellipse at 80% 45%,
+            rgba(0,170,255,.15),
+            transparent 32%
+        ),
+        radial-gradient(
+            ellipse at 50% 65%,
+            rgba(110,0,255,.14),
+            transparent 35%
         );
 
-    filter:blur(30px);
+    filter:blur(35px);
 
-    animation:centerPulse 4s ease-in-out infinite alternate;
+    animation:
+        atmosphereMove 8s ease-in-out infinite alternate;
 }
 
-@keyframes centerPulse{
+@keyframes atmosphereMove{
 
-    from{
-        transform:translate(-50%,-50%) scale(.92);
-        opacity:.65;
+    0%{
+        transform:scale(1);
     }
 
-    to{
-        transform:translate(-50%,-50%) scale(1.08);
-        opacity:1;
+    100%{
+        transform:scale(1.12) rotate(2deg);
     }
-
 }
 
-/* =========================================================
-   ROTATING RINGS
-========================================================= */
+/* =====================================================
+   NEON RING
+===================================================== */
 
-.ring{
+.portal{
     position:absolute;
-    z-index:2;
+
+    width:min(72vw,1100px);
+    height:min(72vw,1100px);
 
     left:50%;
     top:50%;
 
-    width:65vw;
-    height:65vw;
-
-    max-width:1050px;
-    max-height:1050px;
-
-    transform:translate(-50%,-50%);
+    transform:
+        translate(-50%,-50%)
+        rotateX(64deg);
 
     border-radius:50%;
 
-    border:1px solid rgba(255,0,195,.12);
+    z-index:3;
+
+    border:
+        2px solid rgba(255,0,190,.34);
 
     box-shadow:
-        0 0 35px rgba(255,0,180,.04),
-        inset 0 0 35px rgba(0,150,255,.03);
 
-    animation:rotate 24s linear infinite;
-}
+        0 0 20px rgba(255,0,190,.45),
 
-.ring::before{
-    content:"";
+        0 0 60px rgba(255,0,190,.25),
 
-    position:absolute;
+        0 0 120px rgba(120,0,255,.18),
 
-    inset:9%;
-
-    border-radius:50%;
-
-    border:1px solid rgba(0,190,255,.10);
-}
-
-.ring::after{
-    content:"";
-
-    position:absolute;
-
-    inset:23%;
-
-    border-radius:50%;
-
-    border:1px solid rgba(160,0,255,.10);
-}
-
-.ring2{
-    width:48vw;
-    height:48vw;
+        inset 0 0 50px rgba(0,180,255,.12);
 
     animation:
-        rotateReverse 18s linear infinite;
+
+        portalSpin 15s linear infinite,
+
+        portalPulse 3s ease-in-out infinite alternate;
 }
 
-.ring3{
-    width:82vw;
-    height:82vw;
+.portal::before{
 
-    opacity:.35;
+    content:"";
 
-    animation-duration:36s;
-}
-
-@keyframes rotate{
-
-    from{
-        transform:translate(-50%,-50%) rotate(0deg);
-    }
-
-    to{
-        transform:translate(-50%,-50%) rotate(360deg);
-    }
-
-}
-
-@keyframes rotateReverse{
-
-    from{
-        transform:translate(-50%,-50%) rotate(360deg);
-    }
-
-    to{
-        transform:translate(-50%,-50%) rotate(0deg);
-    }
-
-}
-
-/* =========================================================
-   GRAIN
-========================================================= */
-
-.grain{
-    position:absolute;
-    inset:-50%;
-
-    z-index:20;
-
-    pointer-events:none;
-
-    opacity:.045;
-
-    background-image:url("data:image/svg+xml,%3Csvg viewBox='0 0 180 180' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='.8'/%3E%3C/svg%3E");
-
-    animation:grainMove .18s steps(2) infinite;
-}
-
-@keyframes grainMove{
-
-    0%{transform:translate(0,0)}
-    25%{transform:translate(2%,-2%)}
-    50%{transform:translate(-2%,1%)}
-    75%{transform:translate(1%,2%)}
-    100%{transform:translate(-1%,-1%)}
-
-}
-
-/* =========================================================
-   ÜST BAR
-========================================================= */
-
-.topBar{
     position:absolute;
 
-    left:0;
-    right:0;
-    top:0;
-
-    height:90px;
-
-    padding:0 4vw;
-
-    z-index:15;
-
-    display:flex;
-    align-items:center;
-    justify-content:space-between;
-
-    border-bottom:1px solid rgba(255,255,255,.07);
-
-    background:linear-gradient(
-        to bottom,
-        rgba(0,0,0,.38),
-        transparent
-    );
-}
-
-.logo{
-    font-size:14px;
-    font-weight:800;
-    letter-spacing:5px;
-}
-
-.logo span{
-    color:var(--pink);
-
-    text-shadow:
-        0 0 12px var(--pink),
-        0 0 30px rgba(255,0,180,.7);
-}
-
-.live{
-    display:flex;
-    align-items:center;
-    gap:9px;
-
-    font-size:10px;
-    font-weight:700;
-
-    letter-spacing:3px;
-
-    color:rgba(255,255,255,.55);
-}
-
-.liveDot{
-    width:6px;
-    height:6px;
+    inset:6%;
 
     border-radius:50%;
 
-    background:#ff159f;
+    border:
+        1px solid rgba(0,210,255,.45);
 
     box-shadow:
-        0 0 8px #ff159f,
-        0 0 18px #ff159f;
 
-    animation:livePulse 1s infinite alternate;
+        0 0 30px rgba(0,190,255,.35),
+
+        inset 0 0 40px rgba(255,0,200,.16);
 }
 
-@keyframes livePulse{
+.portal::after{
+
+    content:"";
+
+    position:absolute;
+
+    inset:17%;
+
+    border-radius:50%;
+
+    border:
+        1px solid rgba(180,0,255,.35);
+
+    box-shadow:
+        0 0 35px rgba(150,0,255,.3);
+}
+
+@keyframes portalSpin{
 
     from{
-        opacity:.3;
-        transform:scale(.7);
+        transform:
+            translate(-50%,-50%)
+            rotateX(64deg)
+            rotateZ(0deg);
     }
 
     to{
-        opacity:1;
-        transform:scale(1.2);
+        transform:
+            translate(-50%,-50%)
+            rotateX(64deg)
+            rotateZ(360deg);
     }
-
 }
 
-/* =========================================================
-   HERO
-========================================================= */
+@keyframes portalPulse{
 
-.hero{
+    from{
+        opacity:.45;
+        filter:brightness(.8);
+    }
+
+    to{
+        opacity:.95;
+        filter:brightness(1.45);
+    }
+}
+
+/* =====================================================
+   İKİNCİ HALKA
+===================================================== */
+
+.portal2{
+
+    position:absolute;
+
+    width:min(45vw,700px);
+    height:min(45vw,700px);
+
+    left:50%;
+    top:50%;
+
+    transform:
+        translate(-50%,-50%)
+        rotateX(70deg);
+
+    border-radius:50%;
+
+    border:
+        2px solid rgba(0,210,255,.24);
+
+    box-shadow:
+        0 0 35px rgba(0,180,255,.35),
+        inset 0 0 35px rgba(255,0,180,.2);
+
+    z-index:4;
+
+    animation:
+        portalSpin2 10s linear infinite reverse;
+}
+
+@keyframes portalSpin2{
+
+    from{
+        transform:
+            translate(-50%,-50%)
+            rotateX(70deg)
+            rotateZ(0);
+    }
+
+    to{
+        transform:
+            translate(-50%,-50%)
+            rotateX(70deg)
+            rotateZ(360deg);
+    }
+}
+
+/* =====================================================
+   ÜST VIBE EVENT
+===================================================== */
+
+.brand{
+
     position:absolute;
 
     z-index:10;
 
-    inset:0;
+    top:7%;
 
-    display:flex;
-    flex-direction:column;
+    left:50%;
 
-    justify-content:center;
-    align-items:center;
+    transform:translateX(-50%);
 
-    text-align:center;
+    color:white;
 
-    perspective:1000px;
-}
+    font-size:
+        clamp(12px,1.2vw,22px);
 
-.eyebrow{
-    position:relative;
+    font-weight:800;
 
-    margin-bottom:22px;
-
-    font-size:10px;
-    font-weight:700;
-
-    letter-spacing:8px;
-
-    color:rgba(255,255,255,.62);
-
-    text-transform:uppercase;
-
-    animation:fadeIn 1.5s ease both;
-}
-
-.eyebrow::before,
-.eyebrow::after{
-    content:"";
-
-    position:absolute;
-
-    top:50%;
-
-    width:80px;
-    height:1px;
-
-    background:linear-gradient(
-        90deg,
-        transparent,
-        rgba(255,0,190,.7)
-    );
-}
-
-.eyebrow::before{
-    right:calc(100% + 20px);
-}
-
-.eyebrow::after{
-    left:calc(100% + 20px);
-
-    transform:rotate(180deg);
-}
-
-/* =========================================================
-   DEV DJ TINA
-========================================================= */
-
-.titleWrap{
-    position:relative;
-
-    display:flex;
-    justify-content:center;
-    align-items:center;
-
-    transform-style:preserve-3d;
-}
-
-.title{
-
-    position:relative;
-
-    font-size:clamp(90px,15.8vw,290px);
-
-    line-height:.78;
-
-    font-weight:900;
-
-    letter-spacing:-.075em;
+    letter-spacing:
+        clamp(6px,1vw,15px);
 
     white-space:nowrap;
 
-    color:#fff;
-
-    transform:translateZ(40px);
+    text-transform:uppercase;
 
     text-shadow:
 
-        0 1px 0 #fff,
+        0 0 8px white,
 
-        0 0 5px rgba(255,255,255,.95),
+        0 0 20px #ff00c8,
 
-        0 0 15px rgba(255,0,200,.95),
+        0 0 40px #7d2cff;
 
-        0 0 35px rgba(255,0,180,.75),
-
-        0 0 75px rgba(124,44,255,.55),
-
-        0 0 130px rgba(0,170,255,.25);
-
-    animation:titleBreath 3.2s ease-in-out infinite alternate;
-
+    animation:
+        brandPulse 2.8s ease-in-out infinite alternate;
 }
 
-@keyframes titleBreath{
+@keyframes brandPulse{
 
     from{
-
-        filter:brightness(.92);
-
-        text-shadow:
-            0 0 5px rgba(255,255,255,.95),
-            0 0 15px rgba(255,0,200,.9),
-            0 0 35px rgba(255,0,180,.65),
-            0 0 70px rgba(124,44,255,.45),
-            0 0 120px rgba(0,170,255,.18);
-
+        opacity:.55;
+        filter:brightness(.8);
     }
 
     to{
+        opacity:1;
+        filter:brightness(1.5);
+    }
+}
 
-        filter:brightness(1.22);
+/* =====================================================
+   ANA DJ TINA
+===================================================== */
 
-        text-shadow:
-            0 0 5px white,
-            0 0 18px #ff00c8,
-            0 0 45px #ff009d,
-            0 0 90px #7c2cff,
-            0 0 150px rgba(0,180,255,.4);
+.title{
 
+    position:absolute;
+
+    z-index:8;
+
+    left:50%;
+    top:50%;
+
+    transform:
+        translate(-50%,-50%);
+
+    width:100%;
+
+    text-align:center;
+
+    color:#fff;
+
+    font-size:
+        clamp(80px,16vw,300px);
+
+    line-height:.78;
+
+    font-weight:1000;
+
+    letter-spacing:
+        -.075em;
+
+    white-space:nowrap;
+
+    text-shadow:
+
+        0 0 4px #fff,
+
+        0 0 10px #fff,
+
+        0 0 22px #ff00c8,
+
+        0 0 45px #ff009d,
+
+        0 0 90px #8c2cff,
+
+        0 0 150px rgba(0,160,255,.5);
+
+    animation:
+        titlePulse 2.4s ease-in-out infinite alternate;
+}
+
+@keyframes titlePulse{
+
+    0%{
+
+        transform:
+            translate(-50%,-50%)
+            scale(.98);
+
+        filter:
+            brightness(.88);
     }
 
+    100%{
+
+        transform:
+            translate(-50%,-50%)
+            scale(1.035);
+
+        filter:
+            brightness(1.35);
+    }
 }
 
 /* RGB GHOST */
 
-.title::before,
+.title::before{
+
+    content:"DJ TINA";
+
+    position:absolute;
+
+    inset:0;
+
+    color:#00eaff;
+
+    opacity:.17;
+
+    transform:translateX(-5px);
+
+    mix-blend-mode:screen;
+
+}
+
 .title::after{
 
     content:"DJ TINA";
@@ -481,408 +420,315 @@ body{
 
     inset:0;
 
-    pointer-events:none;
-
-    opacity:.15;
-
-}
-
-.title::before{
-
-    color:#00d9ff;
-
-    transform:translate(-4px,1px);
-
-    mix-blend-mode:screen;
-
-}
-
-.title::after{
-
     color:#ff008c;
 
-    transform:translate(4px,-1px);
+    opacity:.17;
+
+    transform:translateX(5px);
 
     mix-blend-mode:screen;
-
 }
 
-/* =========================================================
-   ALT YAZI
-========================================================= */
+/* =====================================================
+   OPEN YOUR EYES
+===================================================== */
 
 .subtitle{
 
-    margin-top:35px;
-
-    font-size:clamp(11px,1.1vw,17px);
-
-    font-weight:600;
-
-    letter-spacing:11px;
-
-    color:rgba(255,255,255,.78);
-
-    text-transform:uppercase;
-
-    text-shadow:
-        0 0 12px rgba(255,0,200,.8),
-        0 0 28px rgba(124,44,255,.5);
-
-    animation:fadeIn 1.5s .4s ease both;
-
-}
-
-/* =========================================================
-   EVENT INFO
-========================================================= */
-
-.eventInfo{
-
-    margin-top:48px;
-
-    display:flex;
-
-    align-items:center;
-
-    gap:18px;
-
-    animation:fadeIn 1.5s .7s ease both;
-
-}
-
-.infoItem{
-
-    min-width:125px;
-
-    padding:12px 22px;
-
-    border:1px solid rgba(255,255,255,.11);
-
-    background:rgba(255,255,255,.035);
-
-    backdrop-filter:blur(14px);
-
-    border-radius:50px;
-
-    font-size:10px;
-
-    font-weight:700;
-
-    letter-spacing:2px;
-
-    color:rgba(255,255,255,.72);
-
-}
-
-.infoItem strong{
-
-    color:white;
-
-    font-size:12px;
-
-}
-
-.separator{
-
-    width:4px;
-    height:4px;
-
-    border-radius:50%;
-
-    background:var(--pink);
-
-    box-shadow:0 0 12px var(--pink);
-
-}
-
-/* =========================================================
-   BUTTON
-========================================================= */
-
-.cta{
-
     position:absolute;
 
-    bottom:7vh;
+    z-index:9;
 
     left:50%;
 
+    top:67%;
+
     transform:translateX(-50%);
+
+    color:rgba(255,255,255,.9);
+
+    font-size:
+        clamp(10px,1.1vw,18px);
+
+    font-weight:700;
+
+    letter-spacing:
+        clamp(5px,1vw,13px);
+
+    white-space:nowrap;
+
+    text-shadow:
+
+        0 0 8px white,
+
+        0 0 20px #ff00c8,
+
+        0 0 35px #6e2cff;
+
+    animation:
+        subtitlePulse 2s ease-in-out infinite alternate;
+}
+
+@keyframes subtitlePulse{
+
+    from{
+        opacity:.45;
+    }
+
+    to{
+        opacity:1;
+    }
+}
+
+/* =====================================================
+   YAN IŞIKLAR
+===================================================== */
+
+.sideGlow{
+
+    position:absolute;
+
+    top:-20%;
+
+    width:35vw;
+    height:140vh;
+
+    z-index:4;
+
+    pointer-events:none;
+
+    filter:blur(25px);
+
+    opacity:.55;
+
+    transform-origin:
+        bottom center;
+}
+
+.sideGlow.left{
+
+    left:-17vw;
+
+    background:
+        linear-gradient(
+            20deg,
+            rgba(255,0,170,.75),
+            transparent 65%
+        );
+
+    animation:
+        leftSweep 4.5s ease-in-out infinite alternate;
+}
+
+.sideGlow.right{
+
+    right:-17vw;
+
+    background:
+        linear-gradient(
+            -20deg,
+            rgba(0,150,255,.75),
+            transparent 65%
+        );
+
+    animation:
+        rightSweep 5s ease-in-out infinite alternate;
+}
+
+@keyframes leftSweep{
+
+    from{
+        transform:
+            rotate(18deg);
+    }
+
+    to{
+        transform:
+            rotate(-18deg);
+    }
+}
+
+@keyframes rightSweep{
+
+    from{
+        transform:
+            rotate(-18deg);
+    }
+
+    to{
+        transform:
+            rotate(18deg);
+    }
+}
+
+/* =====================================================
+   STROBE FLASH
+===================================================== */
+
+.flash{
+
+    position:absolute;
+
+    inset:0;
 
     z-index:15;
 
-    display:flex;
+    pointer-events:none;
 
-    align-items:center;
+    background:white;
 
-    gap:14px;
+    opacity:0;
 
-    padding:16px 26px;
-
-    border-radius:100px;
-
-    border:1px solid rgba(255,255,255,.18);
-
-    color:white;
-
-    text-decoration:none;
-
-    font-size:10px;
-
-    font-weight:800;
-
-    letter-spacing:3px;
-
-    background:rgba(255,255,255,.055);
-
-    backdrop-filter:blur(16px);
-
-    box-shadow:
-        0 0 25px rgba(255,0,170,.10),
-        inset 0 0 20px rgba(255,255,255,.025);
-
-    transition:
-        transform .3s ease,
-        box-shadow .3s ease,
-        background .3s ease;
-
+    animation:
+        randomFlash 7s infinite;
 }
 
-.cta:hover{
+@keyframes randomFlash{
 
-    transform:translateX(-50%) translateY(-4px);
+    0%,
+    88%,
+    90%,
+    94%,
+    100%{
+        opacity:0;
+    }
 
-    background:rgba(255,0,170,.14);
+    89%{
+        opacity:.22;
+    }
 
-    box-shadow:
-        0 0 20px rgba(255,0,180,.45),
-        0 0 55px rgba(124,44,255,.25);
-
+    93%{
+        opacity:.10;
+    }
 }
 
-.ctaDot{
+/* =====================================================
+   GRAIN
+===================================================== */
 
-    width:7px;
-    height:7px;
+.grain{
 
-    border-radius:50%;
+    position:absolute;
 
-    background:var(--pink);
+    inset:-50%;
 
-    box-shadow:
-        0 0 8px var(--pink),
-        0 0 18px var(--pink);
+    z-index:30;
 
+    pointer-events:none;
+
+    opacity:.055;
+
+    background-image:
+        url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='180' height='180'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+
+    animation:
+        grainMove .18s steps(2) infinite;
 }
 
-/* =========================================================
-   FULLSCREEN
-========================================================= */
+@keyframes grainMove{
+
+    0%{
+        transform:translate(0,0);
+    }
+
+    25%{
+        transform:translate(2%,-2%);
+    }
+
+    50%{
+        transform:translate(-2%,1%);
+    }
+
+    75%{
+        transform:translate(1%,2%);
+    }
+
+    100%{
+        transform:translate(-1%,-1%);
+    }
+}
+
+/* =====================================================
+   VIGNETTE
+===================================================== */
+
+.vignette{
+
+    position:absolute;
+
+    inset:0;
+
+    z-index:25;
+
+    pointer-events:none;
+
+    background:
+
+        radial-gradient(
+            ellipse at center,
+            transparent 42%,
+            rgba(0,0,0,.2) 68%,
+            rgba(0,0,0,.72) 100%
+        );
+}
+
+/* =====================================================
+   FULLSCREEN BUTTON
+===================================================== */
 
 .fullscreen{
 
     position:absolute;
 
-    z-index:20;
+    right:20px;
+    bottom:20px;
 
-    right:4vw;
-    bottom:30px;
+    z-index:50;
 
-    width:42px;
-    height:42px;
+    width:38px;
+    height:38px;
 
-    display:grid;
-    place-items:center;
-
-    border:1px solid rgba(255,255,255,.12);
+    border:1px solid rgba(255,255,255,.15);
 
     border-radius:50%;
 
-    color:rgba(255,255,255,.65);
+    color:white;
 
-    background:rgba(0,0,0,.22);
-
-    backdrop-filter:blur(10px);
+    background:rgba(0,0,0,.35);
 
     cursor:pointer;
 
-    transition:.3s;
+    opacity:.25;
 
+    transition:.3s;
 }
 
 .fullscreen:hover{
-
-    color:white;
-
-    border-color:rgba(255,0,180,.5);
-
-    box-shadow:
-        0 0 20px rgba(255,0,180,.25);
-
+    opacity:1;
 }
 
-/* =========================================================
-   SCREEN EDGES
-========================================================= */
-
-.edge{
-
-    position:absolute;
-
-    z-index:5;
-
-    pointer-events:none;
-
-}
-
-.edge.left{
-
-    left:0;
-    top:0;
-    bottom:0;
-
-    width:17vw;
-
-    background:
-        linear-gradient(
-            90deg,
-            rgba(255,0,160,.08),
-            transparent
-        );
-
-}
-
-.edge.right{
-
-    right:0;
-    top:0;
-    bottom:0;
-
-    width:17vw;
-
-    background:
-        linear-gradient(
-            270deg,
-            rgba(0,130,255,.08),
-            transparent
-        );
-
-}
-
-/* =========================================================
-   FADE
-========================================================= */
-
-@keyframes fadeIn{
-
-    from{
-        opacity:0;
-        transform:translateY(12px);
-    }
-
-    to{
-        opacity:1;
-        transform:translateY(0);
-    }
-
-}
-
-/* =========================================================
-   MOBILE
-========================================================= */
+/* =====================================================
+   MOBİL / DİKEY
+===================================================== */
 
 @media(max-width:700px){
 
-    .topBar{
-        height:65px;
-        padding:0 22px;
-    }
-
-    .logo{
-        font-size:10px;
-        letter-spacing:3px;
-    }
-
-    .live{
-        font-size:8px;
-        letter-spacing:2px;
-    }
-
     .title{
         font-size:21vw;
-        letter-spacing:-.09em;
-    }
-
-    .eyebrow{
-        font-size:8px;
-        letter-spacing:5px;
-    }
-
-    .eyebrow::before,
-    .eyebrow::after{
-        width:35px;
     }
 
     .subtitle{
-        font-size:8px;
-        letter-spacing:5px;
-        margin-top:25px;
+        top:65%;
     }
 
-    .eventInfo{
-        margin-top:30px;
-        gap:7px;
+    .portal{
+        width:110vw;
+        height:110vw;
     }
 
-    .infoItem{
-        min-width:auto;
-        padding:9px 12px;
-        font-size:7px;
-    }
-
-    .infoItem strong{
-        font-size:9px;
-    }
-
-    .separator{
-        display:none;
-    }
-
-    .cta{
-        bottom:45px;
-        padding:13px 20px;
-        font-size:8px;
-    }
-
-    .fullscreen{
-        right:18px;
-        bottom:18px;
-        width:36px;
-        height:36px;
-    }
-
-    .ring{
-        width:130vw;
-        height:130vw;
-    }
-
-}
-
-/* =========================================================
-   REDUCED MOTION
-========================================================= */
-
-@media(prefers-reduced-motion:reduce){
-
-    *,
-    *::before,
-    *::after{
-
-        animation-duration:.01ms !important;
-        animation-iteration-count:1 !important;
-        transition:none !important;
-
+    .portal2{
+        width:70vw;
+        height:70vw;
     }
 
 }
@@ -892,253 +738,279 @@ body{
 
 <body>
 
-<div class="scene">
+<div class="stage">
 
-    <canvas id="lights"></canvas>
+    <canvas id="visual"></canvas>
 
-    <div class="centerGlow"></div>
+    <div class="atmosphere"></div>
 
-    <div class="ring ring1"></div>
-    <div class="ring ring2"></div>
-    <div class="ring ring3"></div>
+    <div class="sideGlow left"></div>
+    <div class="sideGlow right"></div>
 
-    <div class="edge left"></div>
-    <div class="edge right"></div>
+    <div class="portal"></div>
+    <div class="portal2"></div>
 
-    <div class="topBar">
-
-        <div class="logo">
-            VIBE <span>EVENT</span>
-        </div>
-
-        <div class="live">
-            <span class="liveDot"></span>
-            OPEN YOUR EYES
-        </div>
-
+    <div class="brand">
+        VIBE EVENT
     </div>
 
-    <main class="hero">
+    <div class="title">
+        DJ TINA
+    </div>
 
-        <div class="eyebrow">
-            VIBE EVENT PRESENTS
-        </div>
+    <div class="subtitle">
+        OPEN YOUR EYES
+    </div>
 
-        <div class="titleWrap">
+    <div class="flash"></div>
 
-            <h1 class="title">
-                DJ TINA
-            </h1>
-
-        </div>
-
-        <div class="subtitle">
-            OPEN YOUR EYES
-        </div>
-
-        <div class="eventInfo">
-
-            <div class="infoItem">
-                <strong>22 EYLÜL</strong>
-            </div>
-
-            <div class="separator"></div>
-
-            <div class="infoItem">
-                <strong>19:30</strong>
-            </div>
-
-            <div class="separator"></div>
-
-            <div class="infoItem">
-                <strong>KIRIKKALE</strong>
-            </div>
-
-        </div>
-
-    </main>
-
-    <a href="#" class="cta">
-        <span class="ctaDot"></span>
-        ENTER THE NIGHT
-    </a>
-
-    <button class="fullscreen" id="fullscreenBtn" aria-label="Tam ekran">
-        ⛶
-    </button>
+    <div class="vignette"></div>
 
     <div class="grain"></div>
+
+    <button
+        class="fullscreen"
+        id="fullscreen">
+        ⛶
+    </button>
 
 </div>
 
 
 <script>
 
-/* =========================================================
-   PREMIUM LIGHT BEAMS
-========================================================= */
+/* =====================================================
+   CANVAS — LAZER / PARÇACIK / IŞIK SİSTEMİ
+===================================================== */
 
-const canvas = document.getElementById("lights");
-const ctx = canvas.getContext("2d");
+const canvas =
+    document.getElementById("visual");
 
-let W;
-let H;
+const ctx =
+    canvas.getContext("2d");
+
+let width;
+let height;
+let dpr;
 
 function resize(){
 
-    W = canvas.width = window.innerWidth * devicePixelRatio;
-    H = canvas.height = window.innerHeight * devicePixelRatio;
+    dpr =
+        Math.min(
+            window.devicePixelRatio || 1,
+            2
+        );
 
-    canvas.style.width = window.innerWidth + "px";
-    canvas.style.height = window.innerHeight + "px";
+    width =
+        window.innerWidth;
+
+    height =
+        window.innerHeight;
+
+    canvas.width =
+        width * dpr;
+
+    canvas.height =
+        height * dpr;
+
+    canvas.style.width =
+        width + "px";
+
+    canvas.style.height =
+        height + "px";
 
     ctx.setTransform(
-        devicePixelRatio,
+        dpr,
         0,
         0,
-        devicePixelRatio,
+        dpr,
         0,
         0
     );
-
 }
+
+window.addEventListener(
+    "resize",
+    resize
+);
 
 resize();
 
-window.addEventListener("resize",resize);
 
-
-/* LIGHT OBJECTS */
+/* =====================================================
+   IŞIK BEAM'LERİ
+===================================================== */
 
 const beams = [
 
     {
-        x:.18,
+        x:.04,
         color:"#ff009d",
-        width:.16,
-        speed:.00055,
+        speed:.0008,
         phase:0
     },
 
     {
-        x:.31,
-        color:"#7c2cff",
-        width:.11,
-        speed:-.00042,
+        x:.17,
+        color:"#8c2cff",
+        speed:-.00055,
         phase:2
     },
 
     {
-        x:.52,
-        color:"#00aaff",
-        width:.13,
-        speed:.00030,
+        x:.31,
+        color:"#00c8ff",
+        speed:.00045,
         phase:4
     },
 
     {
-        x:.68,
-        color:"#8a2cff",
-        width:.12,
-        speed:-.00047,
+        x:.47,
+        color:"#ff00c8",
+        speed:-.00038,
         phase:1
     },
 
     {
-        x:.84,
-        color:"#ff00c8",
-        width:.17,
-        speed:.00050,
+        x:.63,
+        color:"#009dff",
+        speed:.0006,
+        phase:5
+    },
+
+    {
+        x:.78,
+        color:"#8a2cff",
+        speed:-.0005,
+        phase:2
+    },
+
+    {
+        x:.94,
+        color:"#ff009d",
+        speed:.0007,
         phase:3
     }
 
 ];
 
 
-let time = 0;
+/* =====================================================
+   PARÇACIKLAR
+===================================================== */
+
+const particles=[];
+
+for(
+    let i=0;
+    i<180;
+    i++
+){
+
+    particles.push({
+
+        x:Math.random(),
+        y:Math.random(),
+
+        size:
+            Math.random()*2+.3,
+
+        speed:
+            Math.random()*.0008+.00015,
+
+        alpha:
+            Math.random()*.7+.15,
+
+        phase:
+            Math.random()*Math.PI*2
+
+    });
+
+}
 
 
-/* =========================================================
-   BEAM DRAW
-========================================================= */
+/* =====================================================
+   BEAM ÇİZ
+===================================================== */
 
-function drawBeam(beam){
+function drawBeam(
+    beam,
+    time
+){
 
-    const x =
-        W / devicePixelRatio *
-        beam.x;
+    const baseX =
+        width * beam.x;
 
-    const center =
-        W / devicePixelRatio / 2;
-
-    const angle =
+    const movement =
         Math.sin(
             time * beam.speed * 1000 +
             beam.phase
-        ) * .65;
+        );
 
-    const length =
-        H / devicePixelRatio * 1.5;
+    const targetX =
+        width*.5 +
+        movement * width*.38;
 
     const spread =
-        Math.sin(
-            time * beam.speed * 700 +
-            beam.phase
-        ) * 150;
-
-    ctx.save();
-
-    ctx.translate(x,0);
-
-    ctx.rotate(angle * .22);
+        width*.07;
 
     const gradient =
         ctx.createLinearGradient(
-            0,
-            H / devicePixelRatio,
-            spread,
+            baseX,
+            height,
+            targetX,
             0
         );
 
     gradient.addColorStop(
         0,
-        beam.color.replace(")",", .0)") 
+        "rgba(0,0,0,0)"
     );
 
-    /* custom transparent gradients */
+    gradient.addColorStop(
+        .25,
+        beam.color
+    );
 
-    const g =
-        ctx.createLinearGradient(
-            0,
-            H / devicePixelRatio,
-            spread,
-            0
-        );
+    gradient.addColorStop(
+        .55,
+        "rgba(255,255,255,.03)"
+    );
 
-    g.addColorStop(0,"rgba(255,255,255,0)");
-    g.addColorStop(.15,beam.color);
-    g.addColorStop(.45,"rgba(255,255,255,0)");
-    g.addColorStop(1,"rgba(255,255,255,0)");
+    gradient.addColorStop(
+        1,
+        "rgba(0,0,0,0)"
+    );
 
-    ctx.globalCompositeOperation="screen";
+    ctx.save();
 
-    ctx.globalAlpha=.16;
+    ctx.globalCompositeOperation =
+        "screen";
 
-    ctx.fillStyle=g;
+    ctx.globalAlpha=.20;
+
+    ctx.fillStyle=gradient;
 
     ctx.beginPath();
 
-    ctx.moveTo(-250,H/devicePixelRatio);
-    ctx.lineTo(250,H/devicePixelRatio);
-
-    ctx.lineTo(
-        spread + 100,
-        -100
+    ctx.moveTo(
+        baseX-spread,
+        height
     );
 
     ctx.lineTo(
-        spread - 100,
-        -100
+        baseX+spread,
+        height
+    );
+
+    ctx.lineTo(
+        targetX+width*.025,
+        0
+    );
+
+    ctx.lineTo(
+        targetX-width*.025,
+        0
     );
 
     ctx.closePath();
@@ -1150,152 +1022,296 @@ function drawBeam(beam){
 }
 
 
-/* =========================================================
-   SOFT LIGHT CLOUDS
-========================================================= */
+/* =====================================================
+   LAZER ÇİZ
+===================================================== */
 
-function drawGlow(x,y,r,color,alpha){
+function drawLaser(
+    beam,
+    time
+){
 
-    const gradient =
-        ctx.createRadialGradient(
-            x,
-            y,
-            0,
-            x,
-            y,
-            r
+    const movement =
+        Math.sin(
+            time*.001+
+            beam.phase
         );
 
-    gradient.addColorStop(
-        0,
-        color
-    );
+    const startX =
+        width*beam.x;
 
-    gradient.addColorStop(
-        1,
-        "rgba(0,0,0,0)"
-    );
+    const endX =
+        width*.5 +
+        movement*width*.38;
 
-    ctx.globalCompositeOperation="screen";
+    ctx.save();
 
-    ctx.globalAlpha=alpha;
+    ctx.globalCompositeOperation =
+        "screen";
 
-    ctx.fillStyle=gradient;
+    ctx.globalAlpha=.65;
+
+    ctx.shadowBlur=18;
+
+    ctx.shadowColor=
+        beam.color;
+
+    ctx.strokeStyle=
+        beam.color;
+
+    ctx.lineWidth=1;
 
     ctx.beginPath();
 
-    ctx.arc(x,y,r,0,Math.PI*2);
+    ctx.moveTo(
+        startX,
+        height
+    );
 
-    ctx.fill();
+    ctx.lineTo(
+        endX,
+        height*.15
+    );
+
+    ctx.stroke();
+
+    ctx.restore();
 
 }
 
 
-/* =========================================================
+/* =====================================================
+   PARÇACIK ÇİZ
+===================================================== */
+
+function drawParticles(time){
+
+    ctx.save();
+
+    ctx.globalCompositeOperation =
+        "screen";
+
+    particles.forEach(p=>{
+
+        p.y -= p.speed;
+
+        if(p.y < -.02){
+            p.y=1.02;
+            p.x=Math.random();
+        }
+
+        const pulse =
+            .5 +
+            Math.sin(
+                time*.002+
+                p.phase
+            )*.5;
+
+        ctx.globalAlpha =
+            p.alpha*pulse;
+
+        ctx.fillStyle =
+            Math.random()>.5
+                ? "#ff00c8"
+                : "#00d9ff";
+
+        ctx.shadowBlur=10;
+
+        ctx.shadowColor=
+            ctx.fillStyle;
+
+        ctx.beginPath();
+
+        ctx.arc(
+            p.x*width,
+            p.y*height,
+            p.size,
+            0,
+            Math.PI*2
+        );
+
+        ctx.fill();
+
+    });
+
+    ctx.restore();
+}
+
+
+/* =====================================================
+   MERKEZ ENERJİ HALKALARI
+===================================================== */
+
+function drawEnergy(
+    time
+){
+
+    const cx =
+        width/2;
+
+    const cy =
+        height/2;
+
+    ctx.save();
+
+    ctx.translate(
+        cx,
+        cy
+    );
+
+    ctx.globalCompositeOperation =
+        "screen";
+
+    for(
+        let i=0;
+        i<7;
+        i++
+    ){
+
+        const radius =
+            Math.min(width,height)*
+            (.18+i*.035);
+
+        const rotation =
+            time*.0004*
+            (i%2===0?1:-1);
+
+        ctx.save();
+
+        ctx.rotate(rotation);
+
+        ctx.strokeStyle =
+            i%2===0
+                ? "rgba(255,0,190,.16)"
+                : "rgba(0,190,255,.13)";
+
+        ctx.lineWidth =
+            i===0 ? 2 : 1;
+
+        ctx.shadowBlur=18;
+
+        ctx.shadowColor =
+            i%2===0
+                ? "#ff00c8"
+                : "#00c8ff";
+
+        ctx.beginPath();
+
+        for(
+            let a=0;
+            a<Math.PI*2;
+            a+=.04
+        ){
+
+            const wave =
+                Math.sin(
+                    a*9+
+                    time*.002+
+                    i
+                )*4;
+
+            const r =
+                radius+wave;
+
+            const x =
+                Math.cos(a)*r;
+
+            const y =
+                Math.sin(a)*r*.35;
+
+            if(a===0){
+                ctx.moveTo(x,y);
+            }else{
+                ctx.lineTo(x,y);
+            }
+
+        }
+
+        ctx.stroke();
+
+        ctx.restore();
+
+    }
+
+    ctx.restore();
+
+}
+
+
+/* =====================================================
    ANIMATION
-========================================================= */
+===================================================== */
 
-function animate(){
+let start =
+    performance.now();
 
-    time++;
+function animate(now){
+
+    const time =
+        now-start;
 
     ctx.clearRect(
         0,
         0,
-        W / devicePixelRatio,
-        H / devicePixelRatio
+        width,
+        height
     );
 
-    const width =
-        W / devicePixelRatio;
+    /* BEAMS */
 
-    const height =
-        H / devicePixelRatio;
-
-    /* atmospheric glow */
-
-    drawGlow(
-        width*.20,
-        height*.35,
-        width*.35,
-        "rgba(255,0,170,.35)",
-        .25
+    beams.forEach(
+        beam=>drawBeam(
+            beam,
+            time
+        )
     );
 
-    drawGlow(
-        width*.82,
-        height*.42,
-        width*.38,
-        "rgba(0,120,255,.30)",
-        .22
+    /* LAZER */
+
+    beams.forEach(
+        beam=>drawLaser(
+            beam,
+            time
+        )
     );
 
-    drawGlow(
-        width*.50,
-        height*.62,
-        width*.30,
-        "rgba(110,0,255,.30)",
-        .18
+    /* ENERGY */
+
+    drawEnergy(time);
+
+    /* PARTICLES */
+
+    drawParticles(time);
+
+    requestAnimationFrame(
+        animate
     );
-
-    beams.forEach(drawBeam);
-
-    ctx.globalAlpha=1;
-
-    requestAnimationFrame(animate);
-
 }
 
-animate();
+requestAnimationFrame(
+    animate
+);
 
 
-/* =========================================================
-   MOUSE PARALLAX
-========================================================= */
-
-const title =
-    document.querySelector(".title");
-
-const rings =
-    document.querySelectorAll(".ring");
-
-let mouseX=0;
-let mouseY=0;
-
-window.addEventListener("mousemove",(e)=>{
-
-    mouseX =
-        (e.clientX / window.innerWidth - .5);
-
-    mouseY =
-        (e.clientY / window.innerHeight - .5);
-
-    title.style.transform =
-        `
-        translate3d(
-            ${mouseX * 14}px,
-            ${mouseY * 9}px,
-            40px
-        )
-        `;
-
-});
-
-
-/* =========================================================
+/* =====================================================
    FULLSCREEN
-========================================================= */
+===================================================== */
 
-const fullscreenBtn =
-    document.getElementById("fullscreenBtn");
+const fullscreen =
+    document.getElementById(
+        "fullscreen"
+    );
 
-fullscreenBtn.addEventListener("click",async()=>{
+async function goFullscreen(){
 
     try{
 
-        if(!document.fullscreenElement){
+        if(
+            !document.fullscreenElement
+        ){
 
-            await document.documentElement.requestFullscreen();
+            await document.documentElement
+                .requestFullscreen();
 
         }else{
 
@@ -1303,37 +1319,59 @@ fullscreenBtn.addEventListener("click",async()=>{
 
         }
 
-    }catch(error){
+    }catch(e){
 
-        console.log(error);
-
-    }
-
-});
-
-
-/* =========================================================
-   DOUBLE CLICK = FULLSCREEN
-========================================================= */
-
-document.querySelector(".scene")
-.addEventListener("dblclick",async()=>{
-
-    try{
-
-        if(!document.fullscreenElement){
-
-            await document.documentElement.requestFullscreen();
-
-        }
-
-    }catch(error){
-
-        console.log(error);
+        console.log(e);
 
     }
 
-});
+}
+
+fullscreen.addEventListener(
+    "click",
+    goFullscreen
+);
+
+
+/* =====================================================
+   ÇİFT TIK = FULLSCREEN
+===================================================== */
+
+document
+.querySelector(".stage")
+.addEventListener(
+    "dblclick",
+    goFullscreen
+);
+
+
+/* =====================================================
+   MOUSE PARALLAX
+===================================================== */
+
+document.addEventListener(
+    "mousemove",
+    e=>{
+
+        const x =
+            (e.clientX/window.innerWidth-.5);
+
+        const y =
+            (e.clientY/window.innerHeight-.5);
+
+        const title =
+            document.querySelector(
+                ".title"
+            );
+
+        title.style.marginLeft =
+            `${x*12}px`;
+
+        title.style.marginTop =
+            `${y*7}px`;
+
+    }
+);
 
 </script>
 
