@@ -49,7 +49,6 @@ body::before{
     50%{transform:scale(1.08);filter:hue-rotate(20deg)}
     100%{transform:scale(1.02);filter:hue-rotate(-18deg)}
 }
-
 /* =========================
    INTRO
 ========================= */
@@ -182,7 +181,6 @@ body::before{
         pointer-events:none;
     }
 }
-
 /* =========================
    NAV
 ========================= */
@@ -208,18 +206,17 @@ nav{
         );
     backdrop-filter:blur(10px);
 }
-
 /* =========================
    SMOOTH KÖŞE LOGOSU
 ========================= */
 .nav-logo-box{
-    width:94px;
-    min-height:62px;
-    padding:2px;
+    width:88px;
+    height:56px;
+    padding:0;
     display:flex;
     align-items:center;
     justify-content:center;
-    border-radius:22px;
+    border-radius:20px;
     background:
         linear-gradient(
             145deg,
@@ -249,13 +246,15 @@ nav{
     display:flex;
     align-items:center;
     justify-content:center;
+    overflow:hidden;
+    border-radius:19px;
 }
 .nav-logo{
-    width:100%;
-    height:58px;
-    object-fit:contain;
+    width:108%;
+    height:108%;
+    object-fit:cover;
     object-position:center;
-    border-radius:18px;
+    border-radius:19px;
     filter:
         drop-shadow(0 0 10px rgba(255,47,146,.20))
         drop-shadow(0 0 18px rgba(155,92,255,.08));
@@ -264,7 +263,7 @@ nav{
         filter .4s ease;
 }
 .nav-logo-box:hover .nav-logo{
-    transform:scale(1.035);
+    transform:scale(1.055);
     filter:
         drop-shadow(0 0 12px rgba(255,47,146,.30))
         drop-shadow(0 0 22px rgba(155,92,255,.16));
@@ -301,7 +300,6 @@ nav{
     height:1.5px;
     background:white;
 }
-
 /* =========================
    MOBILE MENU
 ========================= */
@@ -342,7 +340,6 @@ nav{
     font-weight:900;
     letter-spacing:-.08em;
 }
-
 /* =========================
    HERO
 ========================= */
@@ -471,7 +468,6 @@ nav{
     color:white;
     background:rgba(255,255,255,.025);
 }
-
 /* =========================
    INSTAGRAM HERO LINK
 ========================= */
@@ -506,7 +502,6 @@ nav{
     font-size:15px;
     line-height:1;
 }
-
 .scroll-indicator{
     position:absolute;
     bottom:27px;
@@ -541,7 +536,6 @@ nav{
         transform-origin:top;
     }
 }
-
 /* =========================
    MARQUEE
 ========================= */
@@ -572,7 +566,6 @@ nav{
         transform:translateX(-50%);
     }
 }
-
 /* =========================
    SECTIONS
 ========================= */
@@ -594,7 +587,6 @@ section{
     font-weight:900;
     margin-bottom:35px;
 }
-
 /* =========================
    NEXT EVENT
 ========================= */
@@ -690,7 +682,6 @@ section{
     font-weight:900;
     letter-spacing:.14em;
 }
-
 /* =========================
    ARCHIVE
 ========================= */
@@ -748,7 +739,6 @@ section{
     line-height:1;
     letter-spacing:-.05em;
 }
-
 /* =========================
    MANIFESTO
 ========================= */
@@ -819,7 +809,6 @@ section{
     font-size:11px;
     line-height:1.85;
 }
-
 /* =========================
    TEAM
 ========================= */
@@ -887,7 +876,6 @@ section{
     font-weight:900;
     letter-spacing:.12em;
 }
-
 /* =========================
    FOOTER
 ========================= */
@@ -899,14 +887,13 @@ footer{
     border-top:1px solid rgba(255,255,255,.08);
 }
 .footer-logo-box{
-    width:94px;
-    min-height:62px;
-    padding:2px;
+    width:88px;
+    height:56px;
+    padding:0;
     display:flex;
-    flex-direction:column;
     align-items:center;
     justify-content:center;
-    border-radius:22px;
+    border-radius:20px;
     background:
         linear-gradient(
             145deg,
@@ -930,11 +917,11 @@ footer{
     transform:scale(.95);
 }
 .footer-logo{
-    width:100%;
-    height:58px;
-    object-fit:contain;
+    width:108%;
+    height:108%;
+    object-fit:cover;
     object-position:center;
-    border-radius:18px;
+    border-radius:19px;
     filter:
         drop-shadow(0 0 10px rgba(255,47,146,.20))
         drop-shadow(0 0 18px rgba(155,92,255,.08));
@@ -943,7 +930,7 @@ footer{
         filter .4s ease;
 }
 .footer-logo-box:hover .footer-logo{
-    transform:scale(1.035);
+    transform:scale(1.055);
     filter:
         drop-shadow(0 0 12px rgba(255,47,146,.30))
         drop-shadow(0 0 22px rgba(155,92,255,.16));
@@ -958,7 +945,6 @@ footer{
     color:#aaa;
     text-decoration:none;
 }
-
 /* =========================
    REVEAL
 ========================= */
@@ -977,7 +963,6 @@ footer{
         translateY(0)
         scale(1);
 }
-
 /* =========================
    TOUCH FLASH
 ========================= */
@@ -1018,7 +1003,6 @@ footer{
         opacity:0;
     }
 }
-
 /* =========================
    DESKTOP
 ========================= */
@@ -1072,322 +1056,223 @@ footer{
 }
 </style>
 </head>
-
 <body>
-
 <!-- =========================
      INTRO
 ========================= -->
 <div id="intro">
 <div class="intro-grid"></div>
 <div class="intro-glow"></div>
-
 <div class="intro-content">
     <div class="intro-small">
         PRESENTED BY
     </div>
-
     <div class="intro-logo-text">
         VIBE
     </div>
-
     <div class="intro-bottom">
         EVENT COLLECTIVE
     </div>
 </div>
-
 <div class="intro-flash"></div>
 </div>
-
 <!-- =========================
      NAV
 ========================= -->
 <nav>
-
 <a
     href="#"
     aria-label="VIBE"
     class="nav-logo-box">
-
     <div>
-
         <img
             src="Paragraf metniniz.png"
             class="nav-logo"
             alt="VIBE">
-
     </div>
-
 </a>
-
 <div class="nav-right">
-
     <a
         href="#events"
         class="nav-button">
-
         NEXT EVENT
-
     </a>
-
     <button
         class="menu-button"
         id="menuButton"
         aria-label="Menu">
-
         <span></span>
         <span></span>
-
     </button>
-
 </div>
-
 </nav>
-
 <!-- =========================
      MOBILE MENU
 ========================= -->
 <div
     class="mobile-menu"
     id="mobileMenu">
-
 <ul class="mobile-menu-links">
-
     <li>
         <a href="#events">
             EVENTS
         </a>
     </li>
-
     <li>
         <a href="#past">
             ARCHIVE
         </a>
     </li>
-
     <li>
         <a href="#team">
             TEAM
         </a>
     </li>
-
 </ul>
-
 </div>
-
 <!-- =========================
      HERO
 ========================= -->
 <header class="hero">
-
 <div class="hero-orb"></div>
-
 <div class="hero-content">
-
     <div class="hero-tag">
         KIRIKKALE · TURKEY · 2026
     </div>
-
     <h1>
         VIBE
     </h1>
-
     <p class="hero-sub">
         We don't just organize events.
         We create experiences.
     </p>
-
     <div class="hero-buttons">
-
         <a
             href="#events"
             class="primary-button">
-
             DISCOVER THE VIBE
-
         </a>
-
         <a
             href="#team"
             class="secondary-button">
-
             JOIN THE TEAM
-
         </a>
-
     </div>
-
     <!-- INSTAGRAM -->
     <div class="instagram-link">
-
         <a
             href="https://www.instagram.com/vibe.eventt?stkn=emU0eDAzN3J4OHpo"
             target="_blank"
             rel="noopener noreferrer">
-
             <span class="instagram-icon">
                 ◎
             </span>
-
             <span>
                 @vibe.eventt
             </span>
-
         </a>
-
     </div>
-
 </div>
-
 <div class="scroll-indicator">
-
     <div>
         SCROLL
     </div>
-
     <div class="scroll-line"></div>
-
 </div>
-
 </header>
-
 <!-- =========================
      MARQUEE
 ========================= -->
 <div class="marquee">
-
 <div class="marquee-track">
-
     <span class="pink">
         VIBE EVENT
     </span>
-
     <span>
         MUSIC
     </span>
-
     <span>
         ENERGY
     </span>
-
     <span class="pink">
         EXPERIENCE
     </span>
-
     <span>
         NIGHTLIFE
     </span>
-
     <span>
         COMMUNITY
     </span>
-
     <span class="pink">
         VIBE EVENT
     </span>
-
     <span>
         MUSIC
     </span>
-
     <span>
         ENERGY
     </span>
-
     <span class="pink">
         EXPERIENCE
     </span>
-
     <span>
         NIGHTLIFE
     </span>
-
     <span>
         COMMUNITY
     </span>
-
 </div>
-
 </div>
-
 <!-- =========================
      NEXT EVENT
 ========================= -->
 <section id="events">
-
 <div class="upcoming">
-
     <div class="section-label reveal">
         01 / UPCOMING
     </div>
-
     <h2 class="section-title reveal">
-
         NEXT<br>
         VIBE.
-
     </h2>
-
     <div class="event-card reveal">
-
         <div class="event-image"></div>
-
         <div class="event-badge">
             UPCOMING EVENT
         </div>
-
         <div class="event-content">
-
             <div class="event-date">
                 HALLOWEEN · 2026
             </div>
-
             <div class="event-name">
                 HALLOWEEN
             </div>
-
             <div class="event-location">
                 VIBE EVENT · KIRIKKALE
             </div>
-
             <a
                 href="#"
                 class="event-link">
-
                 GET YOUR TICKET ↗
-
             </a>
-
         </div>
-
     </div>
-
 </div>
-
 </section>
-
 <!-- =========================
      ARCHIVE
 ========================= -->
 <section id="past">
-
 <div class="past-events">
-
     <div class="section-label reveal">
         02 / ARCHIVE
     </div>
-
     <h2 class="section-title reveal">
-
         WE'VE<br>
         BEEN THERE.
-
     </h2>
-
     <div class="events-grid">
-
         <div class="past-card reveal">
-
             <div
                 class="past-image"
                 style="
@@ -1395,25 +1280,17 @@ footer{
                 url('DJ-TINA.jpeg');
                 ">
             </div>
-
             <div class="past-overlay"></div>
-
             <div class="past-info">
-
                 <small>
                     2026
                 </small>
-
                 <h3>
                     OPEN YOUR EYES
                 </h3>
-
             </div>
-
         </div>
-
         <div class="past-card reveal">
-
             <div
                 class="past-image"
                 style="
@@ -1426,25 +1303,17 @@ footer{
                 );
                 ">
             </div>
-
             <div class="past-overlay"></div>
-
             <div class="past-info">
-
                 <small>
                     VIBE EVENT
                 </small>
-
                 <h3>
                     MORE SOON.
                 </h3>
-
             </div>
-
         </div>
-
         <div class="past-card reveal">
-
             <div
                 class="past-image"
                 style="
@@ -1457,364 +1326,253 @@ footer{
                 );
                 ">
             </div>
-
             <div class="past-overlay"></div>
-
             <div class="past-info">
-
                 <small>
                     VIBE ARCHIVE
                 </small>
-
                 <h3>
                     STAY TUNED.
                 </h3>
-
             </div>
-
         </div>
-
     </div>
-
 </div>
-
 </section>
-
 <!-- =========================
      MANIFESTO
 ========================= -->
 <section class="manifesto">
-
 <div class="manifesto-content reveal">
-
     <div class="section-label">
         THE VIBE
     </div>
-
     <h2>
-
         NOT JUST<br>
         A <span>PARTY.</span>
-
     </h2>
-
     <p>
-
         Vibe Event is a new generation event collective
         built around music, people, energy and
         unforgettable nights. We bring artists,
         communities and experiences together in one place.
-
     </p>
-
 </div>
-
 </section>
-
 <!-- =========================
      TEAM
 ========================= -->
 <section id="team">
-
 <div class="team">
-
     <div class="section-label reveal">
         03 / JOIN US
     </div>
-
     <div class="team-box reveal">
-
         <h2>
-
             WANT TO BE<br>
             PART OF
             <span style="color:#ff2f92;">
                 VIBE?
             </span>
-
         </h2>
-
         <p>
-
             Organizasyon, sosyal medya,
             tasarım, prodüksiyon veya
             etkinlik operasyonlarında
             bizimle çalışmak ister misin?
-
         </p>
-
         <a
             href="#"
             class="join-button">
-
             JOIN THE TEAM →
-
         </a>
-
     </div>
-
 </div>
-
 </section>
-
 <!-- =========================
      FOOTER
 ========================= -->
 <footer>
-
 <div>
-
     <div class="footer-logo-box">
-
         <img
             src="Paragraf metniniz.png"
             class="footer-logo"
             alt="VIBE">
-
     </div>
-
 </div>
-
 <div class="footer-right">
-
     <div>
         KIRIKKALE · TURKEY
     </div>
-
     <div>
         © 2026 VIBE EVENT
     </div>
-
     <div>
-
         <a
             href="https://www.instagram.com/vibe.eventt?stkn=emU0eDAzN3J4OHpo"
             target="_blank"
             rel="noopener noreferrer">
-
             Instagram
-
         </a>
-
         &nbsp;·&nbsp;
-
         <a href="#">
             Contact
         </a>
-
     </div>
-
 </div>
-
 </footer>
-
 <script>
-
 /* =========================
    MOBILE MENU
 ========================= */
-
 const menuButton =
     document.getElementById(
         "menuButton"
     );
-
 const mobileMenu =
     document.getElementById(
         "mobileMenu"
     );
-
 const menuLinks =
     document.querySelectorAll(
         ".mobile-menu-links a"
     );
-
 menuButton.addEventListener(
     "click",
     () => {
-
         mobileMenu.classList.toggle(
             "active"
         );
-
     }
 );
-
 menuLinks.forEach(
     link => {
-
         link.addEventListener(
             "click",
             () => {
-
                 mobileMenu.classList.remove(
                     "active"
                 );
-
             }
         );
-
     }
 );
-
 /* =========================
    SCROLL REVEAL
 ========================= */
-
 const revealElements =
     document.querySelectorAll(
         ".reveal"
     );
-
 const observer =
     new IntersectionObserver(
         entries => {
-
             entries.forEach(
                 entry => {
-
                     if(
                         entry.isIntersecting
                     ){
-
                         entry.target.classList.add(
                             "active"
                         );
-
                     }
-
                 }
             );
-
         },
         {
             threshold:.12
         }
     );
-
 revealElements.forEach(
     element => {
-
         observer.observe(
             element
         );
-
     }
 );
-
 /* =========================
    HERO PARALLAX
 ========================= */
-
 window.addEventListener(
     "scroll",
     () => {
-
         const scroll =
             window.scrollY;
-
         const orb =
             document.querySelector(
                 ".hero-orb"
             );
-
         if(orb){
-
             orb.style.transform =
                 `translateY(${scroll * .16}px)`;
-
         }
-
     },
     {
         passive:true
     }
 );
-
 /* =========================
    TOUCH FLASH
 ========================= */
-
 document.addEventListener(
     "touchstart",
     event => {
-
         const touch =
             event.touches[0];
-
         if(!touch) return;
-
         const flash =
             document.createElement(
                 "div"
             );
-
         flash.className =
             "touch-flash";
-
         flash.style.left =
             touch.clientX + "px";
-
         flash.style.top =
             touch.clientY + "px";
-
         document.body.appendChild(
             flash
         );
-
         setTimeout(
             () => {
-
                 flash.remove();
-
             },
             500
         );
-
     },
     {
         passive:true
     }
 );
-
 /* =========================
    CARD TOUCH
 ========================= */
-
 document
     .querySelectorAll(
         ".event-card, .past-card, .team-box"
     )
     .forEach(
         card => {
-
             card.addEventListener(
                 "touchstart",
                 () => {
-
                     card.style.transform =
                         "scale(.985)";
-
                 },
                 {
                     passive:true
                 }
             );
-
             card.addEventListener(
                 "touchend",
                 () => {
-
                     card.style.transform =
                         "";
-
                 }
             );
-
         }
     );
-
 </script>
-
 </body>
 </html>
