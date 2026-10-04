@@ -423,7 +423,6 @@ nav{
     letter-spacing:.22em;
     margin-bottom:25px;
 }
-/* ANA HERO'DA BÜYÜK VIBE YAZISI */
 .hero h1{
     font-size:clamp(5.4rem,28vw,11rem);
     line-height:.73;
@@ -500,6 +499,40 @@ nav{
     border:1px solid rgba(255,255,255,.18);
     color:white;
     background:rgba(255,255,255,.025);
+}
+/* =========================
+   INSTAGRAM HERO LINK
+========================= */
+.instagram-link{
+    margin-top:15px;
+    display:flex;
+    justify-content:center;
+}
+.instagram-link a{
+    display:inline-flex;
+    align-items:center;
+    gap:8px;
+    color:#aaa5b5;
+    text-decoration:none;
+    font-size:10px;
+    font-weight:700;
+    letter-spacing:.08em;
+    transition:.3s ease;
+}
+.instagram-link a:hover{
+    color:white;
+    transform:translateY(-2px);
+}
+.instagram-icon{
+    width:19px;
+    height:19px;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    border:1.5px solid currentColor;
+    border-radius:6px;
+    font-size:15px;
+    line-height:1;
 }
 .scroll-indicator{
     position:absolute;
@@ -885,7 +918,6 @@ footer{
         calc(35px + env(safe-area-inset-bottom));
     border-top:1px solid rgba(255,255,255,.08);
 }
-/* FOOTER LOGOSU NAV İLE AYNI */
 .footer-logo-box{
     width:94px;
     min-height:62px;
@@ -1196,6 +1228,20 @@ footer{
             JOIN THE TEAM
         </a>
     </div>
+    <!-- INSTAGRAM -->
+    <div class="instagram-link">
+        <a
+            href="https://www.instagram.com/vibe.eventt?stkn=emU0eDAzN3J4OHpo"
+            target="_blank"
+            rel="noopener noreferrer">
+            <span class="instagram-icon">
+                ◎
+            </span>
+            <span>
+                @vibe.eventt
+            </span>
+        </a>
+    </div>
 </div>
 <div class="scroll-indicator">
     <div>
@@ -1436,7 +1482,10 @@ footer{
         © 2026 VIBE EVENT
     </div>
     <div>
-        <a href="#">
+        <a
+            href="https://www.instagram.com/vibe.eventt?stkn=emU0eDAzN3J4OHpo"
+            target="_blank"
+            rel="noopener noreferrer">
             Instagram
         </a>
         &nbsp;·&nbsp;
