@@ -7,6 +7,7 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+
 <style>
 :root{
     --black:#05030a;
@@ -17,21 +18,25 @@
     --white:#fff;
     --muted:#aaa5b5;
 }
+
 *{
     margin:0;
     padding:0;
     box-sizing:border-box;
     -webkit-tap-highlight-color:transparent;
 }
+
 html{
     scroll-behavior:smooth;
 }
+
 body{
     background:var(--black);
     color:white;
     font-family:'Plus Jakarta Sans',sans-serif;
     overflow-x:hidden;
 }
+
 body::before{
     content:"";
     position:fixed;
@@ -44,14 +49,18 @@ body::before{
         radial-gradient(circle at 50% 80%,rgba(155,92,255,.18),transparent 35%);
     animation:bgMove 12s ease-in-out infinite alternate;
 }
+
 @keyframes bgMove{
     0%{transform:scale(1);filter:hue-rotate(0deg)}
     50%{transform:scale(1.08);filter:hue-rotate(20deg)}
     100%{transform:scale(1.02);filter:hue-rotate(-18deg)}
 }
+
+
 /* =========================
    INTRO
 ========================= */
+
 #intro{
     position:fixed;
     inset:0;
@@ -63,6 +72,7 @@ body::before{
     overflow:hidden;
     animation:introOut .8s ease 3.15s forwards;
 }
+
 .intro-grid{
     position:absolute;
     inset:-50%;
@@ -73,6 +83,7 @@ body::before{
     transform:perspective(500px) rotateX(65deg);
     animation:gridMove 2s linear infinite;
 }
+
 @keyframes gridMove{
     from{
         transform:perspective(500px) rotateX(65deg) translateY(0);
@@ -81,6 +92,7 @@ body::before{
         transform:perspective(500px) rotateX(65deg) translateY(45px);
     }
 }
+
 .intro-glow{
     position:absolute;
     width:280px;
@@ -97,29 +109,35 @@ body::before{
     opacity:.45;
     animation:introGlow 2s ease-in-out infinite alternate;
 }
+
 @keyframes introGlow{
     from{transform:scale(.75)}
     to{transform:scale(1.35)}
 }
+
 .intro-content{
     position:relative;
     z-index:2;
     text-align:center;
     animation:introZoom 3s cubic-bezier(.16,1,.3,1) forwards;
 }
+
 .intro-small{
     font-size:10px;
     letter-spacing:.55em;
     color:#999;
     margin-bottom:18px;
 }
+
 /* BURADA ARTIK LOGO YOK.
    Girişte tekrar büyük VIBE yazısı var. */
+
 .intro-logo-text{
     font-size:clamp(5rem,27vw,11rem);
     line-height:.78;
     font-weight:900;
     letter-spacing:-.11em;
+
     background:
         linear-gradient(
             120deg,
@@ -129,40 +147,51 @@ body::before{
             var(--purple) 65%,
             var(--blue) 88%
         );
+
     background-size:250% auto;
+
     -webkit-background-clip:text;
     background-clip:text;
     color:transparent;
+
     animation:introGradient 2s linear infinite;
+
     text-shadow:
         0 0 35px rgba(255,47,146,.12);
 }
+
 @keyframes introGradient{
     to{
         background-position:250% center;
     }
 }
+
 .intro-bottom{
     margin-top:24px;
     font-size:8px;
     letter-spacing:.45em;
     color:#666;
 }
+
 @keyframes introZoom{
     0%{
         opacity:0;
         transform:scale(.65);
     }
+
     25%{
         opacity:1;
     }
+
     75%{
         transform:scale(1);
     }
+
     100%{
         transform:scale(1.1);
     }
 }
+
 .intro-flash{
     position:absolute;
     inset:0;
@@ -171,11 +200,13 @@ body::before{
     z-index:5;
     animation:flash .42s ease 2.65s forwards;
 }
+
 @keyframes flash{
     0%{opacity:0}
     25%{opacity:.95}
     100%{opacity:0}
 }
+
 @keyframes introOut{
     to{
         opacity:0;
@@ -183,22 +214,28 @@ body::before{
         pointer-events:none;
     }
 }
+
+
 /* =========================
    NAV
 ========================= */
+
 nav{
     position:fixed;
     top:0;
     left:0;
     width:100%;
     z-index:5000;
+
     padding:
         calc(13px + env(safe-area-inset-top))
         17px
         13px;
+
     display:flex;
     justify-content:space-between;
     align-items:center;
+
     background:
         linear-gradient(
             to bottom,
@@ -206,78 +243,167 @@ nav{
             rgba(5,3,10,.35),
             transparent
         );
+
     backdrop-filter:blur(10px);
 }
-/* LOGO ARTIK KÖŞEDE,
-   OVAL / YUMUŞAK ALAN İÇİNDE */
+
+/* LOGO KÖŞEDE,
+   OVAL / YUMUŞAK ALAN */
+
 .nav-logo-box{
-    width:72px;
-    height:42px;
-    padding:6px 11px;
+    width:90px;
+    min-height:58px;
+
+    padding:6px 10px 5px;
+
     display:flex;
     align-items:center;
     justify-content:center;
+
     border-radius:999px;
+
     background:
         linear-gradient(
             135deg,
             rgba(255,255,255,.10),
             rgba(255,47,146,.07)
         );
+
     border:1px solid rgba(255,255,255,.15);
+
     box-shadow:
         0 0 22px rgba(255,47,146,.10),
         inset 0 0 15px rgba(255,255,255,.025);
+
     backdrop-filter:blur(12px);
+
     overflow:hidden;
+
+    text-decoration:none;
 }
+
+.nav-logo-box > div{
+    width:100%;
+    display:flex;
+    flex-direction:column;
+    align-items:center;
+    justify-content:center;
+}
+
 .nav-logo{
     width:100%;
-    height:100%;
+    height:34px;
+
     object-fit:contain;
+
     border-radius:999px;
+
     filter:
         drop-shadow(0 0 9px rgba(255,47,146,.22));
 }
+
+
+/* KÖŞE LOGOSUNUN ALTINDAKİ VIBE EVENT */
+
+.nav-logo-subtitle{
+    margin-top:3px;
+
+    font-size:5px;
+
+    font-weight:800;
+
+    letter-spacing:.16em;
+
+    padding-left:.16em;
+
+    color:#d9d9df;
+
+    text-align:center;
+
+    white-space:nowrap;
+
+    text-shadow:
+        0 0 4px rgba(255,255,255,.55),
+        0 0 9px rgba(210,215,230,.45),
+        0 0 14px rgba(255,47,146,.22);
+
+    animation:navLogoBreath 2.8s ease-in-out infinite;
+}
+
+@keyframes navLogoBreath{
+    0%,100%{
+        opacity:.55;
+        transform:scale(.96);
+
+        filter:
+            drop-shadow(0 0 4px rgba(220,225,235,.3))
+            drop-shadow(0 0 10px rgba(255,47,146,.12));
+    }
+
+    50%{
+        opacity:1;
+        transform:scale(1.04);
+
+        filter:
+            drop-shadow(0 0 6px rgba(255,255,255,.7))
+            drop-shadow(0 0 15px rgba(190,195,210,.65))
+            drop-shadow(0 0 25px rgba(255,47,146,.3));
+    }
+}
+
 .nav-right{
     display:flex;
     align-items:center;
     gap:8px;
 }
+
 .nav-button{
     padding:9px 13px;
+
     border:1px solid rgba(255,255,255,.2);
     border-radius:999px;
+
     color:white;
     text-decoration:none;
+
     font-size:8px;
     font-weight:900;
     letter-spacing:.12em;
 }
+
 .menu-button{
     width:38px;
     height:38px;
+
     border:1px solid rgba(255,255,255,.18);
     border-radius:50%;
+
     background:rgba(255,255,255,.05);
+
     display:flex;
     flex-direction:column;
     align-items:center;
     justify-content:center;
+
     gap:4px;
 }
+
 .menu-button span{
     width:14px;
     height:1.5px;
     background:white;
 }
+
+
 /* =========================
    MOBILE MENU
 ========================= */
+
 .mobile-menu{
     position:fixed;
     inset:0;
     z-index:4000;
+
     background:
         radial-gradient(
             circle at 80% 15%,
@@ -285,50 +411,72 @@ nav{
             transparent 35%
         ),
         #05030a;
+
     display:flex;
     align-items:center;
     justify-content:center;
+
     opacity:0;
     visibility:hidden;
+
     transition:.4s ease;
 }
+
 .mobile-menu.active{
     opacity:1;
     visibility:visible;
 }
+
 .mobile-menu-links{
     list-style:none;
     text-align:center;
 }
+
 .mobile-menu-links li{
     margin:23px 0;
 }
+
 .mobile-menu-links a{
     color:white;
     text-decoration:none;
+
     font-size:clamp(2.8rem,14vw,5rem);
+
     line-height:.85;
+
     font-weight:900;
     letter-spacing:-.08em;
 }
+
+
 /* =========================
    HERO
 ========================= */
+
 .hero{
     min-height:100svh;
+
     position:relative;
+
     display:flex;
     align-items:center;
     justify-content:center;
+
     text-align:center;
+
     padding:120px 18px 70px;
+
     overflow:hidden;
 }
+
 .hero-orb{
     position:absolute;
+
     width:470px;
     height:470px;
+
     border-radius:50%;
+
     background:
         radial-gradient(
             circle,
@@ -336,39 +484,59 @@ nav{
             rgba(155,92,255,.18),
             transparent 68%
         );
+
     filter:blur(25px);
+
     animation:orb 7s ease-in-out infinite alternate;
 }
+
 @keyframes orb{
     0%{
         transform:translate(-80px,-50px) scale(.85);
     }
+
     100%{
         transform:translate(80px,60px) scale(1.2);
     }
 }
+
 .hero-content{
     position:relative;
     z-index:2;
 }
+
 .hero-tag{
     display:inline-block;
+
     padding:8px 13px;
+
     border:1px solid rgba(255,255,255,.18);
     border-radius:999px;
+
     background:rgba(255,255,255,.035);
+
     color:#aaa;
+
     font-size:8px;
     letter-spacing:.22em;
+
     margin-bottom:25px;
 }
-/* ANA HERO'DA TEKRAR YAZI VIBE */
+
+
+/* ANA HERO'DA BÜYÜK VIBE YAZISI */
+
 .hero h1{
     font-size:clamp(5.4rem,28vw,11rem);
+
     line-height:.73;
+
     letter-spacing:-.11em;
+
     font-weight:900;
+
     margin-bottom:30px;
+
     background:
         linear-gradient(
             120deg,
@@ -378,45 +546,66 @@ nav{
             var(--purple) 63%,
             var(--blue) 85%
         );
+
     background-size:250% auto;
+
     -webkit-background-clip:text;
     background-clip:text;
+
     color:transparent;
+
     animation:heroGradient 6s linear infinite;
 }
+
 @keyframes heroGradient{
     to{
         background-position:250% center;
     }
 }
+
 .hero-sub{
     max-width:315px;
+
     margin:auto;
+
     color:#aaa5b5;
+
     font-size:12px;
+
     line-height:1.75;
 }
+
 .hero-buttons{
     display:flex;
     flex-direction:column;
+
     gap:10px;
+
     margin-top:32px;
 }
+
 .primary-button,
 .secondary-button{
     width:100%;
+
     min-height:52px;
+
     display:flex;
     align-items:center;
     justify-content:center;
+
     border-radius:999px;
+
     text-decoration:none;
+
     font-size:10px;
     font-weight:900;
     letter-spacing:.12em;
 }
+
 .primary-button{
     color:white;
+
     background:
         linear-gradient(
             90deg,
@@ -425,126 +614,188 @@ nav{
             var(--blue),
             var(--pink)
         );
+
     background-size:300% auto;
+
     box-shadow:
         0 10px 40px rgba(255,47,146,.28);
+
     animation:buttonGradient 4s linear infinite;
 }
+
 @keyframes buttonGradient{
     to{
         background-position:300% center;
     }
 }
+
 .secondary-button{
     border:1px solid rgba(255,255,255,.18);
+
     color:white;
+
     background:rgba(255,255,255,.025);
 }
+
 .scroll-indicator{
     position:absolute;
+
     bottom:27px;
     left:50%;
+
     transform:translateX(-50%);
+
     color:#777;
+
     font-size:7px;
+
     letter-spacing:.25em;
+
     display:flex;
     flex-direction:column;
+
     align-items:center;
+
     gap:7px;
 }
+
 .scroll-line{
     width:1px;
     height:35px;
+
     background:
         linear-gradient(
             to bottom,
             var(--pink),
             transparent
         );
+
     animation:scrollLine 1.4s ease-in-out infinite;
 }
+
 @keyframes scrollLine{
     0%,100%{
         transform:scaleY(.4);
         transform-origin:top;
     }
+
     50%{
         transform:scaleY(1);
         transform-origin:top;
     }
 }
+
+
 /* =========================
    MARQUEE
 ========================= */
+
 .marquee{
     overflow:hidden;
     white-space:nowrap;
+
     padding:17px 0;
+
     border-top:1px solid rgba(255,255,255,.08);
     border-bottom:1px solid rgba(255,255,255,.08);
+
     background:rgba(255,255,255,.015);
 }
+
 .marquee-track{
     display:inline-flex;
+
     animation:marquee 20s linear infinite;
 }
+
 .marquee span{
     margin-right:35px;
+
     color:#68636f;
+
     font-size:8px;
+
     font-weight:900;
+
     letter-spacing:.25em;
 }
+
 .marquee .pink{
     color:var(--pink);
 }
+
 @keyframes marquee{
     to{
         transform:translateX(-50%);
     }
 }
+
+
 /* =========================
    SECTIONS
 ========================= */
+
 section{
     position:relative;
+
     padding:95px 18px;
 }
+
 .section-label{
     color:var(--pink);
+
     font-size:8px;
+
     font-weight:900;
+
     letter-spacing:.35em;
+
     margin-bottom:14px;
 }
+
 .section-title{
     font-size:clamp(3.1rem,16vw,6rem);
+
     line-height:.83;
+
     letter-spacing:-.09em;
+
     font-weight:900;
+
     margin-bottom:35px;
 }
+
+
 /* =========================
    NEXT EVENT
 ========================= */
+
 .upcoming{
     max-width:700px;
     margin:auto;
 }
+
 .event-card{
     min-height:600px;
+
     position:relative;
+
     overflow:hidden;
+
     border-radius:28px;
+
     border:1px solid rgba(255,255,255,.14);
+
     background:#100817;
+
     box-shadow:
         0 25px 90px rgba(255,47,146,.13);
 }
+
 .event-image{
     position:absolute;
     inset:0;
+
     background:
         linear-gradient(
             to top,
@@ -555,10 +806,13 @@ section{
         ),
         url("IMG_5389.jpeg") center/cover no-repeat;
 }
+
 .event-image::after{
     content:"";
+
     position:absolute;
     inset:0;
+
     background:
         linear-gradient(
             125deg,
@@ -566,92 +820,145 @@ section{
             transparent 38%,
             rgba(53,167,255,.14)
         );
+
     mix-blend-mode:screen;
 }
+
 .event-badge{
     position:absolute;
+
     top:20px;
     left:20px;
+
     padding:8px 12px;
+
     border-radius:999px;
+
     background:rgba(5,3,10,.65);
+
     border:1px solid rgba(255,255,255,.18);
+
     backdrop-filter:blur(10px);
+
     font-size:7px;
+
     font-weight:900;
+
     letter-spacing:.2em;
+
     color:white;
 }
+
 .event-content{
     position:absolute;
+
     left:0;
     right:0;
     bottom:0;
+
     padding:27px;
 }
+
 .event-date{
     color:#ccc7d0;
+
     font-size:8px;
+
     letter-spacing:.2em;
+
     margin-bottom:12px;
 }
+
 .event-name{
     font-size:clamp(2.7rem,14vw,5.7rem);
+
     line-height:.82;
+
     letter-spacing:-.08em;
+
     font-weight:900;
 }
+
 .event-location{
     color:#aaa5b5;
+
     font-size:10px;
+
     margin-top:13px;
 }
+
 .event-link{
     display:flex;
+
     align-items:center;
     justify-content:center;
+
     min-height:51px;
+
     margin-top:23px;
+
     border-radius:999px;
+
     background:white;
+
     color:black;
+
     text-decoration:none;
+
     font-size:9px;
+
     font-weight:900;
+
     letter-spacing:.14em;
 }
+
+
 /* =========================
    ARCHIVE
 ========================= */
+
 .past-events{
     max-width:700px;
     margin:auto;
 }
+
 .events-grid{
     display:flex;
     flex-direction:column;
+
     gap:15px;
 }
+
 .past-card{
     height:390px;
+
     position:relative;
+
     overflow:hidden;
+
     border-radius:24px;
+
     border:1px solid rgba(255,255,255,.11);
+
     background:#111;
 }
+
 .past-card:first-child{
     height:450px;
 }
+
 .past-image{
     position:absolute;
     inset:0;
+
     background-size:cover;
     background-position:center;
 }
+
 .past-overlay{
     position:absolute;
     inset:0;
+
     background:
         linear-gradient(
             to top,
@@ -659,75 +966,109 @@ section{
             rgba(5,3,10,.1) 72%
         );
 }
+
 .past-info{
     position:absolute;
+
     left:23px;
     right:23px;
     bottom:22px;
 }
+
 .past-info small{
     color:var(--pink);
+
     font-size:7px;
+
     font-weight:800;
+
     letter-spacing:.25em;
 }
+
 .past-info h3{
     margin-top:6px;
+
     font-size:25px;
+
     line-height:1;
+
     letter-spacing:-.05em;
 }
+
+
 /* =========================
    MANIFESTO
 ========================= */
+
 .manifesto{
     min-height:90svh;
+
     display:flex;
+
     align-items:center;
+
     justify-content:center;
+
     text-align:center;
+
     overflow:hidden;
 }
+
 .manifesto::before{
     content:"";
+
     position:absolute;
+
     width:460px;
     height:460px;
+
     border-radius:50%;
+
     background:
         radial-gradient(
             circle,
             rgba(155,92,255,.25),
             transparent 68%
         );
+
     filter:blur(30px);
+
     animation:
         manifestoGlow
         6s ease-in-out
         infinite alternate;
 }
+
 @keyframes manifestoGlow{
     from{
         transform:
             translate(-80px,-50px)
             scale(.8);
     }
+
     to{
         transform:
             translate(80px,60px)
             scale(1.2);
     }
 }
+
 .manifesto-content{
     position:relative;
+
     z-index:2;
 }
+
 .manifesto h2{
     font-size:clamp(4rem,19vw,8rem);
+
     line-height:.78;
+
     letter-spacing:-.1em;
+
     font-weight:900;
 }
+
 .manifesto h2 span{
     background:
         linear-gradient(
@@ -736,31 +1077,49 @@ section{
             var(--purple),
             var(--blue)
         );
+
     -webkit-background-clip:text;
     background-clip:text;
+
     color:transparent;
 }
+
 .manifesto p{
     max-width:340px;
+
     margin:28px auto 0;
+
     color:#97929f;
+
     font-size:11px;
+
     line-height:1.85;
 }
+
+
 /* =========================
    TEAM
 ========================= */
+
 .team{
     max-width:700px;
+
     margin:auto;
+
     text-align:center;
 }
+
 .team-box{
     position:relative;
+
     overflow:hidden;
+
     padding:65px 22px;
+
     border-radius:28px;
+
     border:1px solid rgba(255,255,255,.13);
+
     background:
         radial-gradient(
             circle at 100% 0%,
@@ -773,118 +1132,183 @@ section{
             rgba(53,167,255,.06)
         );
 }
+
 .team-box::before{
     content:"";
+
     position:absolute;
+
     width:180px;
     height:180px;
+
     right:-80px;
     top:-70px;
+
     border-radius:50%;
+
     background:var(--pink);
+
     filter:blur(70px);
+
     opacity:.35;
 }
+
 .team-box h2{
     position:relative;
+
     font-size:clamp(2.8rem,14vw,5rem);
+
     line-height:.82;
+
     letter-spacing:-.08em;
+
     font-weight:900;
 }
+
 .team-box p{
     position:relative;
+
     max-width:310px;
+
     margin:24px auto 30px;
+
     color:#99949f;
+
     font-size:11px;
+
     line-height:1.8;
 }
+
 .join-button{
     position:relative;
+
     display:flex;
+
     align-items:center;
     justify-content:center;
+
     min-height:53px;
+
     border-radius:999px;
+
     background:white;
+
     color:black;
+
     text-decoration:none;
+
     font-size:9px;
+
     font-weight:900;
+
     letter-spacing:.12em;
 }
+
+
 /* =========================
    FOOTER
 ========================= */
+
 footer{
     padding:
         65px
         18px
         calc(35px + env(safe-area-inset-bottom));
+
     border-top:1px solid rgba(255,255,255,.08);
 }
-/* FOOTER LOGOSU DA YUMUŞAK */
+
 .footer-logo-box{
     width:125px;
     height:58px;
+
     padding:8px 14px;
+
     display:flex;
     align-items:center;
     justify-content:center;
+
     border-radius:999px;
+
     background:rgba(255,255,255,.035);
+
     border:1px solid rgba(255,255,255,.10);
+
     overflow:hidden;
+
     box-shadow:
         0 0 20px rgba(255,47,146,.08);
 }
+
 .footer-logo{
     width:100%;
     height:100%;
+
     object-fit:contain;
+
     border-radius:999px;
+
     filter:
         drop-shadow(0 0 9px rgba(255,47,146,.18));
 }
+
 .footer-right{
     margin-top:30px;
+
     color:#66616c;
+
     font-size:8px;
+
     line-height:2;
 }
+
 .footer-right a{
     color:#aaa;
     text-decoration:none;
 }
+
+
 /* =========================
    REVEAL
 ========================= */
+
 .reveal{
     opacity:0;
+
     transform:
         translateY(35px)
         scale(.98);
+
     transition:
         opacity .8s ease,
         transform .8s cubic-bezier(.16,1,.3,1);
 }
+
 .reveal.active{
     opacity:1;
+
     transform:
         translateY(0)
         scale(1);
 }
+
+
 /* =========================
    TOUCH FLASH
 ========================= */
+
 .touch-flash{
     position:fixed;
+
     width:100px;
     height:100px;
+
     border-radius:50%;
+
     pointer-events:none;
+
     z-index:9998;
+
     background:
         radial-gradient(
             circle,
@@ -892,287 +1316,461 @@ footer{
             rgba(255,47,146,.16),
             transparent 70%
         );
+
     transform:
         translate(-50%,-50%)
         scale(0);
+
     animation:
         touchFlash
         .5s
         ease-out
         forwards;
 }
+
 @keyframes touchFlash{
     0%{
         transform:
             translate(-50%,-50%)
             scale(0);
+
         opacity:1;
     }
+
     100%{
         transform:
             translate(-50%,-50%)
             scale(2.8);
+
         opacity:0;
     }
 }
+
+
 /* =========================
    DESKTOP
 ========================= */
+
 @media(min-width:801px){
+
     .menu-button{
         display:none;
     }
+
     .hero-buttons{
         flex-direction:row;
         justify-content:center;
     }
+
     .primary-button,
     .secondary-button{
         width:auto;
         padding:0 28px;
     }
+
     .events-grid{
         display:grid;
+
         grid-template-columns:
             repeat(3,1fr);
     }
+
     .past-card,
     .past-card:first-child{
         height:430px;
     }
+
     section{
         padding:130px 5vw;
     }
+
     .event-card{
         min-height:680px;
     }
+
     .event-content{
         padding:45px;
     }
+
     .event-link{
         display:inline-flex;
+
         padding:0 28px;
     }
+
     .team-box{
         padding:90px 40px;
     }
+
     footer{
         display:flex;
+
         justify-content:space-between;
+
         align-items:flex-end;
     }
+
     .footer-right{
         margin-top:0;
+
         text-align:right;
     }
 }
 </style>
 </head>
+
 <body>
+
+
 <!-- =========================
      INTRO
 ========================= -->
+
 <div id="intro">
+
     <div class="intro-grid"></div>
+
     <div class="intro-glow"></div>
+
     <div class="intro-content">
+
         <div class="intro-small">
             PRESENTED BY
         </div>
-        <!-- ARTIK BURADA PNG YOK -->
+
         <div class="intro-logo-text">
             VIBE
         </div>
+
         <div class="intro-bottom">
             EVENT COLLECTIVE
         </div>
+
     </div>
+
     <div class="intro-flash"></div>
+
 </div>
+
+
 <!-- =========================
      NAV
 ========================= -->
+
 <nav>
+
     <!-- LOGO SADECE KÖŞEDE -->
+
     <a
         href="#"
         aria-label="VIBE"
         class="nav-logo-box">
-        <img
-            src="Paragraf metniniz.png"
-            class="nav-logo"
-            alt="VIBE">
+
+        <div>
+
+            <img
+                src="Paragraf metniniz.png"
+                class="nav-logo"
+                alt="VIBE">
+
+            <div class="nav-logo-subtitle">
+                VIBE EVENT
+            </div>
+
+        </div>
+
     </a>
+
+
     <div class="nav-right">
+
         <a
             href="#events"
             class="nav-button">
+
             NEXT EVENT
+
         </a>
+
+
         <button
             class="menu-button"
             id="menuButton"
             aria-label="Menu">
+
             <span></span>
             <span></span>
+
         </button>
+
     </div>
+
 </nav>
+
+
 <!-- =========================
      MOBILE MENU
 ========================= -->
+
 <div
     class="mobile-menu"
     id="mobileMenu">
+
     <ul class="mobile-menu-links">
+
         <li>
             <a href="#events">
                 EVENTS
             </a>
         </li>
+
         <li>
             <a href="#past">
                 ARCHIVE
             </a>
         </li>
+
         <li>
             <a href="#team">
                 TEAM
             </a>
         </li>
+
     </ul>
+
 </div>
+
+
 <!-- =========================
      HERO
 ========================= -->
+
 <header class="hero">
+
     <div class="hero-orb"></div>
+
     <div class="hero-content">
+
         <div class="hero-tag">
             KIRIKKALE · TURKEY · 2026
         </div>
-        <!-- BURADA TEKRAR BÜYÜK VIBE YAZISI -->
+
+
         <h1>
             VIBE
         </h1>
+
+
         <p class="hero-sub">
+
             We don't just organize events.
             We create experiences.
+
         </p>
+
+
         <div class="hero-buttons">
+
             <a
                 href="#events"
                 class="primary-button">
+
                 DISCOVER THE VIBE
+
             </a>
+
+
             <a
                 href="#team"
                 class="secondary-button">
+
                 JOIN THE TEAM
+
             </a>
+
         </div>
+
     </div>
+
+
     <div class="scroll-indicator">
+
         <div>
             SCROLL
         </div>
+
         <div class="scroll-line"></div>
+
     </div>
+
 </header>
+
+
 <!-- =========================
      MARQUEE
 ========================= -->
+
 <div class="marquee">
+
     <div class="marquee-track">
+
         <span class="pink">
             VIBE EVENT
         </span>
+
         <span>
             MUSIC
         </span>
+
         <span>
             ENERGY
         </span>
+
         <span class="pink">
             EXPERIENCE
         </span>
+
         <span>
             NIGHTLIFE
         </span>
+
         <span>
             COMMUNITY
         </span>
+
+
         <span class="pink">
             VIBE EVENT
         </span>
+
         <span>
             MUSIC
         </span>
+
         <span>
             ENERGY
         </span>
+
         <span class="pink">
             EXPERIENCE
         </span>
+
         <span>
             NIGHTLIFE
         </span>
+
         <span>
             COMMUNITY
         </span>
+
     </div>
+
 </div>
+
+
 <!-- =========================
      NEXT EVENT
 ========================= -->
+
 <section id="events">
+
     <div class="upcoming">
+
         <div class="section-label reveal">
+
             01 / UPCOMING
+
         </div>
+
+
         <h2 class="section-title reveal">
+
             NEXT<br>
             VIBE.
+
         </h2>
+
+
         <div class="event-card reveal">
+
             <div class="event-image"></div>
+
+
             <div class="event-badge">
+
                 UPCOMING EVENT
+
             </div>
+
+
             <div class="event-content">
+
                 <div class="event-date">
+
                     HALLOWEEN · 2026
+
                 </div>
+
+
                 <div class="event-name">
+
                     HALLOWEEN
+
                 </div>
+
+
                 <div class="event-location">
+
                     VIBE EVENT · KIRIKKALE
+
                 </div>
+
+
                 <a
                     href="#"
                     class="event-link">
+
                     GET YOUR TICKET ↗
+
                 </a>
+
             </div>
+
         </div>
+
     </div>
+
 </section>
+
+
 <!-- =========================
      ARCHIVE
 ========================= -->
+
 <section id="past">
+
     <div class="past-events">
+
         <div class="section-label reveal">
+
             02 / ARCHIVE
+
         </div>
+
+
         <h2 class="section-title reveal">
+
             WE'VE<br>
             BEEN THERE.
+
         </h2>
+
+
         <div class="events-grid">
-            <!-- DJ TINA -->
+
+
             <div class="past-card reveal">
+
                 <div
                     class="past-image"
                     style="
@@ -1180,18 +1778,27 @@ footer{
                     url('DJ-TINA.jpeg');
                     ">
                 </div>
+
                 <div class="past-overlay"></div>
+
+
                 <div class="past-info">
+
                     <small>
                         2026
                     </small>
+
                     <h3>
                         OPEN YOUR EYES
                     </h3>
+
                 </div>
+
             </div>
-            <!-- MORE -->
+
+
             <div class="past-card reveal">
+
                 <div
                     class="past-image"
                     style="
@@ -1204,18 +1811,27 @@ footer{
                     );
                     ">
                 </div>
+
                 <div class="past-overlay"></div>
+
+
                 <div class="past-info">
+
                     <small>
                         VIBE EVENT
                     </small>
+
                     <h3>
                         MORE SOON.
                     </h3>
+
                 </div>
+
             </div>
-            <!-- FUTURE -->
+
+
             <div class="past-card reveal">
+
                 <div
                     class="past-image"
                     style="
@@ -1228,250 +1844,393 @@ footer{
                     );
                     ">
                 </div>
+
                 <div class="past-overlay"></div>
+
+
                 <div class="past-info">
+
                     <small>
                         VIBE ARCHIVE
                     </small>
+
                     <h3>
                         STAY TUNED.
                     </h3>
+
                 </div>
+
             </div>
+
         </div>
+
     </div>
+
 </section>
+
+
 <!-- =========================
      MANIFESTO
 ========================= -->
+
 <section class="manifesto">
+
     <div class="manifesto-content reveal">
+
         <div class="section-label">
+
             THE VIBE
+
         </div>
+
+
         <h2>
+
             NOT JUST<br>
             A <span>PARTY.</span>
+
         </h2>
+
+
         <p>
+
             Vibe Event is a new generation event collective
             built around music, people, energy and
             unforgettable nights. We bring artists,
             communities and experiences together in one place.
+
         </p>
+
     </div>
+
 </section>
+
+
 <!-- =========================
      TEAM
 ========================= -->
+
 <section id="team">
+
     <div class="team">
+
         <div class="section-label reveal">
+
             03 / JOIN US
+
         </div>
+
+
         <div class="team-box reveal">
+
             <h2>
+
                 WANT TO BE<br>
                 PART OF
+
                 <span style="color:#ff2f92;">
                     VIBE?
                 </span>
+
             </h2>
+
+
             <p>
+
                 Organizasyon, sosyal medya,
                 tasarım, prodüksiyon veya
                 etkinlik operasyonlarında
                 bizimle çalışmak ister misin?
+
             </p>
+
+
             <a
                 href="#"
                 class="join-button">
+
                 JOIN THE TEAM →
+
             </a>
+
         </div>
+
     </div>
+
 </section>
+
+
 <!-- =========================
      FOOTER
 ========================= -->
+
 <footer>
+
     <div>
+
         <div class="footer-logo-box">
+
             <img
                 src="Paragraf metniniz.png"
                 class="footer-logo"
                 alt="VIBE">
+
         </div>
+
     </div>
+
+
     <div class="footer-right">
+
         <div>
             KIRIKKALE · TURKEY
         </div>
+
         <div>
             © 2026 VIBE EVENT
         </div>
+
         <div>
+
             <a href="#">
                 Instagram
             </a>
+
             &nbsp;·&nbsp;
+
             <a href="#">
                 Contact
             </a>
+
         </div>
+
     </div>
+
 </footer>
+
+
 <script>
+
 /* =========================
    MOBILE MENU
 ========================= */
+
 const menuButton =
     document.getElementById(
         "menuButton"
     );
+
 const mobileMenu =
     document.getElementById(
         "mobileMenu"
     );
+
 const menuLinks =
     document.querySelectorAll(
         ".mobile-menu-links a"
     );
+
+
 menuButton.addEventListener(
     "click",
     () => {
+
         mobileMenu.classList.toggle(
             "active"
         );
+
     }
 );
+
+
 menuLinks.forEach(
     link => {
+
         link.addEventListener(
             "click",
             () => {
+
                 mobileMenu.classList.remove(
                     "active"
                 );
+
             }
         );
+
     }
 );
+
+
 /* =========================
    SCROLL REVEAL
 ========================= */
+
 const revealElements =
     document.querySelectorAll(
         ".reveal"
     );
+
+
 const observer =
     new IntersectionObserver(
         entries => {
+
             entries.forEach(
                 entry => {
+
                     if(
                         entry.isIntersecting
                     ){
+
                         entry.target.classList.add(
                             "active"
                         );
+
                     }
+
                 }
             );
+
         },
         {
             threshold:.12
         }
     );
+
+
 revealElements.forEach(
     element => {
+
         observer.observe(
             element
         );
+
     }
 );
+
+
 /* =========================
    HERO PARALLAX
 ========================= */
+
 window.addEventListener(
     "scroll",
     () => {
+
         const scroll =
             window.scrollY;
+
         const orb =
             document.querySelector(
                 ".hero-orb"
             );
+
         if(orb){
+
             orb.style.transform =
                 `translateY(${scroll * .16}px)`;
+
         }
+
     },
     {
         passive:true
     }
 );
+
+
 /* =========================
    TOUCH FLASH
 ========================= */
+
 document.addEventListener(
     "touchstart",
     event => {
+
         const touch =
             event.touches[0];
+
         if(!touch) return;
+
+
         const flash =
             document.createElement(
                 "div"
             );
+
+
         flash.className =
             "touch-flash";
+
+
         flash.style.left =
             touch.clientX + "px";
+
+
         flash.style.top =
             touch.clientY + "px";
+
+
         document.body.appendChild(
             flash
         );
+
+
         setTimeout(
             () => {
+
                 flash.remove();
+
             },
             500
         );
+
     },
     {
         passive:true
     }
 );
+
+
 /* =========================
    CARD TOUCH
 ========================= */
+
 document
     .querySelectorAll(
         ".event-card, .past-card, .team-box"
     )
     .forEach(
         card => {
+
             card.addEventListener(
                 "touchstart",
                 () => {
+
                     card.style.transform =
                         "scale(.985)";
+
                 },
                 {
                     passive:true
                 }
             );
+
+
             card.addEventListener(
                 "touchend",
                 () => {
+
                     card.style.transform =
                         "";
+
                 }
             );
+
         }
     );
+
 </script>
+
 </body>
 </html>
