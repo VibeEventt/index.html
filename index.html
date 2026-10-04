@@ -113,13 +113,34 @@ body::before{
     color:#999;
     margin-bottom:18px;
 }
-.intro-logo{
-    width:min(70vw,360px);
-    max-height:130px;
-    object-fit:contain;
-    filter:
-        drop-shadow(0 0 20px rgba(255,47,146,.35))
-        drop-shadow(0 0 50px rgba(155,92,255,.2));
+/* BURADA ARTIK LOGO YOK.
+   Girişte tekrar büyük VIBE yazısı var. */
+.intro-logo-text{
+    font-size:clamp(5rem,27vw,11rem);
+    line-height:.78;
+    font-weight:900;
+    letter-spacing:-.11em;
+    background:
+        linear-gradient(
+            120deg,
+            #fff 5%,
+            #ffb3d7 25%,
+            var(--pink) 43%,
+            var(--purple) 65%,
+            var(--blue) 88%
+        );
+    background-size:250% auto;
+    -webkit-background-clip:text;
+    background-clip:text;
+    color:transparent;
+    animation:introGradient 2s linear infinite;
+    text-shadow:
+        0 0 35px rgba(255,47,146,.12);
+}
+@keyframes introGradient{
+    to{
+        background-position:250% center;
+    }
 }
 .intro-bottom{
     margin-top:24px;
@@ -132,9 +153,15 @@ body::before{
         opacity:0;
         transform:scale(.65);
     }
-    25%{opacity:1}
-    75%{transform:scale(1)}
-    100%{transform:scale(1.1)}
+    25%{
+        opacity:1;
+    }
+    75%{
+        transform:scale(1);
+    }
+    100%{
+        transform:scale(1.1);
+    }
 }
 .intro-flash{
     position:absolute;
@@ -181,12 +208,36 @@ nav{
         );
     backdrop-filter:blur(10px);
 }
+/* LOGO ARTIK KÖŞEDE,
+   OVAL / YUMUŞAK ALAN İÇİNDE */
+.nav-logo-box{
+    width:72px;
+    height:42px;
+    padding:6px 11px;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    border-radius:999px;
+    background:
+        linear-gradient(
+            135deg,
+            rgba(255,255,255,.10),
+            rgba(255,47,146,.07)
+        );
+    border:1px solid rgba(255,255,255,.15);
+    box-shadow:
+        0 0 22px rgba(255,47,146,.10),
+        inset 0 0 15px rgba(255,255,255,.025);
+    backdrop-filter:blur(12px);
+    overflow:hidden;
+}
 .nav-logo{
-    width:76px;
-    height:32px;
+    width:100%;
+    height:100%;
     object-fit:contain;
-    object-position:left center;
-    filter:drop-shadow(0 0 10px rgba(255,47,146,.2));
+    border-radius:999px;
+    filter:
+        drop-shadow(0 0 9px rgba(255,47,146,.22));
 }
 .nav-right{
     display:flex;
@@ -311,22 +362,36 @@ nav{
     letter-spacing:.22em;
     margin-bottom:25px;
 }
-.hero-logo{
-    width:min(78vw,430px);
-    max-height:180px;
-    object-fit:contain;
-    filter:
-        drop-shadow(0 0 20px rgba(255,47,146,.25))
-        drop-shadow(0 0 70px rgba(155,92,255,.16));
-    animation:logoFloat 4s ease-in-out infinite alternate;
+/* ANA HERO'DA TEKRAR YAZI VIBE */
+.hero h1{
+    font-size:clamp(5.4rem,28vw,11rem);
+    line-height:.73;
+    letter-spacing:-.11em;
+    font-weight:900;
+    margin-bottom:30px;
+    background:
+        linear-gradient(
+            120deg,
+            white 5%,
+            #ffb3d7 25%,
+            var(--pink) 42%,
+            var(--purple) 63%,
+            var(--blue) 85%
+        );
+    background-size:250% auto;
+    -webkit-background-clip:text;
+    background-clip:text;
+    color:transparent;
+    animation:heroGradient 6s linear infinite;
 }
-@keyframes logoFloat{
-    from{transform:translateY(-4px) scale(.98)}
-    to{transform:translateY(5px) scale(1.02)}
+@keyframes heroGradient{
+    to{
+        background-position:250% center;
+    }
 }
 .hero-sub{
     max-width:315px;
-    margin:30px auto 0;
+    margin:auto;
     color:#aaa5b5;
     font-size:12px;
     line-height:1.75;
@@ -361,11 +426,14 @@ nav{
             var(--pink)
         );
     background-size:300% auto;
-    box-shadow:0 10px 40px rgba(255,47,146,.28);
+    box-shadow:
+        0 10px 40px rgba(255,47,146,.28);
     animation:buttonGradient 4s linear infinite;
 }
 @keyframes buttonGradient{
-    to{background-position:300% center}
+    to{
+        background-position:300% center;
+    }
 }
 .secondary-button{
     border:1px solid rgba(255,255,255,.18);
@@ -432,7 +500,9 @@ nav{
     color:var(--pink);
 }
 @keyframes marquee{
-    to{transform:translateX(-50%)}
+    to{
+        transform:translateX(-50%);
+    }
 }
 /* =========================
    SECTIONS
@@ -469,7 +539,8 @@ section{
     border-radius:28px;
     border:1px solid rgba(255,255,255,.14);
     background:#100817;
-    box-shadow:0 25px 90px rgba(255,47,146,.13);
+    box-shadow:
+        0 25px 90px rgba(255,47,146,.13);
 }
 .event-image{
     position:absolute;
@@ -630,14 +701,21 @@ section{
             transparent 68%
         );
     filter:blur(30px);
-    animation:manifestoGlow 6s ease-in-out infinite alternate;
+    animation:
+        manifestoGlow
+        6s ease-in-out
+        infinite alternate;
 }
 @keyframes manifestoGlow{
     from{
-        transform:translate(-80px,-50px) scale(.8);
+        transform:
+            translate(-80px,-50px)
+            scale(.8);
     }
     to{
-        transform:translate(80px,60px) scale(1.2);
+        transform:
+            translate(80px,60px)
+            scale(1.2);
     }
 }
 .manifesto-content{
@@ -746,11 +824,28 @@ footer{
         calc(35px + env(safe-area-inset-bottom));
     border-top:1px solid rgba(255,255,255,.08);
 }
-.footer-logo{
+/* FOOTER LOGOSU DA YUMUŞAK */
+.footer-logo-box{
     width:125px;
-    max-height:70px;
+    height:58px;
+    padding:8px 14px;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    border-radius:999px;
+    background:rgba(255,255,255,.035);
+    border:1px solid rgba(255,255,255,.10);
+    overflow:hidden;
+    box-shadow:
+        0 0 20px rgba(255,47,146,.08);
+}
+.footer-logo{
+    width:100%;
+    height:100%;
     object-fit:contain;
-    object-position:left center;
+    border-radius:999px;
+    filter:
+        drop-shadow(0 0 9px rgba(255,47,146,.18));
 }
 .footer-right{
     margin-top:30px;
@@ -767,14 +862,18 @@ footer{
 ========================= */
 .reveal{
     opacity:0;
-    transform:translateY(35px) scale(.98);
+    transform:
+        translateY(35px)
+        scale(.98);
     transition:
         opacity .8s ease,
         transform .8s cubic-bezier(.16,1,.3,1);
 }
 .reveal.active{
     opacity:1;
-    transform:translateY(0) scale(1);
+    transform:
+        translateY(0)
+        scale(1);
 }
 /* =========================
    TOUCH FLASH
@@ -793,16 +892,26 @@ footer{
             rgba(255,47,146,.16),
             transparent 70%
         );
-    transform:translate(-50%,-50%) scale(0);
-    animation:touchFlash .5s ease-out forwards;
+    transform:
+        translate(-50%,-50%)
+        scale(0);
+    animation:
+        touchFlash
+        .5s
+        ease-out
+        forwards;
 }
 @keyframes touchFlash{
     0%{
-        transform:translate(-50%,-50%) scale(0);
+        transform:
+            translate(-50%,-50%)
+            scale(0);
         opacity:1;
     }
     100%{
-        transform:translate(-50%,-50%) scale(2.8);
+        transform:
+            translate(-50%,-50%)
+            scale(2.8);
         opacity:0;
     }
 }
@@ -824,7 +933,8 @@ footer{
     }
     .events-grid{
         display:grid;
-        grid-template-columns:repeat(3,1fr);
+        grid-template-columns:
+            repeat(3,1fr);
     }
     .past-card,
     .past-card:first-child{
@@ -869,11 +979,10 @@ footer{
         <div class="intro-small">
             PRESENTED BY
         </div>
-        <img
-            src="Paragraf metniniz.png"
-            class="intro-logo"
-            alt="VIBE"
-        >
+        <!-- ARTIK BURADA PNG YOK -->
+        <div class="intro-logo-text">
+            VIBE
+        </div>
         <div class="intro-bottom">
             EVENT COLLECTIVE
         </div>
@@ -884,12 +993,15 @@ footer{
      NAV
 ========================= -->
 <nav>
-    <a href="#" aria-label="VIBE">
+    <!-- LOGO SADECE KÖŞEDE -->
+    <a
+        href="#"
+        aria-label="VIBE"
+        class="nav-logo-box">
         <img
             src="Paragraf metniniz.png"
             class="nav-logo"
-            alt="VIBE"
-        >
+            alt="VIBE">
     </a>
     <div class="nav-right">
         <a
@@ -939,11 +1051,10 @@ footer{
         <div class="hero-tag">
             KIRIKKALE · TURKEY · 2026
         </div>
-        <img
-            src="Paragraf metniniz.png"
-            class="hero-logo"
-            alt="VIBE EVENT"
-        >
+        <!-- BURADA TEKRAR BÜYÜK VIBE YAZISI -->
+        <h1>
+            VIBE
+        </h1>
         <p class="hero-sub">
             We don't just organize events.
             We create experiences.
@@ -1038,10 +1149,6 @@ footer{
                 <div class="event-location">
                     VIBE EVENT · KIRIKKALE
                 </div>
-                <!--
-                    BiletimGO linkini daha sonra
-                    href="#" kısmına koyacağız.
-                -->
                 <a
                     href="#"
                     class="event-link">
@@ -1189,11 +1296,12 @@ footer{
 ========================= -->
 <footer>
     <div>
-        <img
-            src="Paragraf metniniz.png"
-            class="footer-logo"
-            alt="VIBE"
-        >
+        <div class="footer-logo-box">
+            <img
+                src="Paragraf metniniz.png"
+                class="footer-logo"
+                alt="VIBE">
+        </div>
     </div>
     <div class="footer-right">
         <div>
