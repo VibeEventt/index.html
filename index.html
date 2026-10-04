@@ -36,18 +36,18 @@ body::before{
     content:"";
     position:fixed;
     inset:0;
-    pointer-events:none;
     z-index:-10;
+    pointer-events:none;
     background:
-        radial-gradient(circle at 15% 15%,rgba(255,47,146,.25),transparent 30%),
-        radial-gradient(circle at 90% 25%,rgba(53,167,255,.20),transparent 30%),
-        radial-gradient(circle at 50% 80%,rgba(155,92,255,.20),transparent 35%);
+        radial-gradient(circle at 15% 15%,rgba(255,47,146,.23),transparent 30%),
+        radial-gradient(circle at 90% 25%,rgba(53,167,255,.18),transparent 30%),
+        radial-gradient(circle at 50% 80%,rgba(155,92,255,.18),transparent 35%);
     animation:bgMove 12s ease-in-out infinite alternate;
 }
 @keyframes bgMove{
     0%{transform:scale(1);filter:hue-rotate(0deg)}
-    50%{transform:scale(1.08);filter:hue-rotate(25deg)}
-    100%{transform:scale(1.02);filter:hue-rotate(-20deg)}
+    50%{transform:scale(1.08);filter:hue-rotate(20deg)}
+    100%{transform:scale(1.02);filter:hue-rotate(-18deg)}
 }
 /* =========================
    INTRO
@@ -61,7 +61,7 @@ body::before{
     align-items:center;
     justify-content:center;
     overflow:hidden;
-    animation:introExit .8s ease 3.1s forwards;
+    animation:introOut .8s ease 3.15s forwards;
 }
 .intro-grid{
     position:absolute;
@@ -74,22 +74,32 @@ body::before{
     animation:gridMove 2s linear infinite;
 }
 @keyframes gridMove{
-    from{transform:perspective(500px) rotateX(65deg) translateY(0)}
-    to{transform:perspective(500px) rotateX(65deg) translateY(45px)}
+    from{
+        transform:perspective(500px) rotateX(65deg) translateY(0);
+    }
+    to{
+        transform:perspective(500px) rotateX(65deg) translateY(45px);
+    }
 }
 .intro-glow{
     position:absolute;
-    width:260px;
-    height:260px;
+    width:280px;
+    height:280px;
     border-radius:50%;
-    background:radial-gradient(circle,var(--pink),var(--purple),transparent 68%);
+    background:
+        radial-gradient(
+            circle,
+            var(--pink),
+            var(--purple),
+            transparent 68%
+        );
     filter:blur(25px);
     opacity:.45;
     animation:introGlow 2s ease-in-out infinite alternate;
 }
 @keyframes introGlow{
-    from{transform:scale(.8)}
-    to{transform:scale(1.4)}
+    from{transform:scale(.75)}
+    to{transform:scale(1.35)}
 }
 .intro-content{
     position:relative;
@@ -101,50 +111,30 @@ body::before{
     font-size:10px;
     letter-spacing:.55em;
     color:#999;
-    margin-bottom:16px;
+    margin-bottom:18px;
 }
 .intro-logo{
-    font-size:clamp(4.5rem,22vw,11rem);
-    font-weight:900;
-    letter-spacing:-.09em;
-    line-height:.8;
-    background:linear-gradient(
-        90deg,
-        #fff,
-        var(--pink),
-        var(--purple),
-        var(--blue),
-        #fff
-    );
-    background-size:300% auto;
-    -webkit-background-clip:text;
-    background-clip:text;
-    color:transparent;
-    animation:introGradient 1.5s linear infinite;
+    width:min(70vw,360px);
+    max-height:130px;
+    object-fit:contain;
+    filter:
+        drop-shadow(0 0 20px rgba(255,47,146,.35))
+        drop-shadow(0 0 50px rgba(155,92,255,.2));
 }
 .intro-bottom{
-    margin-top:28px;
-    font-size:9px;
-    letter-spacing:.4em;
+    margin-top:24px;
+    font-size:8px;
+    letter-spacing:.45em;
     color:#666;
-}
-@keyframes introGradient{
-    to{background-position:300% center}
 }
 @keyframes introZoom{
     0%{
         opacity:0;
         transform:scale(.65);
     }
-    25%{
-        opacity:1;
-    }
-    75%{
-        transform:scale(1);
-    }
-    100%{
-        transform:scale(1.12);
-    }
+    25%{opacity:1}
+    75%{transform:scale(1)}
+    100%{transform:scale(1.1)}
 }
 .intro-flash{
     position:absolute;
@@ -152,14 +142,14 @@ body::before{
     background:white;
     opacity:0;
     z-index:5;
-    animation:flash .4s ease 2.65s forwards;
+    animation:flash .42s ease 2.65s forwards;
 }
 @keyframes flash{
     0%{opacity:0}
     25%{opacity:.95}
     100%{opacity:0}
 }
-@keyframes introExit{
+@keyframes introOut{
     to{
         opacity:0;
         visibility:hidden;
@@ -167,7 +157,7 @@ body::before{
     }
 }
 /* =========================
-   NAVBAR
+   NAV
 ========================= */
 nav{
     position:fixed;
@@ -176,76 +166,80 @@ nav{
     width:100%;
     z-index:5000;
     padding:
-        calc(14px + env(safe-area-inset-top))
-        18px
-        14px;
+        calc(13px + env(safe-area-inset-top))
+        17px
+        13px;
     display:flex;
-    align-items:center;
     justify-content:space-between;
-    background:linear-gradient(
-        to bottom,
-        rgba(5,3,10,.92),
-        rgba(5,3,10,.35),
-        transparent
-    );
+    align-items:center;
+    background:
+        linear-gradient(
+            to bottom,
+            rgba(5,3,10,.94),
+            rgba(5,3,10,.35),
+            transparent
+        );
     backdrop-filter:blur(10px);
 }
-.logo{
-    color:white;
-    text-decoration:none;
-    font-size:1.25rem;
-    font-weight:900;
-    letter-spacing:-.07em;
-}
-.logo span{
-    color:var(--pink);
+.nav-logo{
+    width:76px;
+    height:32px;
+    object-fit:contain;
+    object-position:left center;
+    filter:drop-shadow(0 0 10px rgba(255,47,146,.2));
 }
 .nav-right{
     display:flex;
     align-items:center;
-    gap:9px;
+    gap:8px;
 }
 .nav-button{
+    padding:9px 13px;
+    border:1px solid rgba(255,255,255,.2);
+    border-radius:999px;
     color:white;
     text-decoration:none;
-    border:1px solid rgba(255,255,255,.22);
-    border-radius:999px;
-    padding:9px 14px;
-    font-size:9px;
-    font-weight:800;
+    font-size:8px;
+    font-weight:900;
     letter-spacing:.12em;
 }
 .menu-button{
     width:38px;
     height:38px;
     border:1px solid rgba(255,255,255,.18);
-    background:rgba(255,255,255,.05);
     border-radius:50%;
+    background:rgba(255,255,255,.05);
     display:flex;
     flex-direction:column;
-    justify-content:center;
     align-items:center;
+    justify-content:center;
     gap:4px;
 }
 .menu-button span{
     width:14px;
     height:1.5px;
     background:white;
-    transition:.3s;
 }
+/* =========================
+   MOBILE MENU
+========================= */
 .mobile-menu{
     position:fixed;
     inset:0;
     z-index:4000;
     background:
-        radial-gradient(circle at 80% 15%,rgba(255,47,146,.28),transparent 35%),
+        radial-gradient(
+            circle at 80% 15%,
+            rgba(255,47,146,.28),
+            transparent 35%
+        ),
         #05030a;
     display:flex;
     align-items:center;
     justify-content:center;
     opacity:0;
     visibility:hidden;
-    transition:.4s;
+    transition:.4s ease;
 }
 .mobile-menu.active{
     opacity:1;
@@ -256,15 +250,15 @@ nav{
     text-align:center;
 }
 .mobile-menu-links li{
-    margin:22px 0;
+    margin:23px 0;
 }
 .mobile-menu-links a{
     color:white;
     text-decoration:none;
-    font-size:clamp(2.7rem,13vw,5rem);
-    line-height:.9;
+    font-size:clamp(2.8rem,14vw,5rem);
+    line-height:.85;
     font-weight:900;
-    letter-spacing:-.07em;
+    letter-spacing:-.08em;
 }
 /* =========================
    HERO
@@ -315,38 +309,27 @@ nav{
     color:#aaa;
     font-size:8px;
     letter-spacing:.22em;
-    margin-bottom:26px;
+    margin-bottom:25px;
 }
-.hero h1{
-    font-size:clamp(5.4rem,28vw,11rem);
-    line-height:.73;
-    letter-spacing:-.11em;
-    font-weight:900;
-    margin-bottom:30px;
-    background:
-        linear-gradient(
-            120deg,
-            white 5%,
-            #ffb3d7 25%,
-            var(--pink) 42%,
-            var(--purple) 63%,
-            var(--blue) 85%
-        );
-    background-size:250% auto;
-    -webkit-background-clip:text;
-    background-clip:text;
-    color:transparent;
-    animation:heroGradient 6s linear infinite;
+.hero-logo{
+    width:min(78vw,430px);
+    max-height:180px;
+    object-fit:contain;
+    filter:
+        drop-shadow(0 0 20px rgba(255,47,146,.25))
+        drop-shadow(0 0 70px rgba(155,92,255,.16));
+    animation:logoFloat 4s ease-in-out infinite alternate;
 }
-@keyframes heroGradient{
-    to{background-position:250% center}
+@keyframes logoFloat{
+    from{transform:translateY(-4px) scale(.98)}
+    to{transform:translateY(5px) scale(1.02)}
 }
 .hero-sub{
-    max-width:310px;
-    margin:auto;
+    max-width:315px;
+    margin:30px auto 0;
     color:#aaa5b5;
     font-size:12px;
-    line-height:1.7;
+    line-height:1.75;
 }
 .hero-buttons{
     display:flex;
@@ -378,8 +361,7 @@ nav{
             var(--pink)
         );
     background-size:300% auto;
-    box-shadow:
-        0 10px 40px rgba(255,47,146,.28);
+    box-shadow:0 10px 40px rgba(255,47,146,.28);
     animation:buttonGradient 4s linear infinite;
 }
 @keyframes buttonGradient{
@@ -390,41 +372,49 @@ nav{
     color:white;
     background:rgba(255,255,255,.025);
 }
-/* =========================
-   SCROLL INDICATOR
-========================= */
 .scroll-indicator{
     position:absolute;
-    bottom:28px;
+    bottom:27px;
     left:50%;
     transform:translateX(-50%);
+    color:#777;
+    font-size:7px;
+    letter-spacing:.25em;
     display:flex;
     flex-direction:column;
     align-items:center;
     gap:7px;
-    color:#777;
-    font-size:7px;
-    letter-spacing:.25em;
 }
 .scroll-line{
     width:1px;
     height:35px;
-    background:linear-gradient(to bottom,var(--pink),transparent);
+    background:
+        linear-gradient(
+            to bottom,
+            var(--pink),
+            transparent
+        );
     animation:scrollLine 1.4s ease-in-out infinite;
 }
 @keyframes scrollLine{
-    0%,100%{transform:scaleY(.4);transform-origin:top}
-    50%{transform:scaleY(1);transform-origin:top}
+    0%,100%{
+        transform:scaleY(.4);
+        transform-origin:top;
+    }
+    50%{
+        transform:scaleY(1);
+        transform-origin:top;
+    }
 }
 /* =========================
    MARQUEE
 ========================= */
 .marquee{
-    border-top:1px solid rgba(255,255,255,.08);
-    border-bottom:1px solid rgba(255,255,255,.08);
-    padding:17px 0;
     overflow:hidden;
     white-space:nowrap;
+    padding:17px 0;
+    border-top:1px solid rgba(255,255,255,.08);
+    border-bottom:1px solid rgba(255,255,255,.08);
     background:rgba(255,255,255,.015);
 }
 .marquee-track{
@@ -433,10 +423,10 @@ nav{
 }
 .marquee span{
     margin-right:35px;
+    color:#68636f;
     font-size:8px;
     font-weight:900;
     letter-spacing:.25em;
-    color:#68636f;
 }
 .marquee .pink{
     color:var(--pink);
@@ -448,15 +438,15 @@ nav{
    SECTIONS
 ========================= */
 section{
-    padding:95px 18px;
     position:relative;
+    padding:95px 18px;
 }
 .section-label{
-    font-size:8px;
-    letter-spacing:.35em;
     color:var(--pink);
+    font-size:8px;
     font-weight:900;
-    margin-bottom:13px;
+    letter-spacing:.35em;
+    margin-bottom:14px;
 }
 .section-title{
     font-size:clamp(3.1rem,16vw,6rem);
@@ -466,22 +456,20 @@ section{
     margin-bottom:35px;
 }
 /* =========================
-   UPCOMING EVENT
+   NEXT EVENT
 ========================= */
 .upcoming{
     max-width:700px;
     margin:auto;
 }
 .event-card{
+    min-height:600px;
     position:relative;
-    min-height:570px;
-    border-radius:28px;
     overflow:hidden;
+    border-radius:28px;
     border:1px solid rgba(255,255,255,.14);
     background:#100817;
-    box-shadow:
-        0 25px 90px rgba(255,47,146,.12);
-    transform:translateZ(0);
+    box-shadow:0 25px 90px rgba(255,47,146,.13);
 }
 .event-image{
     position:absolute;
@@ -490,12 +478,11 @@ section{
         linear-gradient(
             to top,
             rgba(5,3,10,1) 0%,
-            rgba(5,3,10,.78) 30%,
-            rgba(5,3,10,.1) 70%,
-            transparent
+            rgba(5,3,10,.82) 27%,
+            rgba(5,3,10,.22) 67%,
+            transparent 100%
         ),
-        url("DJ TINA - 1.jpeg") center/cover no-repeat;
-    transform:scale(1.02);
+        url("IMG_5389.jpeg") center/cover no-repeat;
 }
 .event-image::after{
     content:"";
@@ -504,11 +491,25 @@ section{
     background:
         linear-gradient(
             125deg,
-            rgba(255,47,146,.20),
-            transparent 35%,
-            rgba(53,167,255,.12)
+            rgba(255,47,146,.18),
+            transparent 38%,
+            rgba(53,167,255,.14)
         );
     mix-blend-mode:screen;
+}
+.event-badge{
+    position:absolute;
+    top:20px;
+    left:20px;
+    padding:8px 12px;
+    border-radius:999px;
+    background:rgba(5,3,10,.65);
+    border:1px solid rgba(255,255,255,.18);
+    backdrop-filter:blur(10px);
+    font-size:7px;
+    font-weight:900;
+    letter-spacing:.2em;
+    color:white;
 }
 .event-content{
     position:absolute;
@@ -518,13 +519,13 @@ section{
     padding:27px;
 }
 .event-date{
-    color:#c8c4cc;
+    color:#ccc7d0;
     font-size:8px;
     letter-spacing:.2em;
     margin-bottom:12px;
 }
 .event-name{
-    font-size:clamp(3.1rem,15vw,6rem);
+    font-size:clamp(2.7rem,14vw,5.7rem);
     line-height:.82;
     letter-spacing:-.08em;
     font-weight:900;
@@ -538,8 +539,8 @@ section{
     display:flex;
     align-items:center;
     justify-content:center;
-    min-height:50px;
-    margin-top:24px;
+    min-height:51px;
+    margin-top:23px;
     border-radius:999px;
     background:white;
     color:black;
@@ -549,7 +550,7 @@ section{
     letter-spacing:.14em;
 }
 /* =========================
-   PAST EVENTS
+   ARCHIVE
 ========================= */
 .past-events{
     max-width:700px;
@@ -584,7 +585,7 @@ section{
         linear-gradient(
             to top,
             rgba(5,3,10,.97),
-            rgba(5,3,10,.12) 70%
+            rgba(5,3,10,.1) 72%
         );
 }
 .past-info{
@@ -600,9 +601,9 @@ section{
     letter-spacing:.25em;
 }
 .past-info h3{
-    font-size:24px;
-    line-height:1;
     margin-top:6px;
+    font-size:25px;
+    line-height:1;
     letter-spacing:-.05em;
 }
 /* =========================
@@ -619,8 +620,8 @@ section{
 .manifesto::before{
     content:"";
     position:absolute;
-    width:450px;
-    height:450px;
+    width:460px;
+    height:460px;
     border-radius:50%;
     background:
         radial-gradient(
@@ -632,8 +633,12 @@ section{
     animation:manifestoGlow 6s ease-in-out infinite alternate;
 }
 @keyframes manifestoGlow{
-    from{transform:translate(-80px,-50px) scale(.8)}
-    to{transform:translate(80px,60px) scale(1.2)}
+    from{
+        transform:translate(-80px,-50px) scale(.8);
+    }
+    to{
+        transform:translate(80px,60px) scale(1.2);
+    }
 }
 .manifesto-content{
     position:relative;
@@ -742,16 +747,13 @@ footer{
     border-top:1px solid rgba(255,255,255,.08);
 }
 .footer-logo{
-    font-size:4rem;
-    line-height:.8;
-    font-weight:900;
-    letter-spacing:-.09em;
-}
-.footer-logo span{
-    color:var(--pink);
+    width:125px;
+    max-height:70px;
+    object-fit:contain;
+    object-position:left center;
 }
 .footer-right{
-    margin-top:35px;
+    margin-top:30px;
     color:#66616c;
     font-size:8px;
     line-height:2;
@@ -795,8 +797,14 @@ footer{
     animation:touchFlash .5s ease-out forwards;
 }
 @keyframes touchFlash{
-    0%{transform:translate(-50%,-50%) scale(0);opacity:1}
-    100%{transform:translate(-50%,-50%) scale(2.8);opacity:0}
+    0%{
+        transform:translate(-50%,-50%) scale(0);
+        opacity:1;
+    }
+    100%{
+        transform:translate(-50%,-50%) scale(2.8);
+        opacity:0;
+    }
 }
 /* =========================
    DESKTOP
@@ -826,7 +834,7 @@ footer{
         padding:130px 5vw;
     }
     .event-card{
-        min-height:650px;
+        min-height:680px;
     }
     .event-content{
         padding:45px;
@@ -851,176 +859,273 @@ footer{
 </style>
 </head>
 <body>
-<!-- INTRO -->
+<!-- =========================
+     INTRO
+========================= -->
 <div id="intro">
     <div class="intro-grid"></div>
     <div class="intro-glow"></div>
     <div class="intro-content">
-        <div class="intro-small">PRESENTED BY</div>
-        <div class="intro-logo">VIBE</div>
-        <div class="intro-bottom">EVENT COLLECTIVE</div>
+        <div class="intro-small">
+            PRESENTED BY
+        </div>
+        <img
+            src="Paragraf metniniz.png"
+            class="intro-logo"
+            alt="VIBE"
+        >
+        <div class="intro-bottom">
+            EVENT COLLECTIVE
+        </div>
     </div>
     <div class="intro-flash"></div>
 </div>
-<!-- NAV -->
+<!-- =========================
+     NAV
+========================= -->
 <nav>
-    <a href="#" class="logo">
-        VIBE<span>.</span>
+    <a href="#" aria-label="VIBE">
+        <img
+            src="Paragraf metniniz.png"
+            class="nav-logo"
+            alt="VIBE"
+        >
     </a>
     <div class="nav-right">
-        <a href="#events" class="nav-button">
+        <a
+            href="#events"
+            class="nav-button">
             NEXT EVENT
         </a>
-        <button class="menu-button" id="menuButton">
+        <button
+            class="menu-button"
+            id="menuButton"
+            aria-label="Menu">
             <span></span>
             <span></span>
         </button>
     </div>
 </nav>
-<!-- MOBILE MENU -->
-<div class="mobile-menu" id="mobileMenu">
+<!-- =========================
+     MOBILE MENU
+========================= -->
+<div
+    class="mobile-menu"
+    id="mobileMenu">
     <ul class="mobile-menu-links">
         <li>
-            <a href="#events">EVENTS</a>
+            <a href="#events">
+                EVENTS
+            </a>
         </li>
         <li>
-            <a href="#past">ARCHIVE</a>
+            <a href="#past">
+                ARCHIVE
+            </a>
         </li>
         <li>
-            <a href="#team">TEAM</a>
+            <a href="#team">
+                TEAM
+            </a>
         </li>
     </ul>
 </div>
-<!-- HERO -->
+<!-- =========================
+     HERO
+========================= -->
 <header class="hero">
     <div class="hero-orb"></div>
     <div class="hero-content">
         <div class="hero-tag">
             KIRIKKALE · TURKEY · 2026
         </div>
-        <h1>VIBE</h1>
+        <img
+            src="Paragraf metniniz.png"
+            class="hero-logo"
+            alt="VIBE EVENT"
+        >
         <p class="hero-sub">
             We don't just organize events.
             We create experiences.
         </p>
         <div class="hero-buttons">
-            <a href="#events" class="primary-button">
+            <a
+                href="#events"
+                class="primary-button">
                 DISCOVER THE VIBE
             </a>
-            <a href="#team" class="secondary-button">
+            <a
+                href="#team"
+                class="secondary-button">
                 JOIN THE TEAM
             </a>
         </div>
     </div>
     <div class="scroll-indicator">
-        <div>SCROLL</div>
+        <div>
+            SCROLL
+        </div>
         <div class="scroll-line"></div>
     </div>
 </header>
-<!-- MARQUEE -->
+<!-- =========================
+     MARQUEE
+========================= -->
 <div class="marquee">
     <div class="marquee-track">
-        <span class="pink">VIBE EVENT</span>
-        <span>MUSIC</span>
-        <span>ENERGY</span>
-        <span class="pink">EXPERIENCE</span>
-        <span>NIGHTLIFE</span>
-        <span>COMMUNITY</span>
-        <span class="pink">VIBE EVENT</span>
-        <span>MUSIC</span>
-        <span>ENERGY</span>
-        <span class="pink">EXPERIENCE</span>
-        <span>NIGHTLIFE</span>
-        <span>COMMUNITY</span>
+        <span class="pink">
+            VIBE EVENT
+        </span>
+        <span>
+            MUSIC
+        </span>
+        <span>
+            ENERGY
+        </span>
+        <span class="pink">
+            EXPERIENCE
+        </span>
+        <span>
+            NIGHTLIFE
+        </span>
+        <span>
+            COMMUNITY
+        </span>
+        <span class="pink">
+            VIBE EVENT
+        </span>
+        <span>
+            MUSIC
+        </span>
+        <span>
+            ENERGY
+        </span>
+        <span class="pink">
+            EXPERIENCE
+        </span>
+        <span>
+            NIGHTLIFE
+        </span>
+        <span>
+            COMMUNITY
+        </span>
     </div>
 </div>
-<!-- UPCOMING -->
+<!-- =========================
+     NEXT EVENT
+========================= -->
 <section id="events">
     <div class="upcoming">
         <div class="section-label reveal">
             01 / UPCOMING
         </div>
         <h2 class="section-title reveal">
-            NEXT<br>VIBE.
+            NEXT<br>
+            VIBE.
         </h2>
         <div class="event-card reveal">
             <div class="event-image"></div>
+            <div class="event-badge">
+                UPCOMING EVENT
+            </div>
             <div class="event-content">
                 <div class="event-date">
-                    22 SEPTEMBER 2026 · 19:30
+                    HALLOWEEN · 2026
                 </div>
                 <div class="event-name">
-                    DJ TINA
+                    HALLOWEEN
                 </div>
                 <div class="event-location">
-                    OPEN YOUR EYES · KIRIKKALE
+                    VIBE EVENT · KIRIKKALE
                 </div>
-                <!-- BiletimGO linkini buraya koyacağız -->
-                <a href="#" class="event-link">
+                <!--
+                    BiletimGO linkini daha sonra
+                    href="#" kısmına koyacağız.
+                -->
+                <a
+                    href="#"
+                    class="event-link">
                     GET YOUR TICKET ↗
                 </a>
             </div>
         </div>
     </div>
 </section>
-<!-- ARCHIVE -->
+<!-- =========================
+     ARCHIVE
+========================= -->
 <section id="past">
     <div class="past-events">
         <div class="section-label reveal">
             02 / ARCHIVE
         </div>
         <h2 class="section-title reveal">
-            WE'VE<br>BEEN THERE.
+            WE'VE<br>
+            BEEN THERE.
         </h2>
         <div class="events-grid">
+            <!-- DJ TINA -->
             <div class="past-card reveal">
                 <div
                     class="past-image"
-                    style="background-image:url('DJ TINA - 1.jpeg');">
+                    style="
+                    background-image:
+                    url('DJ-TINA.jpeg');
+                    ">
                 </div>
                 <div class="past-overlay"></div>
                 <div class="past-info">
-                    <small>2026</small>
+                    <small>
+                        2026
+                    </small>
                     <h3>
                         OPEN YOUR EYES
                     </h3>
                 </div>
             </div>
+            <!-- MORE -->
             <div class="past-card reveal">
                 <div
                     class="past-image"
                     style="
                     background:
                     linear-gradient(
-                    135deg,
-                    #ff2f92,
-                    #9b5cff,
-                    #35a7ff
-                    );">
+                        135deg,
+                        #ff2f92,
+                        #9b5cff,
+                        #35a7ff
+                    );
+                    ">
                 </div>
                 <div class="past-overlay"></div>
                 <div class="past-info">
-                    <small>VIBE EVENT</small>
+                    <small>
+                        VIBE EVENT
+                    </small>
                     <h3>
                         MORE SOON.
                     </h3>
                 </div>
             </div>
+            <!-- FUTURE -->
             <div class="past-card reveal">
                 <div
                     class="past-image"
                     style="
                     background:
                     linear-gradient(
-                    135deg,
-                    #ff7a18,
-                    #ff2f92,
-                    #9b5cff
-                    );">
+                        135deg,
+                        #ff7a18,
+                        #ff2f92,
+                        #9b5cff
+                    );
+                    ">
                 </div>
                 <div class="past-overlay"></div>
                 <div class="past-info">
-                    <small>VIBE ARCHIVE</small>
+                    <small>
+                        VIBE ARCHIVE
+                    </small>
                     <h3>
                         STAY TUNED.
                     </h3>
@@ -1029,7 +1134,9 @@ footer{
         </div>
     </div>
 </section>
-<!-- MANIFESTO -->
+<!-- =========================
+     MANIFESTO
+========================= -->
 <section class="manifesto">
     <div class="manifesto-content reveal">
         <div class="section-label">
@@ -1047,7 +1154,9 @@ footer{
         </p>
     </div>
 </section>
-<!-- TEAM -->
+<!-- =========================
+     TEAM
+========================= -->
 <section id="team">
     <div class="team">
         <div class="section-label reveal">
@@ -1062,22 +1171,29 @@ footer{
                 </span>
             </h2>
             <p>
-                Organizasyon, sosyal medya, tasarım,
-                prodüksiyon veya etkinlik operasyonlarında
+                Organizasyon, sosyal medya,
+                tasarım, prodüksiyon veya
+                etkinlik operasyonlarında
                 bizimle çalışmak ister misin?
             </p>
-            <a href="#" class="join-button">
+            <a
+                href="#"
+                class="join-button">
                 JOIN THE TEAM →
             </a>
         </div>
     </div>
 </section>
-<!-- FOOTER -->
+<!-- =========================
+     FOOTER
+========================= -->
 <footer>
     <div>
-        <div class="footer-logo">
-            VIBE<span>.</span>
-        </div>
+        <img
+            src="Paragraf metniniz.png"
+            class="footer-logo"
+            alt="VIBE"
+        >
     </div>
     <div class="footer-right">
         <div>
@@ -1102,42 +1218,70 @@ footer{
    MOBILE MENU
 ========================= */
 const menuButton =
-    document.getElementById("menuButton");
+    document.getElementById(
+        "menuButton"
+    );
 const mobileMenu =
-    document.getElementById("mobileMenu");
+    document.getElementById(
+        "mobileMenu"
+    );
 const menuLinks =
     document.querySelectorAll(
         ".mobile-menu-links a"
     );
-menuButton.addEventListener("click", () => {
-    mobileMenu.classList.toggle("active");
-});
-menuLinks.forEach(link => {
-    link.addEventListener("click", () => {
-        mobileMenu.classList.remove("active");
-    });
-});
+menuButton.addEventListener(
+    "click",
+    () => {
+        mobileMenu.classList.toggle(
+            "active"
+        );
+    }
+);
+menuLinks.forEach(
+    link => {
+        link.addEventListener(
+            "click",
+            () => {
+                mobileMenu.classList.remove(
+                    "active"
+                );
+            }
+        );
+    }
+);
 /* =========================
    SCROLL REVEAL
 ========================= */
 const revealElements =
-    document.querySelectorAll(".reveal");
+    document.querySelectorAll(
+        ".reveal"
+    );
 const observer =
     new IntersectionObserver(
         entries => {
-            entries.forEach(entry => {
-                if(entry.isIntersecting){
-                    entry.target.classList.add("active");
+            entries.forEach(
+                entry => {
+                    if(
+                        entry.isIntersecting
+                    ){
+                        entry.target.classList.add(
+                            "active"
+                        );
+                    }
                 }
-            });
+            );
         },
         {
             threshold:.12
         }
     );
-revealElements.forEach(element => {
-    observer.observe(element);
-});
+revealElements.forEach(
+    element => {
+        observer.observe(
+            element
+        );
+    }
+);
 /* =========================
    HERO PARALLAX
 ========================= */
@@ -1155,7 +1299,9 @@ window.addEventListener(
                 `translateY(${scroll * .16}px)`;
         }
     },
-    {passive:true}
+    {
+        passive:true
+    }
 );
 /* =========================
    TOUCH FLASH
@@ -1180,44 +1326,44 @@ document.addEventListener(
             flash
         );
         setTimeout(
-            () => flash.remove(),
+            () => {
+                flash.remove();
+            },
             500
         );
     },
-    {passive:true}
+    {
+        passive:true
+    }
 );
 /* =========================
-   CARD TAP EFFECT
+   CARD TOUCH
 ========================= */
 document
     .querySelectorAll(
         ".event-card, .past-card, .team-box"
     )
-    .forEach(card => {
-        card.addEventListener(
-            "touchstart",
-            () => {
-                card.style.transform =
-                    "scale(.985)";
-            },
-            {passive:true}
-        );
-        card.addEventListener(
-            "touchend",
-            () => {
-                card.style.transform =
-                    "";
-            },
-            {passive:true}
-        );
-    });
-/* =========================
-   PREVENT INTRO SCROLL FEEL
-========================= */
-setTimeout(() => {
-    document.body.style.overflowX =
-        "hidden";
-}, 100);
+    .forEach(
+        card => {
+            card.addEventListener(
+                "touchstart",
+                () => {
+                    card.style.transform =
+                        "scale(.985)";
+                },
+                {
+                    passive:true
+                }
+            );
+            card.addEventListener(
+                "touchend",
+                () => {
+                    card.style.transform =
+                        "";
+                }
+            );
+        }
+    );
 </script>
 </body>
 </html>
