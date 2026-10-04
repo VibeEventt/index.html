@@ -3,95 +3,211 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<meta name="theme-color" content="#05030a">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
 <title>VIBE EVENT</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
-
 <style>
+/* =========================================================
+   VIBE EVENT
+   PREMIUM EVENT COLLECTIVE WEBSITE
+========================================================= */
 :root{
     --black:#05030a;
+    --black-2:#08050f;
     --pink:#ff2f92;
+    --pink-light:#ff75b7;
     --purple:#9b5cff;
     --blue:#35a7ff;
     --orange:#ff7a18;
     --white:#fff;
     --muted:#aaa5b5;
+    --muted-dark:#68636f;
+    --glass:rgba(255,255,255,.045);
+    --glass-border:rgba(255,255,255,.12);
+    --ease:cubic-bezier(.16,1,.3,1);
 }
-
+/* =========================================================
+   RESET
+========================================================= */
 *{
     margin:0;
     padding:0;
     box-sizing:border-box;
     -webkit-tap-highlight-color:transparent;
 }
-
 html{
     scroll-behavior:smooth;
+    background:var(--black);
 }
-
 body{
+    min-height:100vh;
     background:var(--black);
     color:white;
     font-family:'Plus Jakarta Sans',sans-serif;
     overflow-x:hidden;
+    -webkit-font-smoothing:antialiased;
+    text-rendering:optimizeLegibility;
 }
-
+/* =========================================================
+   GLOBAL BACKGROUND
+========================================================= */
 body::before{
     content:"";
     position:fixed;
-    inset:0;
-    z-index:-10;
+    inset:-10%;
+    z-index:-20;
     pointer-events:none;
     background:
-        radial-gradient(circle at 15% 15%,rgba(255,47,146,.23),transparent 30%),
-        radial-gradient(circle at 90% 25%,rgba(53,167,255,.18),transparent 30%),
-        radial-gradient(circle at 50% 80%,rgba(155,92,255,.18),transparent 35%);
-    animation:bgMove 12s ease-in-out infinite alternate;
+        radial-gradient(
+            circle at 12% 12%,
+            rgba(255,47,146,.22),
+            transparent 28%
+        ),
+        radial-gradient(
+            circle at 88% 22%,
+            rgba(53,167,255,.17),
+            transparent 28%
+        ),
+        radial-gradient(
+            circle at 50% 78%,
+            rgba(155,92,255,.17),
+            transparent 34%
+        );
+    animation:
+        bgMove
+        15s
+        ease-in-out
+        infinite
+        alternate;
+    will-change:transform,filter;
 }
-
+body::after{
+    content:"";
+    position:fixed;
+    inset:0;
+    z-index:-19;
+    pointer-events:none;
+    background:
+        linear-gradient(
+            rgba(255,255,255,.018) 1px,
+            transparent 1px
+        ),
+        linear-gradient(
+            90deg,
+            rgba(255,255,255,.018) 1px,
+            transparent 1px
+        );
+    background-size:70px 70px;
+    mask-image:
+        linear-gradient(
+            to bottom,
+            black,
+            transparent 80%
+        );
+    opacity:.18;
+}
 @keyframes bgMove{
-    0%{transform:scale(1);filter:hue-rotate(0deg)}
-    50%{transform:scale(1.08);filter:hue-rotate(20deg)}
-    100%{transform:scale(1.02);filter:hue-rotate(-18deg)}
+    0%{
+        transform:scale(1)
+                   translate3d(0,0,0);
+        filter:hue-rotate(0deg);
+    }
+    50%{
+        transform:scale(1.06)
+                   translate3d(1%, -1%, 0);
+        filter:hue-rotate(12deg);
+    }
+    100%{
+        transform:scale(1.03)
+                   translate3d(-1%, 1%, 0);
+        filter:hue-rotate(-12deg);
+    }
 }
-
-/* =========================
+/* =========================================================
    INTRO
-========================= */
-
+========================================================= */
 #intro{
     position:fixed;
     inset:0;
     z-index:99999;
-    background:#05030a;
     display:flex;
     align-items:center;
     justify-content:center;
     overflow:hidden;
-    animation:introOut .8s ease 3.15s forwards;
+    background:
+        radial-gradient(
+            circle at 50% 48%,
+            rgba(255,47,146,.08),
+            transparent 35%
+        ),
+        #05030a;
+    animation:
+        introOut
+        .8s
+        ease
+        3.15s
+        forwards;
+    isolation:isolate;
 }
-
+#intro::before{
+    content:"";
+    position:absolute;
+    inset:0;
+    background:
+        radial-gradient(
+            circle at 50% 50%,
+            transparent 0%,
+            rgba(0,0,0,.22) 55%,
+            rgba(0,0,0,.75) 100%
+        );
+    z-index:4;
+    pointer-events:none;
+}
+/* INTRO GRID */
 .intro-grid{
     position:absolute;
-    inset:-50%;
+    inset:-55%;
     background:
-        linear-gradient(rgba(255,255,255,.035) 1px,transparent 1px),
-        linear-gradient(90deg,rgba(255,255,255,.035) 1px,transparent 1px);
+        linear-gradient(
+            rgba(255,255,255,.035) 1px,
+            transparent 1px
+        ),
+        linear-gradient(
+            90deg,
+            rgba(255,255,255,.035) 1px,
+            transparent 1px
+        );
     background-size:45px 45px;
-    transform:perspective(500px) rotateX(65deg);
-    animation:gridMove 2s linear infinite;
+    transform:
+        perspective(500px)
+        rotateX(65deg)
+        translateY(0);
+    animation:
+        gridMove
+        2s
+        linear
+        infinite;
+    opacity:.8;
 }
-
 @keyframes gridMove{
     from{
-        transform:perspective(500px) rotateX(65deg) translateY(0);
+        transform:
+            perspective(500px)
+            rotateX(65deg)
+            translateY(0);
     }
     to{
-        transform:perspective(500px) rotateX(65deg) translateY(45px);
+        transform:
+            perspective(500px)
+            rotateX(65deg)
+            translateY(45px);
     }
 }
-
+/* INTRO GLOW */
 .intro-glow{
     position:absolute;
     width:280px;
@@ -100,36 +216,72 @@ body::before{
     background:
         radial-gradient(
             circle,
-            var(--pink),
-            var(--purple),
-            transparent 68%
+            var(--pink) 0%,
+            var(--purple) 35%,
+            transparent 70%
         );
-    filter:blur(25px);
-    opacity:.45;
-    animation:introGlow 2s ease-in-out infinite alternate;
+    filter:blur(28px);
+    opacity:.5;
+    animation:
+        introGlow
+        2s
+        ease-in-out
+        infinite
+        alternate;
+    will-change:transform;
 }
-
 @keyframes introGlow{
-    from{transform:scale(.75)}
-    to{transform:scale(1.35)}
+    from{
+        transform:scale(.7);
+        opacity:.35;
+    }
+    to{
+        transform:scale(1.4);
+        opacity:.6;
+    }
 }
-
+/* INTRO CONTENT */
 .intro-content{
     position:relative;
-    z-index:2;
+    z-index:6;
     text-align:center;
-    animation:introZoom 3s cubic-bezier(.16,1,.3,1) forwards;
+    animation:
+        introZoom
+        3s
+        var(--ease)
+        forwards;
+    will-change:transform,opacity;
 }
-
 .intro-small{
     font-size:10px;
     letter-spacing:.55em;
     color:#999;
     margin-bottom:18px;
+    animation:
+        introSmall
+        1.2s
+        ease
+        .25s
+        both;
 }
-
+@keyframes introSmall{
+    from{
+        opacity:0;
+        transform:translateY(12px);
+    }
+    to{
+        opacity:1;
+        transform:translateY(0);
+    }
+}
 .intro-logo-text{
-    font-size:clamp(5rem,27vw,11rem);
+    position:relative;
+    font-size:
+        clamp(
+            5rem,
+            27vw,
+            11rem
+        );
     line-height:.78;
     font-weight:900;
     letter-spacing:-.11em;
@@ -137,7 +289,7 @@ body::before{
         linear-gradient(
             120deg,
             #fff 5%,
-            #ffb3d7 25%,
+            #ffb3d7 23%,
             var(--pink) 43%,
             var(--purple) 65%,
             var(--blue) 88%
@@ -146,55 +298,129 @@ body::before{
     -webkit-background-clip:text;
     background-clip:text;
     color:transparent;
-    animation:introGradient 2s linear infinite;
+    animation:
+        introGradient
+        2s
+        linear
+        infinite;
     text-shadow:
-        0 0 35px rgba(255,47,146,.12);
+        0 0 35px rgba(255,47,146,.12),
+        0 0 80px rgba(155,92,255,.08);
 }
-
+.intro-logo-text::after{
+    content:"";
+    position:absolute;
+    inset:0;
+    background:
+        linear-gradient(
+            115deg,
+            transparent 20%,
+            rgba(255,255,255,.8) 48%,
+            transparent 58%
+        );
+    background-size:220% 100%;
+    background-position:-140% center;
+    -webkit-background-clip:text;
+    background-clip:text;
+    animation:
+        introShine
+        2.8s
+        ease
+        1s
+        infinite;
+    pointer-events:none;
+}
+@keyframes introShine{
+    0%{
+        background-position:-140% center;
+    }
+    45%,
+    100%{
+        background-position:140% center;
+    }
+}
 @keyframes introGradient{
     to{
         background-position:250% center;
     }
 }
-
 .intro-bottom{
     margin-top:24px;
     font-size:8px;
     letter-spacing:.45em;
     color:#666;
+    animation:
+        introBottom
+        1s
+        ease
+        .7s
+        both;
 }
-
+@keyframes introBottom{
+    from{
+        opacity:0;
+        letter-spacing:.8em;
+    }
+    to{
+        opacity:1;
+        letter-spacing:.45em;
+    }
+}
 @keyframes introZoom{
     0%{
         opacity:0;
-        transform:scale(.65);
+        transform:scale(.62);
     }
     25%{
         opacity:1;
     }
-    75%{
+    72%{
         transform:scale(1);
     }
     100%{
         transform:scale(1.1);
     }
 }
-
+/* INTRO FLASH */
 .intro-flash{
     position:absolute;
     inset:0;
-    background:white;
+    background:
+        radial-gradient(
+            circle at 50% 50%,
+            white 0%,
+            rgba(255,255,255,.92) 12%,
+            rgba(255,47,146,.5) 35%,
+            transparent 72%
+        );
     opacity:0;
-    z-index:5;
-    animation:flash .42s ease 2.65s forwards;
+    z-index:10;
+    animation:
+        flash
+        .48s
+        ease
+        2.65s
+        forwards;
+    pointer-events:none;
 }
-
 @keyframes flash{
-    0%{opacity:0}
-    25%{opacity:.95}
-    100%{opacity:0}
+    0%{
+        opacity:0;
+        transform:scale(.7);
+    }
+    18%{
+        opacity:1;
+        transform:scale(1.15);
+    }
+    48%{
+        opacity:.35;
+        transform:scale(1.3);
+    }
+    100%{
+        opacity:0;
+        transform:scale(1.5);
+    }
 }
-
 @keyframes introOut{
     to{
         opacity:0;
@@ -202,11 +428,9 @@ body::before{
         pointer-events:none;
     }
 }
-
-/* =========================
+/* =========================================================
    NAV
-========================= */
-
+========================================================= */
 nav{
     position:fixed;
     top:0;
@@ -214,43 +438,45 @@ nav{
     width:100%;
     z-index:5000;
     padding:
-        calc(13px + env(safe-area-inset-top))
-        17px
-        13px;
+        calc(11px + env(safe-area-inset-top))
+        15px
+        11px;
     display:flex;
     justify-content:space-between;
     align-items:center;
     background:
         linear-gradient(
             to bottom,
-            rgba(5,3,10,.94),
-            rgba(5,3,10,.35),
+            rgba(5,3,10,.96),
+            rgba(5,3,10,.58),
             transparent
         );
-    backdrop-filter:blur(10px);
+    backdrop-filter:blur(13px);
+    -webkit-backdrop-filter:blur(13px);
+    transition:
+        padding .35s var(--ease),
+        background .35s ease;
 }
-
-/* =========================
-   SMOOTH KÖŞE LOGOSU
-========================= */
-
+/* =========================================================
+   NAV LOGO
+========================================================= */
 .nav-logo-box{
-    width:88px;
-    height:56px;
+    width:82px;
+    height:52px;
     padding:0;
     display:flex;
     align-items:center;
     justify-content:center;
-    border-radius:20px;
+    border-radius:18px;
     background:
         linear-gradient(
             145deg,
-            rgba(255,255,255,.085),
+            rgba(255,255,255,.09),
             rgba(255,47,146,.035)
         );
     border:1px solid rgba(255,255,255,.11);
     box-shadow:
-        0 8px 30px rgba(0,0,0,.22),
+        0 8px 30px rgba(0,0,0,.25),
         0 0 25px rgba(255,47,146,.08),
         inset 0 0 18px rgba(255,255,255,.025);
     backdrop-filter:blur(14px);
@@ -258,15 +484,27 @@ nav{
     overflow:hidden;
     text-decoration:none;
     transition:
-        transform .35s cubic-bezier(.16,1,.3,1),
+        transform .35s var(--ease),
         box-shadow .35s ease,
         border-color .35s ease;
 }
-
-.nav-logo-box:active{
-    transform:scale(.95);
+.nav-logo-box::before{
+    content:"";
+    position:absolute;
+    width:90px;
+    height:90px;
+    background:
+        radial-gradient(
+            circle,
+            rgba(255,47,146,.14),
+            transparent 70%
+        );
+    filter:blur(10px);
+    pointer-events:none;
 }
-
+.nav-logo-box:active{
+    transform:scale(.94);
+}
 .nav-logo-box > div{
     width:100%;
     height:100%;
@@ -274,37 +512,37 @@ nav{
     align-items:center;
     justify-content:center;
     overflow:hidden;
-    border-radius:19px;
+    border-radius:17px;
 }
-
 .nav-logo{
-    width:108%;
-    height:108%;
+    width:112%;
+    height:112%;
     object-fit:cover;
     object-position:center;
-    border-radius:19px;
+    border-radius:17px;
     filter:
         drop-shadow(0 0 10px rgba(255,47,146,.20))
         drop-shadow(0 0 18px rgba(155,92,255,.08));
     transition:
-        transform .4s cubic-bezier(.16,1,.3,1),
-        filter .4s ease;
+        transform .45s var(--ease),
+        filter .45s ease;
 }
-
 .nav-logo-box:hover .nav-logo{
-    transform:scale(1.055);
+    transform:scale(1.07);
     filter:
-        drop-shadow(0 0 12px rgba(255,47,146,.30))
-        drop-shadow(0 0 22px rgba(155,92,255,.16));
+        drop-shadow(0 0 13px rgba(255,47,146,.30))
+        drop-shadow(0 0 24px rgba(155,92,255,.18));
 }
-
+/* =========================================================
+   NAV RIGHT
+========================================================= */
 .nav-right{
     display:flex;
     align-items:center;
     gap:8px;
 }
-
 .nav-button{
+    position:relative;
     padding:9px 13px;
     border:1px solid rgba(255,255,255,.2);
     border-radius:999px;
@@ -313,11 +551,43 @@ nav{
     font-size:8px;
     font-weight:900;
     letter-spacing:.12em;
+    background:rgba(255,255,255,.025);
+    overflow:hidden;
+    transition:
+        transform .3s var(--ease),
+        background .3s ease,
+        border-color .3s ease;
 }
-
+.nav-button::after{
+    content:"";
+    position:absolute;
+    top:0;
+    left:-120%;
+    width:70%;
+    height:100%;
+    background:
+        linear-gradient(
+            90deg,
+            transparent,
+            rgba(255,255,255,.28),
+            transparent
+        );
+    transform:skewX(-20deg);
+    transition:left .65s ease;
+}
+.nav-button:hover{
+    transform:translateY(-2px);
+    background:rgba(255,47,146,.08);
+    border-color:rgba(255,47,146,.4);
+}
+.nav-button:hover::after{
+    left:140%;
+}
+/* MENU BUTTON */
 .menu-button{
-    width:38px;
-    height:38px;
+    position:relative;
+    width:39px;
+    height:39px;
     border:1px solid rgba(255,255,255,.18);
     border-radius:50%;
     background:rgba(255,255,255,.05);
@@ -326,18 +596,36 @@ nav{
     align-items:center;
     justify-content:center;
     gap:4px;
+    cursor:pointer;
+    transition:
+        transform .35s var(--ease),
+        background .3s ease,
+        border-color .3s ease;
 }
-
+.menu-button:hover{
+    background:rgba(255,47,146,.1);
+    border-color:rgba(255,47,146,.4);
+}
+.menu-button:active{
+    transform:scale(.9);
+}
 .menu-button span{
     width:14px;
     height:1.5px;
     background:white;
+    transition:
+        transform .35s var(--ease),
+        opacity .25s ease;
 }
-
-/* =========================
+.menu-button.active span:first-child{
+    transform:translateY(2.75px) rotate(45deg);
+}
+.menu-button.active span:last-child{
+    transform:translateY(-2.75px) rotate(-45deg);
+}
+/* =========================================================
    MOBILE MENU
-========================= */
-
+========================================================= */
 .mobile-menu{
     position:fixed;
     inset:0;
@@ -348,42 +636,94 @@ nav{
             rgba(255,47,146,.28),
             transparent 35%
         ),
+        radial-gradient(
+            circle at 15% 80%,
+            rgba(53,167,255,.13),
+            transparent 35%
+        ),
         #05030a;
     display:flex;
     align-items:center;
     justify-content:center;
     opacity:0;
     visibility:hidden;
-    transition:.4s ease;
+    transition:
+        opacity .45s ease,
+        visibility .45s ease;
+    overflow:hidden;
 }
-
+.mobile-menu::before{
+    content:"";
+    position:absolute;
+    inset:0;
+    background:
+        linear-gradient(
+            rgba(255,255,255,.025) 1px,
+            transparent 1px
+        ),
+        linear-gradient(
+            90deg,
+            rgba(255,255,255,.025) 1px,
+            transparent 1px
+        );
+    background-size:55px 55px;
+    transform:
+        perspective(500px)
+        rotateX(60deg)
+        scale(1.5);
+    opacity:.3;
+}
 .mobile-menu.active{
     opacity:1;
     visibility:visible;
 }
-
 .mobile-menu-links{
+    position:relative;
+    z-index:2;
     list-style:none;
     text-align:center;
+    width:100%;
 }
-
 .mobile-menu-links li{
-    margin:23px 0;
+    margin:22px 0;
+    overflow:hidden;
 }
-
 .mobile-menu-links a{
+    display:inline-block;
     color:white;
     text-decoration:none;
-    font-size:clamp(2.8rem,14vw,5rem);
+    font-size:
+        clamp(
+            2.8rem,
+            14vw,
+            5rem
+        );
     line-height:.85;
     font-weight:900;
     letter-spacing:-.08em;
+    transform:translateY(120%);
+    transition:
+        transform .7s var(--ease),
+        color .3s ease;
 }
-
-/* =========================
+.mobile-menu.active .mobile-menu-links li:nth-child(1) a{
+    transform:translateY(0);
+    transition-delay:.08s;
+}
+.mobile-menu.active .mobile-menu-links li:nth-child(2) a{
+    transform:translateY(0);
+    transition-delay:.14s;
+}
+.mobile-menu.active .mobile-menu-links li:nth-child(3) a{
+    transform:translateY(0);
+    transition-delay:.20s;
+}
+.mobile-menu-links a:hover{
+    color:var(--pink);
+}
+/* =========================================================
    HERO
-========================= */
-
+========================================================= */
 .hero{
     min-height:100svh;
     position:relative;
@@ -391,10 +731,27 @@ nav{
     align-items:center;
     justify-content:center;
     text-align:center;
-    padding:120px 18px 70px;
+    padding:
+        120px
+        18px
+        70px;
     overflow:hidden;
+    isolation:isolate;
 }
-
+.hero::before{
+    content:"";
+    position:absolute;
+    width:100%;
+    height:100%;
+    background:
+        radial-gradient(
+            ellipse at center,
+            transparent 20%,
+            rgba(5,3,10,.35) 80%
+        );
+    pointer-events:none;
+}
+/* HERO ORB */
 .hero-orb{
     position:absolute;
     width:470px;
@@ -403,30 +760,88 @@ nav{
     background:
         radial-gradient(
             circle,
-            rgba(255,47,146,.32),
-            rgba(155,92,255,.18),
-            transparent 68%
+            rgba(255,47,146,.34),
+            rgba(155,92,255,.19) 38%,
+            rgba(53,167,255,.08) 55%,
+            transparent 70%
         );
     filter:blur(25px);
-    animation:orb 7s ease-in-out infinite alternate;
+    animation:
+        orb
+        7s
+        ease-in-out
+        infinite
+        alternate;
+    will-change:transform;
 }
-
+.hero-orb::after{
+    content:"";
+    position:absolute;
+    inset:20%;
+    border-radius:50%;
+    border:1px solid rgba(255,255,255,.06);
+    box-shadow:
+        0 0 80px rgba(255,47,146,.12);
+}
+/* EXTRA FLOATING LIGHT */
+.hero-content::before,
+.hero-content::after{
+    content:"";
+    position:absolute;
+    width:7px;
+    height:7px;
+    border-radius:50%;
+    background:white;
+    box-shadow:
+        0 0 12px white,
+        0 0 30px var(--pink);
+    opacity:.5;
+    animation:
+        particleFloat
+        4s
+        ease-in-out
+        infinite;
+}
+.hero-content::before{
+    left:-55px;
+    top:30px;
+}
+.hero-content::after{
+    right:-45px;
+    bottom:20px;
+    animation-delay:1.4s;
+}
+@keyframes particleFloat{
+    0%,100%{
+        transform:translateY(0) scale(.7);
+        opacity:.25;
+    }
+    50%{
+        transform:translateY(-25px) scale(1.2);
+        opacity:.8;
+    }
+}
 @keyframes orb{
     0%{
-        transform:translate(-80px,-50px) scale(.85);
+        transform:
+            translate(-80px,-50px)
+            scale(.85);
     }
     100%{
-        transform:translate(80px,60px) scale(1.2);
+        transform:
+            translate(80px,60px)
+            scale(1.2);
     }
 }
-
 .hero-content{
     position:relative;
     z-index:2;
 }
-
+/* HERO TAG */
 .hero-tag{
-    display:inline-block;
+    display:inline-flex;
+    align-items:center;
+    justify-content:center;
     padding:8px 13px;
     border:1px solid rgba(255,255,255,.18);
     border-radius:999px;
@@ -435,10 +850,44 @@ nav{
     font-size:8px;
     letter-spacing:.22em;
     margin-bottom:25px;
+    backdrop-filter:blur(8px);
+    -webkit-backdrop-filter:blur(8px);
+    box-shadow:
+        0 0 30px rgba(255,47,146,.04);
 }
-
+.hero-tag::before{
+    content:"";
+    width:5px;
+    height:5px;
+    margin-right:7px;
+    border-radius:50%;
+    background:var(--pink);
+    box-shadow:
+        0 0 10px var(--pink);
+    animation:
+        liveDot
+        1.5s
+        ease-in-out
+        infinite;
+}
+@keyframes liveDot{
+    0%,100%{
+        opacity:.45;
+        transform:scale(.8);
+    }
+    50%{
+        opacity:1;
+        transform:scale(1.25);
+    }
+}
+/* HERO TITLE */
 .hero h1{
-    font-size:clamp(5.4rem,28vw,11rem);
+    font-size:
+        clamp(
+            5.4rem,
+            28vw,
+            11rem
+        );
     line-height:.73;
     letter-spacing:-.11em;
     font-weight:900;
@@ -456,15 +905,26 @@ nav{
     -webkit-background-clip:text;
     background-clip:text;
     color:transparent;
-    animation:heroGradient 6s linear infinite;
+    animation:
+        heroGradient
+        6s
+        linear
+        infinite;
+    filter:
+        drop-shadow(
+            0 12px 45px rgba(255,47,146,.14)
+        );
 }
-
+.hero h1::selection{
+    background:var(--pink);
+    color:white;
+}
 @keyframes heroGradient{
     to{
         background-position:250% center;
     }
 }
-
+/* HERO SUB */
 .hero-sub{
     max-width:315px;
     margin:auto;
@@ -472,16 +932,16 @@ nav{
     font-size:12px;
     line-height:1.75;
 }
-
+/* HERO BUTTONS */
 .hero-buttons{
     display:flex;
     flex-direction:column;
     gap:10px;
     margin-top:32px;
 }
-
 .primary-button,
 .secondary-button{
+    position:relative;
     width:100%;
     min-height:52px;
     display:flex;
@@ -492,8 +952,38 @@ nav{
     font-size:10px;
     font-weight:900;
     letter-spacing:.12em;
+    overflow:hidden;
+    transition:
+        transform .35s var(--ease),
+        box-shadow .35s ease;
 }
-
+.primary-button::before,
+.secondary-button::before{
+    content:"";
+    position:absolute;
+    top:0;
+    left:-130%;
+    width:70%;
+    height:100%;
+    background:
+        linear-gradient(
+            90deg,
+            transparent,
+            rgba(255,255,255,.38),
+            transparent
+        );
+    transform:skewX(-22deg);
+    transition:left .7s ease;
+}
+.primary-button:hover::before,
+.secondary-button:hover::before{
+    left:145%;
+}
+.primary-button:active,
+.secondary-button:active{
+    transform:scale(.97);
+}
+/* PRIMARY */
 .primary-button{
     color:white;
     background:
@@ -507,31 +997,48 @@ nav{
     background-size:300% auto;
     box-shadow:
         0 10px 40px rgba(255,47,146,.28);
-    animation:buttonGradient 4s linear infinite;
+    animation:
+        buttonGradient
+        4s
+        linear
+        infinite;
 }
-
+.primary-button:hover{
+    transform:translateY(-3px);
+    box-shadow:
+        0 16px 50px rgba(255,47,146,.38);
+}
+/* SECONDARY */
+.secondary-button{
+    border:1px solid rgba(255,255,255,.18);
+    color:white;
+    background:
+        rgba(255,255,255,.025);
+    backdrop-filter:blur(8px);
+    -webkit-backdrop-filter:blur(8px);
+}
+.secondary-button:hover{
+    transform:translateY(-3px);
+    border-color:
+        rgba(255,47,146,.4);
+    background:
+        rgba(255,47,146,.06);
+    box-shadow:
+        0 12px 35px rgba(255,47,146,.08);
+}
 @keyframes buttonGradient{
     to{
         background-position:300% center;
     }
 }
-
-.secondary-button{
-    border:1px solid rgba(255,255,255,.18);
-    color:white;
-    background:rgba(255,255,255,.025);
-}
-
-/* =========================
+/* =========================================================
    INSTAGRAM
-========================= */
-
+========================================================= */
 .instagram-link{
     margin-top:15px;
     display:flex;
     justify-content:center;
 }
-
 .instagram-link a{
     display:inline-flex;
     align-items:center;
@@ -541,27 +1048,27 @@ nav{
     font-size:10px;
     font-weight:700;
     letter-spacing:.08em;
-    transition:.3s ease;
+    transition:
+        color .3s ease,
+        transform .3s var(--ease);
 }
-
 .instagram-link a:hover{
     color:white;
     transform:translateY(-2px);
 }
-
-/* GERÇEK INSTAGRAM İKONU
-   Lens tam matematiksel merkezde */
+/* INSTAGRAM ICON */
 .instagram-icon{
     position:relative;
     width:19px;
     height:19px;
     flex:0 0 19px;
     display:block;
-    border:1.5px solid currentColor;
+    border:
+        1.5px solid
+        currentColor;
     border-radius:6px;
     font-size:0;
 }
-
 .instagram-icon::before{
     content:"";
     position:absolute;
@@ -569,11 +1076,13 @@ nav{
     height:7px;
     left:50%;
     top:50%;
-    transform:translate(-50%,-50%);
-    border:1.5px solid currentColor;
+    transform:
+        translate(-50%,-50%);
+    border:
+        1.5px solid
+        currentColor;
     border-radius:50%;
 }
-
 .instagram-icon::after{
     content:"";
     position:absolute;
@@ -584,12 +1093,15 @@ nav{
     border-radius:50%;
     background:currentColor;
 }
-
+/* =========================================================
+   SCROLL
+========================================================= */
 .scroll-indicator{
     position:absolute;
     bottom:27px;
     left:50%;
-    transform:translateX(-50%);
+    transform:
+        translateX(-50%);
     color:#777;
     font-size:7px;
     letter-spacing:.25em;
@@ -598,8 +1110,8 @@ nav{
     align-items:center;
     gap:7px;
 }
-
 .scroll-line{
+    position:relative;
     width:1px;
     height:35px;
     background:
@@ -608,9 +1120,31 @@ nav{
             var(--pink),
             transparent
         );
-    animation:scrollLine 1.4s ease-in-out infinite;
+    animation:
+        scrollLine
+        1.4s
+        ease-in-out
+        infinite;
 }
-
+.scroll-line::after{
+    content:"";
+    position:absolute;
+    top:0;
+    left:50%;
+    width:5px;
+    height:5px;
+    border-radius:50%;
+    background:var(--pink);
+    box-shadow:
+        0 0 10px var(--pink);
+    transform:
+        translateX(-50%);
+    animation:
+        scrollDot
+        1.4s
+        ease-in-out
+        infinite;
+}
 @keyframes scrollLine{
     0%,100%{
         transform:scaleY(.4);
@@ -621,25 +1155,77 @@ nav{
         transform-origin:top;
     }
 }
-
-/* =========================
+@keyframes scrollDot{
+    0%{
+        top:0;
+        opacity:.3;
+    }
+    50%{
+        top:28px;
+        opacity:1;
+    }
+    100%{
+        top:0;
+        opacity:.3;
+    }
+}
+/* =========================================================
    MARQUEE
-========================= */
-
+========================================================= */
 .marquee{
+    position:relative;
     overflow:hidden;
     white-space:nowrap;
     padding:17px 0;
-    border-top:1px solid rgba(255,255,255,.08);
-    border-bottom:1px solid rgba(255,255,255,.08);
-    background:rgba(255,255,255,.015);
+    border-top:
+        1px solid
+        rgba(255,255,255,.08);
+    border-bottom:
+        1px solid
+        rgba(255,255,255,.08);
+    background:
+        rgba(255,255,255,.015);
+    box-shadow:
+        0 0 40px rgba(255,47,146,.025);
 }
-
+.marquee::before,
+.marquee::after{
+    content:"";
+    position:absolute;
+    top:0;
+    bottom:0;
+    width:70px;
+    z-index:2;
+    pointer-events:none;
+}
+.marquee::before{
+    left:0;
+    background:
+        linear-gradient(
+            90deg,
+            var(--black),
+            transparent
+        );
+}
+.marquee::after{
+    right:0;
+    background:
+        linear-gradient(
+            270deg,
+            var(--black),
+            transparent
+        );
+}
 .marquee-track{
     display:inline-flex;
-    animation:marquee 20s linear infinite;
+    width:max-content;
+    animation:
+        marquee
+        20s
+        linear
+        infinite;
+    will-change:transform;
 }
-
 .marquee span{
     margin-right:35px;
     color:#68636f;
@@ -647,62 +1233,103 @@ nav{
     font-weight:900;
     letter-spacing:.25em;
 }
-
 .marquee .pink{
     color:var(--pink);
+    text-shadow:
+        0 0 15px rgba(255,47,146,.22);
 }
-
 @keyframes marquee{
     to{
         transform:translateX(-50%);
     }
 }
-
-/* =========================
+/* =========================================================
    SECTIONS
-========================= */
-
+========================================================= */
 section{
     position:relative;
     padding:95px 18px;
 }
-
 .section-label{
     color:var(--pink);
     font-size:8px;
     font-weight:900;
     letter-spacing:.35em;
     margin-bottom:14px;
+    text-shadow:
+        0 0 15px rgba(255,47,146,.18);
 }
-
 .section-title{
-    font-size:clamp(3.1rem,16vw,6rem);
+    font-size:
+        clamp(
+            3.1rem,
+            16vw,
+            6rem
+        );
     line-height:.83;
     letter-spacing:-.09em;
     font-weight:900;
     margin-bottom:35px;
 }
-
-/* =========================
+/* =========================================================
    NEXT EVENT
-========================= */
-
+========================================================= */
 .upcoming{
     max-width:700px;
     margin:auto;
 }
-
 .event-card{
     min-height:600px;
     position:relative;
     overflow:hidden;
     border-radius:28px;
-    border:1px solid rgba(255,255,255,.14);
+    border:
+        1px solid
+        rgba(255,255,255,.14);
     background:#100817;
     box-shadow:
-        0 25px 90px rgba(255,47,146,.13);
+        0 25px 90px
+        rgba(255,47,146,.13);
+    isolation:isolate;
+    transform:translateZ(0);
+    transition:
+        transform .55s var(--ease),
+        box-shadow .55s ease,
+        border-color .4s ease;
 }
-
+.event-card::before{
+    content:"";
+    position:absolute;
+    inset:0;
+    z-index:4;
+    pointer-events:none;
+    background:
+        linear-gradient(
+            115deg,
+            transparent 20%,
+            rgba(255,255,255,.10) 45%,
+            transparent 55%
+        );
+    background-size:220% 100%;
+    background-position:-140% center;
+    transition:
+        background-position
+        .8s ease;
+}
+.event-card:hover{
+    transform:
+        translateY(-7px)
+        scale(1.008);
+    border-color:
+        rgba(255,255,255,.22);
+    box-shadow:
+        0 35px 110px
+        rgba(255,47,146,.19);
+}
+.event-card:hover::before{
+    background-position:140% center;
+}
+/* EVENT IMAGE */
 .event-image{
     position:absolute;
     inset:0;
@@ -714,9 +1341,20 @@ section{
             rgba(5,3,10,.22) 67%,
             transparent 100%
         ),
-        url("IMG_5389.jpeg") center/cover no-repeat;
+        url("IMG_5389.jpeg")
+        center/cover no-repeat;
+    transform:scale(1.015);
+    transition:
+        transform 1.2s var(--ease),
+        filter .7s ease;
+    will-change:transform;
 }
-
+.event-card:hover .event-image{
+    transform:scale(1.055);
+    filter:
+        saturate(1.1)
+        contrast(1.04);
+}
 .event-image::after{
     content:"";
     position:absolute;
@@ -730,51 +1368,78 @@ section{
         );
     mix-blend-mode:screen;
 }
-
+/* EVENT BADGE */
 .event-badge{
     position:absolute;
     top:20px;
     left:20px;
     padding:8px 12px;
     border-radius:999px;
-    background:rgba(5,3,10,.65);
-    border:1px solid rgba(255,255,255,.18);
+    background:
+        rgba(5,3,10,.65);
+    border:
+        1px solid
+        rgba(255,255,255,.18);
     backdrop-filter:blur(10px);
+    -webkit-backdrop-filter:blur(10px);
     font-size:7px;
     font-weight:900;
     letter-spacing:.2em;
     color:white;
+    box-shadow:
+        0 8px 25px rgba(0,0,0,.18);
 }
-
+.event-badge::before{
+    content:"";
+    display:inline-block;
+    width:5px;
+    height:5px;
+    margin-right:6px;
+    border-radius:50%;
+    background:var(--pink);
+    box-shadow:
+        0 0 9px var(--pink);
+    animation:
+        liveDot
+        1.5s
+        ease-in-out
+        infinite;
+}
+/* EVENT CONTENT */
 .event-content{
     position:absolute;
     left:0;
     right:0;
     bottom:0;
     padding:27px;
+    z-index:5;
 }
-
 .event-date{
     color:#ccc7d0;
     font-size:8px;
     letter-spacing:.2em;
     margin-bottom:12px;
 }
-
 .event-name{
-    font-size:clamp(2.7rem,14vw,5.7rem);
+    font-size:
+        clamp(
+            2.7rem,
+            14vw,
+            5.7rem
+        );
     line-height:.82;
     letter-spacing:-.08em;
     font-weight:900;
+    text-shadow:
+        0 8px 35px rgba(0,0,0,.4);
 }
-
 .event-location{
     color:#aaa5b5;
     font-size:10px;
     margin-top:13px;
 }
-
 .event-link{
+    position:relative;
     display:flex;
     align-items:center;
     justify-content:center;
@@ -787,46 +1452,116 @@ section{
     font-size:9px;
     font-weight:900;
     letter-spacing:.14em;
+    overflow:hidden;
+    transition:
+        transform .3s var(--ease),
+        box-shadow .3s ease;
 }
-
-/* =========================
+.event-link::after{
+    content:"";
+    position:absolute;
+    top:0;
+    left:-120%;
+    width:70%;
+    height:100%;
+    background:
+        linear-gradient(
+            90deg,
+            transparent,
+            rgba(255,47,146,.25),
+            transparent
+        );
+    transform:skewX(-20deg);
+    transition:left .65s ease;
+}
+.event-link:hover{
+    transform:translateY(-2px);
+    box-shadow:
+        0 12px 30px rgba(255,255,255,.12);
+}
+.event-link:hover::after{
+    left:140%;
+}
+/* =========================================================
    ARCHIVE
-========================= */
-
+========================================================= */
 .past-events{
     max-width:700px;
     margin:auto;
 }
-
 .events-grid{
     display:flex;
     flex-direction:column;
     gap:15px;
 }
-
 .past-card{
     height:390px;
     position:relative;
     overflow:hidden;
     border-radius:24px;
-    border:1px solid rgba(255,255,255,.11);
+    border:
+        1px solid
+        rgba(255,255,255,.11);
     background:#111;
+    isolation:isolate;
+    transition:
+        transform .5s var(--ease),
+        border-color .4s ease,
+        box-shadow .5s ease;
 }
-
 .past-card:first-child{
     height:450px;
 }
-
+.past-card::after{
+    content:"";
+    position:absolute;
+    inset:0;
+    z-index:3;
+    pointer-events:none;
+    background:
+        linear-gradient(
+            120deg,
+            transparent 25%,
+            rgba(255,255,255,.09) 48%,
+            transparent 60%
+        );
+    background-size:230% 100%;
+    background-position:-150% center;
+    transition:
+        background-position
+        .9s ease;
+}
+.past-card:hover{
+    transform:
+        translateY(-6px);
+    border-color:
+        rgba(255,255,255,.22);
+    box-shadow:
+        0 25px 70px
+        rgba(255,47,146,.10);
+}
+.past-card:hover::after{
+    background-position:150% center;
+}
 .past-image{
     position:absolute;
     inset:0;
     background-size:cover;
     background-position:center;
+    transition:
+        transform 1s var(--ease),
+        filter .7s ease;
 }
-
+.past-card:hover .past-image{
+    transform:scale(1.06);
+    filter:
+        saturate(1.08)
+        contrast(1.04);
+}
 .past-overlay{
     position:absolute;
     inset:0;
+    z-index:2;
     background:
         linear-gradient(
             to top,
@@ -834,32 +1569,28 @@ section{
             rgba(5,3,10,.1) 72%
         );
 }
-
 .past-info{
     position:absolute;
     left:23px;
     right:23px;
     bottom:22px;
+    z-index:4;
 }
-
 .past-info small{
     color:var(--pink);
     font-size:7px;
     font-weight:800;
     letter-spacing:.25em;
 }
-
 .past-info h3{
     margin-top:6px;
     font-size:25px;
     line-height:1;
     letter-spacing:-.05em;
 }
-
-/* =========================
+/* =========================================================
    MANIFESTO
-========================= */
-
+========================================================= */
 .manifesto{
     min-height:90svh;
     display:flex;
@@ -868,7 +1599,6 @@ section{
     text-align:center;
     overflow:hidden;
 }
-
 .manifesto::before{
     content:"";
     position:absolute;
@@ -884,10 +1614,32 @@ section{
     filter:blur(30px);
     animation:
         manifestoGlow
-        6s ease-in-out
-        infinite alternate;
+        6s
+        ease-in-out
+        infinite
+        alternate;
+    will-change:transform;
 }
-
+.manifesto::after{
+    content:"";
+    position:absolute;
+    width:220px;
+    height:220px;
+    border-radius:50%;
+    background:
+        radial-gradient(
+            circle,
+            rgba(255,47,146,.12),
+            transparent 70%
+        );
+    filter:blur(25px);
+    animation:
+        manifestoGlow2
+        8s
+        ease-in-out
+        infinite
+        alternate;
+}
 @keyframes manifestoGlow{
     from{
         transform:
@@ -900,19 +1652,33 @@ section{
             scale(1.2);
     }
 }
-
+@keyframes manifestoGlow2{
+    from{
+        transform:
+            translate(80px,40px)
+            scale(.8);
+    }
+    to{
+        transform:
+            translate(-70px,-60px)
+            scale(1.25);
+    }
+}
 .manifesto-content{
     position:relative;
     z-index:2;
 }
-
 .manifesto h2{
-    font-size:clamp(4rem,19vw,8rem);
+    font-size:
+        clamp(
+            4rem,
+            19vw,
+            8rem
+        );
     line-height:.78;
     letter-spacing:-.1em;
     font-weight:900;
 }
-
 .manifesto h2 span{
     background:
         linear-gradient(
@@ -921,11 +1687,16 @@ section{
             var(--purple),
             var(--blue)
         );
+    background-size:200% auto;
     -webkit-background-clip:text;
     background-clip:text;
     color:transparent;
+    animation:
+        heroGradient
+        5s
+        linear
+        infinite;
 }
-
 .manifesto p{
     max-width:340px;
     margin:28px auto 0;
@@ -933,23 +1704,22 @@ section{
     font-size:11px;
     line-height:1.85;
 }
-
-/* =========================
+/* =========================================================
    TEAM
-========================= */
-
+========================================================= */
 .team{
     max-width:700px;
     margin:auto;
     text-align:center;
 }
-
 .team-box{
     position:relative;
     overflow:hidden;
     padding:65px 22px;
     border-radius:28px;
-    border:1px solid rgba(255,255,255,.13);
+    border:
+        1px solid
+        rgba(255,255,255,.13);
     background:
         radial-gradient(
             circle at 100% 0%,
@@ -961,8 +1731,19 @@ section{
             rgba(255,47,146,.08),
             rgba(53,167,255,.06)
         );
+    transition:
+        transform .5s var(--ease),
+        box-shadow .5s ease,
+        border-color .4s ease;
 }
-
+.team-box:hover{
+    transform:translateY(-5px);
+    border-color:
+        rgba(255,255,255,.22);
+    box-shadow:
+        0 25px 80px
+        rgba(255,47,146,.12);
+}
 .team-box::before{
     content:"";
     position:absolute;
@@ -974,27 +1755,70 @@ section{
     background:var(--pink);
     filter:blur(70px);
     opacity:.35;
+    animation:
+        teamGlow
+        5s
+        ease-in-out
+        infinite
+        alternate;
 }
-
+.team-box::after{
+    content:"";
+    position:absolute;
+    left:-120px;
+    bottom:-100px;
+    width:220px;
+    height:220px;
+    border-radius:50%;
+    background:var(--blue);
+    filter:blur(90px);
+    opacity:.13;
+}
+@keyframes teamGlow{
+    from{
+        transform:scale(.8);
+    }
+    to{
+        transform:scale(1.3);
+    }
+}
 .team-box h2{
     position:relative;
-    font-size:clamp(2.8rem,14vw,5rem);
+    z-index:2;
+    font-size:
+        clamp(
+            2.8rem,
+            14vw,
+            5rem
+        );
     line-height:.82;
     letter-spacing:-.08em;
     font-weight:900;
 }
-
+.team-box h2 span{
+    display:inline-block;
+    background:
+        linear-gradient(
+            90deg,
+            var(--pink),
+            var(--purple)
+        );
+    -webkit-background-clip:text;
+    background-clip:text;
+    color:transparent;
+}
 .team-box p{
     position:relative;
+    z-index:2;
     max-width:310px;
     margin:24px auto 30px;
     color:#99949f;
     font-size:11px;
     line-height:1.8;
 }
-
 .join-button{
     position:relative;
+    z-index:2;
     display:flex;
     align-items:center;
     justify-content:center;
@@ -1006,12 +1830,39 @@ section{
     font-size:9px;
     font-weight:900;
     letter-spacing:.12em;
+    overflow:hidden;
+    transition:
+        transform .3s var(--ease),
+        box-shadow .3s ease;
 }
-
-/* =========================
-   TEAM APPLICATION MODAL
-========================= */
-
+.join-button::after{
+    content:"";
+    position:absolute;
+    top:0;
+    left:-120%;
+    width:70%;
+    height:100%;
+    background:
+        linear-gradient(
+            90deg,
+            transparent,
+            rgba(255,47,146,.22),
+            transparent
+        );
+    transform:skewX(-20deg);
+    transition:left .65s ease;
+}
+.join-button:hover{
+    transform:translateY(-2px);
+    box-shadow:
+        0 12px 35px rgba(255,255,255,.1);
+}
+.join-button:hover::after{
+    left:140%;
+}
+/* =========================================================
+   TEAM MODAL
+========================================================= */
 .team-modal{
     position:fixed;
     inset:0;
@@ -1019,8 +1870,12 @@ section{
     display:flex;
     align-items:flex-end;
     justify-content:center;
-    padding:18px;
-    background:rgba(0,0,0,.72);
+    padding:
+        18px
+        18px
+        calc(18px + env(safe-area-inset-bottom));
+    background:
+        rgba(0,0,0,.72);
     backdrop-filter:blur(14px);
     -webkit-backdrop-filter:blur(14px);
     opacity:0;
@@ -1030,22 +1885,23 @@ section{
         opacity .35s ease,
         visibility .35s ease;
 }
-
 .team-modal.active{
     opacity:1;
     visibility:visible;
     pointer-events:auto;
 }
-
 .team-modal-inner{
     width:100%;
     max-width:560px;
     max-height:92svh;
     overflow-y:auto;
+    overflow-x:hidden;
     position:relative;
     padding:30px 20px 22px;
     border-radius:30px;
-    border:1px solid rgba(255,255,255,.15);
+    border:
+        1px solid
+        rgba(255,255,255,.15);
     background:
         radial-gradient(
             circle at 100% 0%,
@@ -1061,15 +1917,21 @@ section{
     box-shadow:
         0 30px 100px rgba(0,0,0,.65),
         0 0 60px rgba(255,47,146,.10);
-    transform:translateY(35px) scale(.97);
+    transform:
+        translateY(35px)
+        scale(.97);
     transition:
-        transform .45s cubic-bezier(.16,1,.3,1);
+        transform .45s var(--ease);
+    scrollbar-width:none;
 }
-
+.team-modal-inner::-webkit-scrollbar{
+    display:none;
+}
 .team-modal.active .team-modal-inner{
-    transform:translateY(0) scale(1);
+    transform:
+        translateY(0)
+        scale(1);
 }
-
 .team-modal-top{
     display:flex;
     align-items:flex-start;
@@ -1077,7 +1939,6 @@ section{
     gap:15px;
     margin-bottom:25px;
 }
-
 .team-modal-label{
     color:var(--pink);
     font-size:8px;
@@ -1085,14 +1946,17 @@ section{
     letter-spacing:.3em;
     margin-bottom:10px;
 }
-
 .team-modal-title{
-    font-size:clamp(2.4rem,11vw,4rem);
+    font-size:
+        clamp(
+            2.4rem,
+            11vw,
+            4rem
+        );
     line-height:.82;
     letter-spacing:-.08em;
     font-weight:900;
 }
-
 .team-modal-title span{
     background:
         linear-gradient(
@@ -1105,41 +1969,50 @@ section{
     background-clip:text;
     color:transparent;
 }
-
 .team-modal-close{
     width:38px;
     height:38px;
     flex:0 0 38px;
     border-radius:50%;
-    border:1px solid rgba(255,255,255,.16);
-    background:rgba(255,255,255,.05);
+    border:
+        1px solid
+        rgba(255,255,255,.16);
+    background:
+        rgba(255,255,255,.05);
     color:white;
     display:flex;
     align-items:center;
     justify-content:center;
     font-size:20px;
     cursor:pointer;
+    transition:
+        transform .3s var(--ease),
+        background .3s ease,
+        border-color .3s ease;
 }
-
+.team-modal-close:hover{
+    transform:rotate(90deg);
+    background:
+        rgba(255,47,146,.12);
+    border-color:
+        rgba(255,47,146,.4);
+}
 .team-modal-description{
     color:#97929f;
     font-size:10px;
     line-height:1.75;
     margin-bottom:22px;
 }
-
 .team-form{
     display:flex;
     flex-direction:column;
     gap:12px;
 }
-
 .team-field{
     display:flex;
     flex-direction:column;
     gap:7px;
 }
-
 .team-field label{
     color:#aaa5b5;
     font-size:8px;
@@ -1147,61 +2020,79 @@ section{
     letter-spacing:.12em;
     text-transform:uppercase;
 }
-
 .team-field input,
 .team-field select,
 .team-field textarea{
     width:100%;
-    border:1px solid rgba(255,255,255,.12);
+    border:
+        1px solid
+        rgba(255,255,255,.12);
     border-radius:15px;
-    background:rgba(255,255,255,.045);
+    background:
+        rgba(255,255,255,.045);
     color:white;
     outline:none;
-    padding:14px 14px;
+    padding:14px;
+    font-family:inherit;
     font-size:11px;
     transition:
         border-color .25s ease,
         box-shadow .25s ease,
-        background .25s ease;
+        background .25s ease,
+        transform .25s var(--ease);
 }
-
 .team-field input::placeholder,
 .team-field textarea::placeholder{
     color:#68636f;
 }
-
 .team-field select{
     appearance:none;
     -webkit-appearance:none;
     background:
-        linear-gradient(45deg,transparent 50%,#888 50%) calc(100% - 18px) 50%/5px 5px no-repeat,
-        linear-gradient(135deg,#888 50%,transparent 50%) calc(100% - 13px) 50%/5px 5px no-repeat,
+        linear-gradient(
+            45deg,
+            transparent 50%,
+            #888 50%
+        )
+        calc(100% - 18px)
+        50%/5px 5px
+        no-repeat,
+        linear-gradient(
+            135deg,
+            #888 50%,
+            transparent 50%
+        )
+        calc(100% - 13px)
+        50%/5px 5px
+        no-repeat,
         rgba(255,255,255,.045);
 }
-
 .team-field select option{
     background:#100c17;
     color:white;
 }
-
 .team-field textarea{
     min-height:105px;
     resize:vertical;
 }
-
 .team-field input:focus,
 .team-field select:focus,
 .team-field textarea:focus{
-    border-color:rgba(255,47,146,.55);
-    background:rgba(255,47,146,.045);
+    border-color:
+        rgba(255,47,146,.55);
+    background:
+        rgba(255,47,146,.045);
     box-shadow:
-        0 0 0 3px rgba(255,47,146,.07);
+        0 0 0 3px
+        rgba(255,47,146,.07);
+    transform:
+        translateY(-1px);
 }
-
 .team-submit{
     width:100%;
     min-height:53px;
     margin-top:5px;
+    border:none;
     border-radius:999px;
     color:white;
     background:
@@ -1214,14 +2105,31 @@ section{
         );
     background-size:300% auto;
     box-shadow:
-        0 10px 35px rgba(255,47,146,.22);
-    animation:buttonGradient 4s linear infinite;
+        0 10px 35px
+        rgba(255,47,146,.22);
+    animation:
+        buttonGradient
+        4s
+        linear
+        infinite;
+    font-family:inherit;
     font-size:9px;
     font-weight:900;
     letter-spacing:.14em;
     cursor:pointer;
+    transition:
+        transform .3s var(--ease),
+        box-shadow .3s ease;
 }
-
+.team-submit:hover{
+    transform:translateY(-2px);
+    box-shadow:
+        0 15px 45px
+        rgba(255,47,146,.3);
+}
+.team-submit:active{
+    transform:scale(.98);
+}
 .team-note{
     margin-top:10px;
     text-align:center;
@@ -1229,17 +2137,29 @@ section{
     font-size:7px;
     line-height:1.6;
 }
-
 .team-success{
     display:none;
     text-align:center;
     padding:35px 8px 20px;
 }
-
 .team-success.active{
     display:block;
+    animation:
+        successIn
+        .5s
+        var(--ease)
+        both;
 }
-
+@keyframes successIn{
+    from{
+        opacity:0;
+        transform:scale(.9);
+    }
+    to{
+        opacity:1;
+        transform:scale(1);
+    }
+}
 .team-success-icon{
     width:58px;
     height:58px;
@@ -1255,17 +2175,16 @@ section{
             var(--purple)
         );
     box-shadow:
-        0 0 35px rgba(255,47,146,.3);
+        0 0 35px
+        rgba(255,47,146,.3);
     font-size:25px;
 }
-
 .team-success h3{
     font-size:28px;
     line-height:1;
     letter-spacing:-.06em;
     margin-bottom:13px;
 }
-
 .team-success p{
     color:#97929f;
     font-size:10px;
@@ -1273,34 +2192,39 @@ section{
     max-width:280px;
     margin:auto;
 }
-
-/* =========================
+/* =========================================================
    FOOTER
-========================= */
-
+========================================================= */
 footer{
     padding:
         65px
         18px
-        calc(35px + env(safe-area-inset-bottom));
-    border-top:1px solid rgba(255,255,255,.08);
+        calc(
+            35px +
+            env(safe-area-inset-bottom)
+        );
+    border-top:
+        1px solid
+        rgba(255,255,255,.08);
 }
-
+/* FOOTER LOGO */
 .footer-logo-box{
-    width:88px;
-    height:56px;
+    width:82px;
+    height:52px;
     padding:0;
     display:flex;
     align-items:center;
     justify-content:center;
-    border-radius:20px;
+    border-radius:18px;
     background:
         linear-gradient(
             145deg,
-            rgba(255,255,255,.085),
+            rgba(255,255,255,.09),
             rgba(255,47,146,.035)
         );
-    border:1px solid rgba(255,255,255,.11);
+    border:
+        1px solid
+        rgba(255,255,255,.11);
     box-shadow:
         0 8px 30px rgba(0,0,0,.22),
         0 0 25px rgba(255,47,146,.08),
@@ -1309,54 +2233,52 @@ footer{
     -webkit-backdrop-filter:blur(14px);
     overflow:hidden;
     transition:
-        transform .35s cubic-bezier(.16,1,.3,1),
+        transform .35s var(--ease),
         box-shadow .35s ease,
         border-color .35s ease;
 }
-
 .footer-logo-box:active{
     transform:scale(.95);
 }
-
 .footer-logo{
-    width:108%;
-    height:108%;
+    width:112%;
+    height:112%;
     object-fit:cover;
     object-position:center;
-    border-radius:19px;
+    border-radius:17px;
     filter:
         drop-shadow(0 0 10px rgba(255,47,146,.20))
         drop-shadow(0 0 18px rgba(155,92,255,.08));
     transition:
-        transform .4s cubic-bezier(.16,1,.3,1),
+        transform .4s var(--ease),
         filter .4s ease;
 }
-
 .footer-logo-box:hover .footer-logo{
-    transform:scale(1.055);
+    transform:scale(1.07);
     filter:
         drop-shadow(0 0 12px rgba(255,47,146,.30))
         drop-shadow(0 0 22px rgba(155,92,255,.16));
 }
-
 .footer-right{
     margin-top:30px;
     color:#66616c;
     font-size:8px;
     line-height:2;
 }
-
 .footer-right a{
     color:#aaa;
     text-decoration:none;
+    transition:
+        color .25s ease;
 }
-
+.footer-right a:hover{
+    color:white;
+}
 .footer-instagram-link{
     display:inline-flex !important;
     align-items:center;
     gap:6px;
 }
-
 .footer-instagram-icon{
     width:14px;
     height:14px;
@@ -1364,45 +2286,38 @@ footer{
     border-width:1.2px;
     border-radius:4px;
 }
-
 .footer-instagram-icon::before{
     width:5px;
     height:5px;
     border-width:1.2px;
 }
-
 .footer-instagram-icon::after{
     width:2.5px;
     height:2.5px;
     right:2px;
     top:2px;
 }
-
-/* =========================
+/* =========================================================
    REVEAL
-========================= */
-
+========================================================= */
 .reveal{
     opacity:0;
     transform:
         translateY(35px)
         scale(.98);
     transition:
-        opacity .8s ease,
-        transform .8s cubic-bezier(.16,1,.3,1);
+        opacity .85s ease,
+        transform .85s var(--ease);
 }
-
 .reveal.active{
     opacity:1;
     transform:
         translateY(0)
         scale(1);
 }
-
-/* =========================
+/* =========================================================
    TOUCH FLASH
-========================= */
-
+========================================================= */
 .touch-flash{
     position:fixed;
     width:100px;
@@ -1425,8 +2340,9 @@ footer{
         .5s
         ease-out
         forwards;
+    filter:
+        blur(.5px);
 }
-
 @keyframes touchFlash{
     0%{
         transform:
@@ -1441,1179 +2357,1066 @@ footer{
         opacity:0;
     }
 }
-
-/* =========================
+/* =========================================================
+   CARD TOUCH
+========================================================= */
+.event-card,
+.past-card,
+.team-box{
+    -webkit-user-select:none;
+    user-select:none;
+}
+/* =========================================================
    DESKTOP
-========================= */
-
+========================================================= */
 @media(min-width:801px){
-
+    nav{
+        padding:
+            16px
+            28px;
+    }
+    .nav-logo-box,
+    .footer-logo-box{
+        width:88px;
+        height:56px;
+    }
     .menu-button{
         display:none;
     }
-
     .hero-buttons{
         flex-direction:row;
         justify-content:center;
     }
-
     .primary-button,
     .secondary-button{
         width:auto;
         padding:0 28px;
     }
-
     .events-grid{
         display:grid;
         grid-template-columns:
             repeat(3,1fr);
+        gap:18px;
     }
-
     .past-card,
     .past-card:first-child{
         height:430px;
     }
-
     section{
-        padding:130px 5vw;
+        padding:
+            130px
+            5vw;
     }
-
     .event-card{
         min-height:680px;
     }
-
     .event-content{
         padding:45px;
     }
-
     .event-link{
         display:inline-flex;
         padding:0 28px;
     }
-
     .team-box{
         padding:90px 40px;
     }
-
     footer{
         display:flex;
         justify-content:space-between;
         align-items:flex-end;
     }
-
     .footer-right{
         margin-top:0;
         text-align:right;
     }
-
     .team-modal{
         align-items:center;
     }
-
     .team-modal-inner{
         max-height:88vh;
     }
 }
+/* =========================================================
+   LARGE DESKTOP
+========================================================= */
+@media(min-width:1200px){
+    .hero{
+        padding-left:60px;
+        padding-right:60px;
+    }
+    .hero h1{
+        font-size:clamp(9rem,16vw,15rem);
+    }
+    .hero-sub{
+        max-width:420px;
+        font-size:13px;
+    }
+    .upcoming,
+    .past-events,
+    .team{
+        max-width:900px;
+    }
+    .event-card{
+        min-height:720px;
+    }
+}
+/* =========================================================
+   SMALL MOBILE
+========================================================= */
+@media(max-width:380px){
+    .nav-logo-box{
+        width:76px;
+        height:49px;
+    }
+    .nav-button{
+        padding:
+            8px
+            10px;
+        font-size:7px;
+    }
+    .hero{
+        padding-left:14px;
+        padding-right:14px;
+    }
+    .hero h1{
+        font-size:clamp(
+            4.8rem,
+            27vw,
+            7rem
+        );
+    }
+    .event-card{
+        min-height:560px;
+        border-radius:24px;
+    }
+    .event-content{
+        padding:22px;
+    }
+    .event-name{
+        font-size:clamp(
+            2.45rem,
+            13vw,
+            4rem
+        );
+    }
+}
+/* =========================================================
+   REDUCED MOTION
+========================================================= */
+@media(prefers-reduced-motion:reduce){
+    html{
+        scroll-behavior:auto;
+    }
+    *,
+    *::before,
+    *::after{
+        animation-duration:.001ms !important;
+        animation-iteration-count:1 !important;
+        transition-duration:.001ms !important;
+    }
+    .reveal{
+        opacity:1;
+        transform:none;
+    }
+}
 </style>
 </head>
-
 <body>
-
-<!-- =========================
+<!-- =======================================================
      INTRO
-========================= -->
-
+======================================================= -->
 <div id="intro">
-
-<div class="intro-grid"></div>
-
-<div class="intro-glow"></div>
-
-<div class="intro-content">
-
-    <div class="intro-small">
-        PRESENTED BY
+    <div class="intro-grid"></div>
+    <div class="intro-glow"></div>
+    <div class="intro-content">
+        <div class="intro-small">
+            PRESENTED BY
+        </div>
+        <div class="intro-logo-text">
+            VIBE
+        </div>
+        <div class="intro-bottom">
+            EVENT COLLECTIVE
+        </div>
     </div>
-
-    <div class="intro-logo-text">
-        VIBE
-    </div>
-
-    <div class="intro-bottom">
-        EVENT COLLECTIVE
-    </div>
-
+    <div class="intro-flash"></div>
 </div>
-
-<div class="intro-flash"></div>
-
-</div>
-
-<!-- =========================
+<!-- =======================================================
      NAV
-========================= -->
-
+======================================================= -->
 <nav>
-
-<a
-    href="#"
-    aria-label="VIBE"
-    class="nav-logo-box">
-
-    <div>
-
-        <img
-            src="Paragraf metniniz.png"
-            class="nav-logo"
-            alt="VIBE">
-
-    </div>
-
-</a>
-
-<div class="nav-right">
-
     <a
-        href="#events"
-        class="nav-button">
-
-        NEXT EVENT
-
+        href="#"
+        aria-label="VIBE"
+        class="nav-logo-box">
+        <div>
+            <img
+                src="Paragraf metniniz.png"
+                class="nav-logo"
+                alt="VIBE">
+        </div>
     </a>
-
-    <button
-        class="menu-button"
-        id="menuButton"
-        aria-label="Menu">
-
-        <span></span>
-        <span></span>
-
-    </button>
-
-</div>
-
+    <div class="nav-right">
+        <a
+            href="#events"
+            class="nav-button">
+            NEXT EVENT
+        </a>
+        <button
+            class="menu-button"
+            id="menuButton"
+            aria-label="Menu"
+            aria-expanded="false">
+            <span></span>
+            <span></span>
+        </button>
+    </div>
 </nav>
-
-<!-- =========================
+<!-- =======================================================
      MOBILE MENU
-========================= -->
-
+======================================================= -->
 <div
     class="mobile-menu"
     id="mobileMenu">
-
-<ul class="mobile-menu-links">
-
-    <li>
-        <a href="#events">
-            EVENTS
-        </a>
-    </li>
-
-    <li>
-        <a href="#past">
-            ARCHIVE
-        </a>
-    </li>
-
-    <li>
-        <a href="#team">
-            TEAM
-        </a>
-    </li>
-
-</ul>
-
+    <ul class="mobile-menu-links">
+        <li>
+            <a href="#events">
+                EVENTS
+            </a>
+        </li>
+        <li>
+            <a href="#past">
+                ARCHIVE
+            </a>
+        </li>
+        <li>
+            <a href="#team">
+                TEAM
+            </a>
+        </li>
+    </ul>
 </div>
-
-<!-- =========================
+<!-- =======================================================
      HERO
-========================= -->
-
+======================================================= -->
 <header class="hero">
-
-<div class="hero-orb"></div>
-
-<div class="hero-content">
-
-    <div class="hero-tag">
-        KIRIKKALE · TURKEY · 2026
-    </div>
-
-    <h1>
-        VIBE
-    </h1>
-
-    <p class="hero-sub">
-        We don't just organize events.
-        We create experiences.
-    </p>
-
-    <div class="hero-buttons">
-
-        <a
-            href="#events"
-            class="primary-button">
-
-            DISCOVER THE VIBE
-
-        </a>
-
-        <a
-            href="#team"
-            class="secondary-button">
-
-            JOIN THE TEAM
-
-        </a>
-
-    </div>
-
-    <!-- INSTAGRAM -->
-
-    <div class="instagram-link">
-
-        <a
-            href="https://www.instagram.com/vibe.eventt?stkn=emU0eDAzN3J4OHpo"
-            target="_blank"
-            rel="noopener noreferrer">
-
-            <span class="instagram-icon"></span>
-
-            <span>
-                @vibe.eventt
-            </span>
-
-        </a>
-
-    </div>
-
-</div>
-
-<div class="scroll-indicator">
-
-    <div>
-        SCROLL
-    </div>
-
-    <div class="scroll-line"></div>
-
-</div>
-
-</header>
-
-<!-- =========================
-     MARQUEE
-========================= -->
-
-<div class="marquee">
-
-<div class="marquee-track">
-
-    <span class="pink">
-        VIBE EVENT
-    </span>
-
-    <span>
-        MUSIC
-    </span>
-
-    <span>
-        ENERGY
-    </span>
-
-    <span class="pink">
-        EXPERIENCE
-    </span>
-
-    <span>
-        NIGHTLIFE
-    </span>
-
-    <span>
-        COMMUNITY
-    </span>
-
-    <span class="pink">
-        VIBE EVENT
-    </span>
-
-    <span>
-        MUSIC
-    </span>
-
-    <span>
-        ENERGY
-    </span>
-
-    <span class="pink">
-        EXPERIENCE
-    </span>
-
-    <span>
-        NIGHTLIFE
-    </span>
-
-    <span>
-        COMMUNITY
-    </span>
-
-</div>
-
-</div>
-
-<!-- =========================
-     NEXT EVENT
-========================= -->
-
-<section id="events">
-
-<div class="upcoming">
-
-    <div class="section-label reveal">
-        01 / UPCOMING
-    </div>
-
-    <h2 class="section-title reveal">
-        NEXT<br>
-        VIBE.
-    </h2>
-
-    <div class="event-card reveal">
-
-        <div class="event-image"></div>
-
-        <div class="event-badge">
-            UPCOMING EVENT
+    <div class="hero-orb"></div>
+    <div class="hero-content">
+        <div class="hero-tag">
+            KIRIKKALE · TURKEY · 2026
         </div>
-
-        <div class="event-content">
-
-            <div class="event-date">
-                HALLOWEEN · 2026
+        <h1>
+            VIBE
+        </h1>
+        <p class="hero-sub">
+            We don't just organize events.
+            We create experiences.
+        </p>
+        <div class="hero-buttons">
+            <a
+                href="#events"
+                class="primary-button">
+                DISCOVER THE VIBE
+            </a>
+            <a
+                href="#team"
+                class="secondary-button">
+                JOIN THE TEAM
+            </a>
+        </div>
+        <div class="instagram-link">
+            <a
+                href="https://www.instagram.com/vibe.eventt?stkn=emU0eDAzN3J4OHpo"
+                target="_blank"
+                rel="noopener noreferrer">
+                <span class="instagram-icon"></span>
+                <span>
+                    @vibe.eventt
+                </span>
+            </a>
+        </div>
+    </div>
+    <div class="scroll-indicator">
+        <div>
+            SCROLL
+        </div>
+        <div class="scroll-line"></div>
+    </div>
+</header>
+<!-- =======================================================
+     MARQUEE
+======================================================= -->
+<div class="marquee">
+    <div class="marquee-track">
+        <span class="pink">
+            VIBE EVENT
+        </span>
+        <span>
+            MUSIC
+        </span>
+        <span>
+            ENERGY
+        </span>
+        <span class="pink">
+            EXPERIENCE
+        </span>
+        <span>
+            NIGHTLIFE
+        </span>
+        <span>
+            COMMUNITY
+        </span>
+        <span class="pink">
+            VIBE EVENT
+        </span>
+        <span>
+            MUSIC
+        </span>
+        <span>
+            ENERGY
+        </span>
+        <span class="pink">
+            EXPERIENCE
+        </span>
+        <span>
+            NIGHTLIFE
+        </span>
+        <span>
+            COMMUNITY
+        </span>
+    </div>
+</div>
+<!-- =======================================================
+     NEXT EVENT
+======================================================= -->
+<section id="events">
+    <div class="upcoming">
+        <div class="section-label reveal">
+            01 / UPCOMING
+        </div>
+        <h2 class="section-title reveal">
+            NEXT<br>
+            VIBE.
+        </h2>
+        <div class="event-card reveal">
+            <div class="event-image"></div>
+            <div class="event-badge">
+                UPCOMING EVENT
             </div>
-
-            <div class="event-name">
-                HALLOWEEN
+            <div class="event-content">
+                <div class="event-date">
+                    HALLOWEEN · 2026
+                </div>
+                <div class="event-name">
+                    HALLOWEEN
+                </div>
+                <div class="event-location">
+                    VIBE EVENT · KIRIKKALE
+                </div>
+                <a
+                    href="#"
+                    class="event-link">
+                    GET YOUR TICKET ↗
+                </a>
             </div>
-
-            <div class="event-location">
-                VIBE EVENT · KIRIKKALE
+        </div>
+    </div>
+</section>
+<!-- =======================================================
+     ARCHIVE
+======================================================= -->
+<section id="past">
+    <div class="past-events">
+        <div class="section-label reveal">
+            02 / ARCHIVE
+        </div>
+        <h2 class="section-title reveal">
+            WE'VE<br>
+            BEEN THERE.
+        </h2>
+        <div class="events-grid">
+            <div class="past-card reveal">
+                <div
+                    class="past-image"
+                    style="
+                    background-image:
+                    url('DJ-TINA.jpeg');
+                    ">
+                </div>
+                <div class="past-overlay"></div>
+                <div class="past-info">
+                    <small>
+                        2026
+                    </small>
+                    <h3>
+                        OPEN YOUR EYES
+                    </h3>
+                </div>
             </div>
-
+            <div class="past-card reveal">
+                <div
+                    class="past-image"
+                    style="
+                    background:
+                    linear-gradient(
+                        135deg,
+                        #ff2f92,
+                        #9b5cff,
+                        #35a7ff
+                    );
+                    ">
+                </div>
+                <div class="past-overlay"></div>
+                <div class="past-info">
+                    <small>
+                        VIBE EVENT
+                    </small>
+                    <h3>
+                        MORE SOON.
+                    </h3>
+                </div>
+            </div>
+            <div class="past-card reveal">
+                <div
+                    class="past-image"
+                    style="
+                    background:
+                    linear-gradient(
+                        135deg,
+                        #ff7a18,
+                        #ff2f92,
+                        #9b5cff
+                    );
+                    ">
+                </div>
+                <div class="past-overlay"></div>
+                <div class="past-info">
+                    <small>
+                        VIBE ARCHIVE
+                    </small>
+                    <h3>
+                        STAY TUNED.
+                    </h3>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+<!-- =======================================================
+     MANIFESTO
+======================================================= -->
+<section class="manifesto">
+    <div class="manifesto-content reveal">
+        <div class="section-label">
+            THE VIBE
+        </div>
+        <h2>
+            NOT JUST<br>
+            A <span>PARTY.</span>
+        </h2>
+        <p>
+            Vibe Event; müzik, insan, enerji ve unutulmaz
+            geceler etrafında şekillenen yeni nesil bir
+            etkinlik topluluğudur. Sanatçıları, toplulukları
+            ve benzersiz deneyimleri tek bir çatı altında
+            buluşturuyoruz.
+        </p>
+    </div>
+</section>
+<!-- =======================================================
+     TEAM
+======================================================= -->
+<section id="team">
+    <div class="team">
+        <div class="section-label reveal">
+            03 / JOIN US
+        </div>
+        <div class="team-box reveal">
+            <h2>
+                WANT TO BE<br>
+                PART OF
+                <span>
+                    VIBE?
+                </span>
+            </h2>
+            <p>
+                Organizasyon, sosyal medya,
+                tasarım, prodüksiyon veya
+                etkinlik operasyonlarında
+                bizimle çalışmak ister misin?
+            </p>
             <a
                 href="#"
-                class="event-link">
-
-                GET YOUR TICKET ↗
-
+                class="join-button"
+                id="joinTeamButton">
+                JOIN THE TEAM →
             </a>
-
         </div>
-
     </div>
-
-</div>
-
 </section>
-
-<!-- =========================
-     ARCHIVE
-========================= -->
-
-<section id="past">
-
-<div class="past-events">
-
-    <div class="section-label reveal">
-        02 / ARCHIVE
-    </div>
-
-    <h2 class="section-title reveal">
-        WE'VE<br>
-        BEEN THERE.
-    </h2>
-
-    <div class="events-grid">
-
-        <div class="past-card reveal">
-
-            <div
-                class="past-image"
-                style="
-                background-image:
-                url('DJ-TINA.jpeg');
-                ">
-            </div>
-
-            <div class="past-overlay"></div>
-
-            <div class="past-info">
-
-                <small>
-                    2026
-                </small>
-
-                <h3>
-                    OPEN YOUR EYES
-                </h3>
-
-            </div>
-
-        </div>
-
-        <div class="past-card reveal">
-
-            <div
-                class="past-image"
-                style="
-                background:
-                linear-gradient(
-                    135deg,
-                    #ff2f92,
-                    #9b5cff,
-                    #35a7ff
-                );
-                ">
-            </div>
-
-            <div class="past-overlay"></div>
-
-            <div class="past-info">
-
-                <small>
-                    VIBE EVENT
-                </small>
-
-                <h3>
-                    MORE SOON.
-                </h3>
-
-            </div>
-
-        </div>
-
-        <div class="past-card reveal">
-
-            <div
-                class="past-image"
-                style="
-                background:
-                linear-gradient(
-                    135deg,
-                    #ff7a18,
-                    #ff2f92,
-                    #9b5cff
-                );
-                ">
-            </div>
-
-            <div class="past-overlay"></div>
-
-            <div class="past-info">
-
-                <small>
-                    VIBE ARCHIVE
-                </small>
-
-                <h3>
-                    STAY TUNED.
-                </h3>
-
-            </div>
-
-        </div>
-
-    </div>
-
-</div>
-
-</section>
-
-<!-- =========================
-     MANIFESTO
-========================= -->
-
-<section class="manifesto">
-
-<div class="manifesto-content reveal">
-
-    <div class="section-label">
-        THE VIBE
-    </div>
-
-    <h2>
-        NOT JUST<br>
-        A <span>PARTY.</span>
-    </h2>
-
-    <p>
-        Vibe Event; müzik, insan, enerji ve unutulmaz
-        geceler etrafında şekillenen yeni nesil bir
-        etkinlik topluluğudur. Sanatçıları, toplulukları
-        ve benzersiz deneyimleri tek bir çatı altında
-        buluşturuyoruz.
-    </p>
-
-</div>
-
-</section>
-
-<!-- =========================
-     TEAM
-========================= -->
-
-<section id="team">
-
-<div class="team">
-
-    <div class="section-label reveal">
-        03 / JOIN US
-    </div>
-
-    <div class="team-box reveal">
-
-        <h2>
-            WANT TO BE<br>
-            PART OF
-            <span style="color:#ff2f92;">
-                VIBE?
-            </span>
-        </h2>
-
-        <p>
-            Organizasyon, sosyal medya,
-            tasarım, prodüksiyon veya
-            etkinlik operasyonlarında
-            bizimle çalışmak ister misin?
-        </p>
-
-        <a
-            href="#"
-            class="join-button"
-            id="joinTeamButton">
-
-            JOIN THE TEAM →
-
-        </a>
-
-    </div>
-
-</div>
-
-</section>
-
-<!-- =========================
+<!-- =======================================================
      TEAM APPLICATION MODAL
-========================= -->
-
+======================================================= -->
 <div
     class="team-modal"
     id="teamModal">
-
     <div class="team-modal-inner">
-
         <div class="team-modal-top">
-
             <div>
-
                 <div class="team-modal-label">
                     JOIN THE VIBE
                 </div>
-
                 <div class="team-modal-title">
                     BECOME<br>
-                    <span>PART OF IT.</span>
+                    <span>
+                        PART OF IT.
+                    </span>
                 </div>
-
             </div>
-
             <button
                 class="team-modal-close"
                 id="closeTeamModal"
                 aria-label="Kapat">
-
                 ×
-
             </button>
-
         </div>
-
         <div id="teamFormArea">
-
             <p class="team-modal-description">
                 VIBE'ın bir parçası olmak ister misin?
                 Kendinden biraz bahset, hangi alanda
                 yer almak istediğini bize söyle.
             </p>
-
             <form
                 class="team-form"
                 id="teamForm">
-
                 <div class="team-field">
-
                     <label for="teamName">
                         Ad Soyad
                     </label>
-
                     <input
                         type="text"
                         id="teamName"
                         name="name"
                         placeholder="Adın ve soyadın"
+                        autocomplete="name"
                         required>
-
                 </div>
-
                 <div class="team-field">
-
                     <label for="teamInstagram">
                         Instagram Kullanıcı Adı
                     </label>
-
                     <input
                         type="text"
                         id="teamInstagram"
                         name="instagram"
                         placeholder="@kullaniciadi"
+                        autocomplete="off"
                         required>
-
                 </div>
-
                 <div class="team-field">
-
                     <label for="teamPhone">
                         Telefon
                     </label>
-
                     <input
                         type="tel"
                         id="teamPhone"
                         name="phone"
                         placeholder="05XX XXX XX XX"
+                        autocomplete="tel"
                         required>
-
                 </div>
-
                 <div class="team-field">
-
                     <label for="teamCity">
                         Şehir
                     </label>
-
                     <input
                         type="text"
                         id="teamCity"
                         name="city"
                         placeholder="Kırıkkale"
+                        autocomplete="address-level2"
                         required>
-
                 </div>
-
                 <div class="team-field">
-
                     <label for="teamArea">
                         Hangi Alanda Yer Almak İstiyorsun?
                     </label>
-
                     <select
                         id="teamArea"
                         name="area"
                         required>
-
-                        <option value="" disabled selected>
+                        <option
+                            value=""
+                            disabled
+                            selected>
                             Bir alan seç
                         </option>
-
                         <option value="Organizasyon">
                             Organizasyon
                         </option>
-
                         <option value="Sosyal Medya">
                             Sosyal Medya
                         </option>
-
                         <option value="Tasarım">
                             Tasarım
                         </option>
-
                         <option value="Fotoğraf / Video">
                             Fotoğraf / Video
                         </option>
-
                         <option value="Prodüksiyon">
                             Prodüksiyon
                         </option>
-
                         <option value="DJ / Müzik">
                             DJ / Müzik
                         </option>
-
                         <option value="Gönüllü / Etkinlik Ekibi">
                             Gönüllü / Etkinlik Ekibi
                         </option>
-
                         <option value="Diğer">
                             Diğer
                         </option>
-
                     </select>
-
                 </div>
-
                 <div class="team-field">
-
                     <label for="teamAbout">
                         Bize Biraz Kendinden Bahset
                     </label>
-
                     <textarea
                         id="teamAbout"
                         name="about"
                         placeholder="Neler yapıyorsun, neden VIBE'ın parçası olmak istiyorsun?"
                         required></textarea>
-
                 </div>
-
                 <button
                     type="submit"
                     class="team-submit">
-
                     SEND APPLICATION →
-
                 </button>
-
                 <div class="team-note">
                     Başvurun VIBE ekibi tarafından
                     değerlendirilecektir.
                 </div>
-
             </form>
-
         </div>
-
         <div
             class="team-success"
             id="teamSuccess">
-
             <div class="team-success-icon">
                 ✓
             </div>
-
             <h3>
                 APPLICATION RECEIVED
             </h3>
-
             <p>
                 Başvurun alındı. VIBE ekibi
                 seninle iletişime geçecek.
             </p>
-
         </div>
-
     </div>
-
 </div>
-
-<!-- =========================
+<!-- =======================================================
      FOOTER
-========================= -->
-
+======================================================= -->
 <footer>
-
-<div>
-
-    <div class="footer-logo-box">
-
-        <img
-            src="Paragraf metniniz.png"
-            class="footer-logo"
-            alt="VIBE">
-
-    </div>
-
-</div>
-
-<div class="footer-right">
-
     <div>
-        KIRIKKALE · TURKEY
+        <div class="footer-logo-box">
+            <img
+                src="Paragraf metniniz.png"
+                class="footer-logo"
+                alt="VIBE">
+        </div>
     </div>
-
-    <div>
-        © 2026 VIBE EVENT
+    <div class="footer-right">
+        <div>
+            KIRIKKALE · TURKEY
+        </div>
+        <div>
+            © 2026 VIBE EVENT
+        </div>
+        <div>
+            <a
+                href="https://www.instagram.com/vibe.eventt?stkn=emU0eDAzN3J4OHpo"
+                target="_blank"
+                rel="noopener noreferrer"
+                class="footer-instagram-link">
+                <span
+                    class="instagram-icon footer-instagram-icon">
+                </span>
+                Instagram
+            </a>
+            &nbsp;·&nbsp;
+            <a href="#">
+                Contact
+            </a>
+        </div>
     </div>
-
-    <div>
-
-        <a
-            href="https://www.instagram.com/vibe.eventt?stkn=emU0eDAzN3J4OHpo"
-            target="_blank"
-            rel="noopener noreferrer"
-            class="footer-instagram-link">
-
-            <span class="instagram-icon footer-instagram-icon"></span>
-
-            Instagram
-
-        </a>
-
-        &nbsp;·&nbsp;
-
-        <a href="#">
-            Contact
-        </a>
-
-    </div>
-
-</div>
-
 </footer>
-
 <script>
-
-/* =========================
-   MOBILE MENU
-========================= */
-
+/* =========================================================
+   DOM
+========================================================= */
 const menuButton =
     document.getElementById(
         "menuButton"
     );
-
 const mobileMenu =
     document.getElementById(
         "mobileMenu"
     );
-
 const menuLinks =
     document.querySelectorAll(
         ".mobile-menu-links a"
     );
-
-menuButton.addEventListener(
-    "click",
-    () => {
-
+const joinTeamButton =
+    document.getElementById(
+        "joinTeamButton"
+    );
+const teamModal =
+    document.getElementById(
+        "teamModal"
+    );
+const closeTeamModal =
+    document.getElementById(
+        "closeTeamModal"
+    );
+const teamForm =
+    document.getElementById(
+        "teamForm"
+    );
+const teamFormArea =
+    document.getElementById(
+        "teamFormArea"
+    );
+const teamSuccess =
+    document.getElementById(
+        "teamSuccess"
+    );
+/* =========================================================
+   MOBILE MENU
+========================================================= */
+function toggleMenu(){
+    const isOpen =
         mobileMenu.classList.toggle(
             "active"
         );
-
-    }
+    menuButton.classList.toggle(
+        "active",
+        isOpen
+    );
+    menuButton.setAttribute(
+        "aria-expanded",
+        isOpen
+            ? "true"
+            : "false"
+    );
+    document.body.style.overflow =
+        isOpen
+            ? "hidden"
+            : "";
+}
+menuButton.addEventListener(
+    "click",
+    toggleMenu
 );
-
 menuLinks.forEach(
     link => {
-
         link.addEventListener(
             "click",
             () => {
-
                 mobileMenu.classList.remove(
                     "active"
                 );
-
+                menuButton.classList.remove(
+                    "active"
+                );
+                menuButton.setAttribute(
+                    "aria-expanded",
+                    "false"
+                );
+                document.body.style.overflow =
+                    "";
             }
         );
-
     }
 );
-
-/* =========================
+/* =========================================================
    SCROLL REVEAL
-========================= */
-
+========================================================= */
 const revealElements =
     document.querySelectorAll(
         ".reveal"
     );
-
 const observer =
     new IntersectionObserver(
         entries => {
-
             entries.forEach(
                 entry => {
-
                     if(
                         entry.isIntersecting
                     ){
-
                         entry.target.classList.add(
                             "active"
                         );
-
+                        observer.unobserve(
+                            entry.target
+                        );
                     }
-
                 }
             );
-
         },
         {
-            threshold:.12
+            threshold:.12,
+            rootMargin:"0px 0px -30px 0px"
         }
     );
-
 revealElements.forEach(
     element => {
-
         observer.observe(
             element
         );
-
     }
 );
-
-/* =========================
+/* =========================================================
    HERO PARALLAX
-========================= */
-
+========================================================= */
+const heroOrb =
+    document.querySelector(
+        ".hero-orb"
+    );
+let ticking = false;
+function updateParallax(){
+    if(!heroOrb){
+        ticking = false;
+        return;
+    }
+    const scroll =
+        window.scrollY || 0;
+    heroOrb.style.transform =
+        `translate3d(
+            ${scroll * .035}px,
+            ${scroll * .16 - 50}px,
+            0
+        )`;
+    ticking = false;
+}
 window.addEventListener(
     "scroll",
     () => {
-
-        const scroll =
-            window.scrollY;
-
-        const orb =
-            document.querySelector(
-                ".hero-orb"
+        if(!ticking){
+            window.requestAnimationFrame(
+                updateParallax
             );
-
-        if(orb){
-
-            orb.style.transform =
-                `translateY(${scroll * .16}px)`;
-
+            ticking = true;
         }
-
     },
     {
         passive:true
     }
 );
-
-/* =========================
+/* =========================================================
    TOUCH FLASH
-========================= */
-
+========================================================= */
+let lastTouchTime = 0;
 document.addEventListener(
     "touchstart",
     event => {
-
+        const now =
+            Date.now();
+        /*
+         * Çok hızlı arka arkaya dokunuşlarda
+         * yüzlerce efekt oluşmasını engeller.
+         */
+        if(
+            now - lastTouchTime < 90
+        ){
+            return;
+        }
+        lastTouchTime = now;
         const touch =
             event.touches[0];
-
-        if(!touch) return;
-
+        if(!touch){
+            return;
+        }
         const flash =
             document.createElement(
                 "div"
             );
-
         flash.className =
             "touch-flash";
-
         flash.style.left =
             touch.clientX + "px";
-
         flash.style.top =
             touch.clientY + "px";
-
         document.body.appendChild(
             flash
         );
-
         setTimeout(
             () => {
-
                 flash.remove();
-
             },
             500
         );
-
     },
     {
         passive:true
     }
 );
-
-/* =========================
+/* =========================================================
    CARD TOUCH
-========================= */
-
+========================================================= */
 document
     .querySelectorAll(
         ".event-card, .past-card, .team-box"
     )
     .forEach(
         card => {
-
             card.addEventListener(
                 "touchstart",
                 () => {
-
                     card.style.transform =
                         "scale(.985)";
-
                 },
                 {
                     passive:true
                 }
             );
-
             card.addEventListener(
                 "touchend",
                 () => {
-
                     card.style.transform =
                         "";
-
                 }
             );
-
+            card.addEventListener(
+                "touchcancel",
+                () => {
+                    card.style.transform =
+                        "";
+                }
+            );
         }
     );
-
-/* =========================
-   TEAM MODAL
-========================= */
-
-const joinTeamButton =
-    document.getElementById(
-        "joinTeamButton"
-    );
-
-const teamModal =
-    document.getElementById(
-        "teamModal"
-    );
-
-const closeTeamModal =
-    document.getElementById(
-        "closeTeamModal"
-    );
-
-const teamForm =
-    document.getElementById(
-        "teamForm"
-    );
-
-const teamFormArea =
-    document.getElementById(
-        "teamFormArea"
-    );
-
-const teamSuccess =
-    document.getElementById(
-        "teamSuccess"
-    );
-
-/* Aç */
-
+/* =========================================================
+   TEAM MODAL OPEN
+========================================================= */
 joinTeamButton.addEventListener(
     "click",
     event => {
-
         event.preventDefault();
-
         teamModal.classList.add(
             "active"
         );
-
         document.body.style.overflow =
             "hidden";
-
+        setTimeout(
+            () => {
+                document.getElementById(
+                    "teamName"
+                )?.focus();
+            },
+            350
+        );
     }
 );
-
-/* Kapat */
-
+/* =========================================================
+   TEAM MODAL CLOSE
+========================================================= */
 function closeTeamApplication(){
-
     teamModal.classList.remove(
         "active"
     );
-
     document.body.style.overflow =
         "";
-
 }
-
-/* X */
-
+/* CLOSE BUTTON */
 closeTeamModal.addEventListener(
     "click",
     closeTeamApplication
 );
-
-/* Dışarı tıklayınca kapat */
-
+/* OUTSIDE CLICK */
 teamModal.addEventListener(
     "click",
     event => {
-
         if(
             event.target === teamModal
         ){
-
             closeTeamApplication();
-
         }
-
     }
 );
-
 /* ESC */
-
 document.addEventListener(
     "keydown",
     event => {
-
         if(
             event.key === "Escape" &&
             teamModal.classList.contains(
                 "active"
             )
         ){
-
             closeTeamApplication();
-
         }
-
     }
 );
-
-/* =========================
+/* =========================================================
    TEAM FORM
-========================= */
-
+========================================================= */
 teamForm.addEventListener(
     "submit",
     event => {
-
         event.preventDefault();
-
         /*
          * Şimdilik frontend başarı ekranı.
-         * Google Sheets / Apps Script bağlantısı
-         * sonraki aşamada buraya bağlanabilir.
+         *
+         * Daha sonra Google Apps Script /
+         * Google Sheets bağlantısı buraya
+         * eklenebilir.
          */
-
         teamFormArea.style.display =
             "none";
-
         teamSuccess.classList.add(
             "active"
         );
-
     }
 );
-
+/* =========================================================
+   PREVENT EMPTY HASH JUMPS
+========================================================= */
+document
+    .querySelectorAll(
+        'a[href="#"]'
+    )
+    .forEach(
+        link => {
+            link.addEventListener(
+                "click",
+                event => {
+                    event.preventDefault();
+                }
+            );
+        }
+    );
+/* =========================================================
+   INTRO CLEANUP
+========================================================= */
+window.addEventListener(
+    "load",
+    () => {
+        setTimeout(
+            () => {
+                const intro =
+                    document.getElementById(
+                        "intro"
+                    );
+                if(intro){
+                    intro.style.pointerEvents =
+                        "none";
+                }
+            },
+            3900
+        );
+    }
+);
 </script>
-
 </body>
 </html>
