@@ -225,11 +225,13 @@ html.gated,html.gated body{overflow:hidden}
 html:not(.js-ready) .gate{display:none}
 @media(min-width:700px){.gate-actions{flex-direction:row;width:auto;justify-content:center}}
 .frame.need-tap:after{content:"DOKUN VE İZLE";position:absolute;inset:0;z-index:5;display:grid;place-items:center;background:#07050c99;font:800 clamp(1rem,4vw,1.5rem) var(--disp);letter-spacing:.06em;cursor:pointer}
-.show{position:relative;height:clamp(380px,70vw,680px);overflow:hidden;border:1px solid #ffffff2b;border-radius:24px;background:#0b0713;touch-action:pan-y}
+.show{position:relative;height:clamp(420px,56vw,720px);overflow:hidden;border:1px solid #ffffff2b;border-radius:24px;background:#0b0713;touch-action:pan-y}
 .show:after{content:"";position:absolute;inset:0;z-index:2;pointer-events:none;background:linear-gradient(to top,#07050ce0,transparent 45%)}
 .show .hud{inset:14px;z-index:3}
 .slide{position:absolute;inset:0;opacity:0;transition:opacity 1.3s ease}.slide.on{opacity:1}
-.slide img{width:100%;height:100%;object-fit:cover;transform:scale(1.02)}
+.slide:before{content:"";position:absolute;inset:-6%;background:var(--bg) center/cover;filter:blur(28px) brightness(.55)}
+.slide img{position:relative;width:100%;height:100%;object-fit:contain;transform:scale(1.02)}
+@media(max-width:699px){.show{height:auto;aspect-ratio:4/5}.slide img{object-fit:cover}}
 .slide.on img{animation:kb 8s ease-out forwards}
 @keyframes kb{to{transform:scale(1.14) translate(-1.5%,-1%)}}
 @keyframes fill5{from{width:0}to{width:100%}}
@@ -239,11 +241,12 @@ html:not(.js-ready) .gate{display:none}
 .show-btn{width:40px;height:40px;border:1px solid #ffffff33;border-radius:50%;background:#07050c99;font-size:20px;cursor:pointer}
 .show.single .show-btn,.show.single .show-prog{display:none}
 .show-empty{position:absolute;inset:0;display:grid;place-items:center;font:800 1.1rem var(--disp);color:#8c829b}
+.gate-actions .btn{min-width:240px;min-height:56px;font-size:11px}
 </style>
 </head>
 <body>
 <div class="prog" id="prog"></div><div class="glow" id="glow"></div>
-<div class="gate" id="gate" role="dialog" aria-label="VIBE EVENT giriş"><div class="gate-in"><div class="tag">Kırıkkale node · online</div><h2 class="gate-title"><span class="gt">ENTER</span><br>THE VIBE</h2><p class="gate-sub">EN İYİ DENEYİM İÇİN SESİ AÇ</p><div class="gate-actions"><button type="button" class="btn btn-p" id="enterSound">SESLİ GİR</button><button type="button" class="btn btn-s" id="enterQuiet">SESSİZ GİR</button></div></div></div>
+<div class="gate" id="gate" role="dialog" aria-label="VIBE EVENT giriş"><div class="gate-in"><div class="tag">Kırıkkale node · online</div><h2 class="gate-title"><span class="gt">ENTER</span><br>THE VIBE</h2><p class="gate-sub">EN İYİ DENEYİM İÇİN SESİ AÇ</p><div class="gate-actions"><button type="button" class="btn btn-p" id="enterSound">SESLİ GİR</button></div></div></div>
 
 <div class="intro" id="intro" aria-label="VIBE EVENT açılışı"><div class="boot">
  <p>&gt; VIBE_OS v2.6 <b>[OK]</b></p><p>&gt; FREKANS YÜKLENİYOR <b>[OK]</b></p><p>&gt; KIRIKKALE NODE <b>[ONLINE]</b></p><p>&gt; ENTER THE VIBE_</p>
@@ -762,8 +765,8 @@ const gate=document.getElementById("gate"),root=document.documentElement;
 const go=snd=>{if(!gate||gate.classList.contains("out"))return;
  if(snd){const b=document.querySelector(".snd");if(b&&!b.classList.contains("on"))b.click()}
  gate.classList.add("out");root.classList.remove("gated");setTimeout(()=>gate.remove(),1000)};
-const es=document.getElementById("enterSound"),eq=document.getElementById("enterQuiet");
-if(es)es.addEventListener("click",()=>go(true));if(eq)eq.addEventListener("click",()=>go(false));
+const es=document.getElementById("enterSound");
+if(es)es.addEventListener("click",()=>go(true));
 setTimeout(()=>{if(es&&gate&&gate.isConnected)es.focus({preventScroll:true})},3400);
 /* ANILAR SLAYT GÖSTERİSİ: DJ-TINA.jpeg + foto1.jpg, foto2.jpg ... (jpg/jpeg/png/webp) */
 const host=document.getElementById("show");if(!host)return;
@@ -780,7 +783,7 @@ function show(n){cur=(n+slides.length)%slides.length;slides.forEach((s,i)=>s.cla
  cnt.textContent=String(cur+1).padStart(2,"0")+" / "+String(slides.length).padStart(2,"0");restart()}
 function build(l){
  if(!l.length){stage.innerHTML='<div class="show-empty">FOTOĞRAFLAR YAKINDA</div>';cnt.textContent="00 / 00";return}
- l.forEach((im,i)=>{const d=document.createElement("div");d.className="slide";im.alt="VIBE EVENT anı "+(i+1);d.appendChild(im);stage.appendChild(d);slides.push(d)});
+ l.forEach((im,i)=>{const d=document.createElement("div");d.className="slide";im.alt="VIBE EVENT anı "+(i+1);d.style.setProperty("--bg",'url("'+im.src+'")');d.appendChild(im);stage.appendChild(d);slides.push(d)});
  host.classList.toggle("single",l.length<2);show(0)}
 document.getElementById("prev").addEventListener("click",()=>show(cur-1));
 document.getElementById("next").addEventListener("click",()=>show(cur+1));
