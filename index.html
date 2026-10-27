@@ -244,6 +244,20 @@ html:not(.js-ready) .gate{display:none}
 .gate-actions .btn{min-width:240px;min-height:56px;font-size:11px}
 .btn-t{border:1px solid #ff299990;background:#ff299918;color:#fff;box-shadow:0 0 24px #ff299933}
 .hero-ig{display:inline-flex;align-items:center;gap:8px;margin-top:20px;font:11px var(--mono);letter-spacing:.1em;color:#c1b9cc;text-decoration:none;transition:color .2s}.hero-ig:hover{color:var(--pk)}
+.seq{padding:22px 16px;border:1px solid #ffffff29;border-radius:24px;background:radial-gradient(ellipse at 0 0,#ff29992a,transparent 45%),radial-gradient(ellipse at 100% 100%,#40c8ff22,transparent 45%),#ffffff08}
+.seq-top{display:flex;flex-wrap:wrap;align-items:center;gap:10px;margin-bottom:22px}
+.seq-top .btn{min-width:0;flex:1 1 130px}
+.seq-bpm{display:flex;align-items:center;gap:10px;flex:2 1 230px;font:10px var(--mono);letter-spacing:.14em;color:#c5bbd2}
+.seq-bpm input{flex:1;accent-color:var(--pk)}.seq-bpm b{min-width:28px;color:#fff;font-weight:500}
+.seq-row{margin-bottom:12px}
+.seq-lb{display:block;margin-bottom:6px;font:9px var(--mono);letter-spacing:.2em;color:var(--c)}
+.seq-cells{display:flex;gap:3px}
+.seq-c{flex:1;min-width:0;height:38px;border:1px solid #ffffff22;border-radius:7px;background:#ffffff0a;cursor:pointer;transition:background .15s,box-shadow .15s,transform .1s}
+.seq-c.b{margin-left:6px}.seq-c.b:first-child{margin-left:0}
+.seq-c.on{background:var(--c);border-color:var(--c);box-shadow:0 0 14px var(--c)}
+.seq-c.cur{transform:translateY(-3px);border-color:#fff}
+.seq-c.on.cur{background:#fff;box-shadow:0 0 20px #fff}
+@media(min-width:700px){.seq{padding:34px}.seq-row{display:flex;align-items:center;gap:14px}.seq-lb{width:56px;margin:0}.seq-cells{flex:1}.seq-c{height:52px}}
 </style>
 </head>
 <body>
@@ -256,12 +270,12 @@ html:not(.js-ready) .gate{display:none}
 
 <header class="site-header" id="siteHeader"><div class="nav-inner">
  <a href="#home" class="brand"><span class="brand-mark"><img src="Paragraf metniniz.png" alt="" onerror="this.style.display='none'">V</span><span class="brand-name">VIBE EVENT</span></a>
- <nav class="desktop-nav"><a href="#events">EVENTS</a><a href="#archive">ARCHIVE</a><a href="#experience">EXPERIENCE</a><a href="#frequency">THE VIBE</a><a href="#collective">COLLAB</a><a href="#team">TEAM</a></nav>
+ <nav class="desktop-nav"><a href="#events">EVENTS</a><a href="#archive">ARCHIVE</a><a href="#experience">EXPERIENCE</a><a href="#beat">BEAT</a><a href="#frequency">THE VIBE</a><a href="#collective">COLLAB</a><a href="#team">TEAM</a></nav>
  <div class="nav-actions"><span class="clock" id="clock">--:--:--</span><a href="#events" class="nav-ticket">NEXT EVENT</a><button class="menu-toggle" id="menuButton" type="button" aria-label="Menüyü aç" aria-expanded="false"><span></span><span></span></button></div>
 </div></header>
 
 <div class="full-menu" id="mobileMenu" aria-hidden="true"><div class="full-menu-label">EXPLORE THE UNIVERSE</div>
- <ul class="full-menu-links"><li><a href="#events">EVENTS</a></li><li><a href="#archive">ARCHIVE</a></li><li><a href="#experience">EXPERIENCE</a></li><li><a href="#frequency">THE VIBE</a></li><li><a href="#collective">COLLABORATE</a></li><li><a href="#team">THE TEAM</a></li></ul></div>
+ <ul class="full-menu-links"><li><a href="#events">EVENTS</a></li><li><a href="#archive">ARCHIVE</a></li><li><a href="#experience">EXPERIENCE</a></li><li><a href="#beat">BEAT MAKER</a></li><li><a href="#frequency">THE VIBE</a></li><li><a href="#collective">COLLABORATE</a></li><li><a href="#team">THE TEAM</a></li></ul></div>
 
 <main>
 <section class="hero" id="home">
@@ -311,10 +325,19 @@ html:not(.js-ready) .gate{display:none}
   <div class="cap"><span>MUSIC · PEOPLE · ENERGY</span><span>● REC</span></div></div>
 </div></section>
 
+<section class="section reveal" id="beat"><div class="container">
+ <div class="tag">04 / Beat Maker</div>
+ <div class="sec-head"><h2 class="sec-title">KENDİ<br><span class="gt">RİTMİNİ YAP.</span></h2><p class="sec-desc">Karelere dokun, kendi ritmini kur. Halka senin vuruşuna göre atar.</p></div>
+ <div class="seq">
+  <div class="seq-top"><button type="button" class="btn btn-p" id="seqPlay">RİTMİ BAŞLAT</button><label class="seq-bpm">TEMPO <input type="range" id="seqBpm" min="90" max="160" value="122" aria-label="Tempo"><b id="seqBpmV">122</b></label><button type="button" class="btn btn-s" id="seqRand">KARIŞTIR</button><button type="button" class="btn btn-s" id="seqReset">SIFIRLA</button></div>
+  <div id="seqGrid"></div>
+ </div>
+</div></section>
+
 <section class="section frequency-section reveal" id="frequency">
  <div class="frequency-atmosphere" aria-hidden="true"></div>
  <div class="container">
-  <div class="tag">04 / THE FREQUENCY · THE VIBE CODE</div>
+  <div class="tag">05 / THE FREQUENCY · THE VIBE CODE</div>
   <div class="frequency-heading"><h2 class="frequency-title">MORE THAN<br><span class="gradient-text">THE MUSIC.</span></h2><p class="frequency-intro">Bir geceyi unutulmaz yapan tek bir şey değil. Ses, ışık, kalabalık ve eve dönerken bile üzerinde kalan o his.</p></div>
   <div class="frequency-grid">
    <article class="frequency-card frequency-card-sound reveal"><div class="frequency-card-top"><span>01 / SOUND</span><span class="frequency-glyph" aria-hidden="true">)))</span></div><div class="frequency-visual sound-visual" aria-hidden="true"><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i></div><h3>FEEL THE<br>LOW END.</h3><p>Ritmi sadece duymadığın, içinde hissettiğin anlar.</p></article>
@@ -327,7 +350,7 @@ html:not(.js-ready) .gate{display:none}
 
 <section class="section night-section reveal" id="nightflow">
  <div class="container">
-  <div class="tag">05 / THE NIGHT FLOW · FROM FIRST BEAT TO LAST LIGHT</div>
+  <div class="tag">06 / THE NIGHT FLOW · FROM FIRST BEAT TO LAST LIGHT</div>
   <div class="night-heading"><h2 class="night-title">A NIGHT THAT<br><span class="gradient-text">MOVES YOU.</span></h2><p class="section-description">Kapıdan içeri girdiğin andan son şarkıya kadar: VIBE'ın hikâyesi birlikte oluşur.</p></div>
   <div class="night-track">
    <article class="night-stop reveal"><div class="night-stop-line"><span>PHASE 01</span><span class="night-stop-dot"></span></div><div class="night-stop-art night-art-arrive"><span>ENTRY</span><i></i><i></i><i></i></div><div class="night-stop-copy"><h3>THE ARRIVAL.</h3><p>İlk karşılaşmalar, mekânın enerjisi ve gecenin başlamak üzere olduğu o his.</p></div></article>
@@ -357,7 +380,7 @@ html:not(.js-ready) .gate{display:none}
 </section>
 
 <section class="section reveal" id="team"><div class="container">
- <div class="tag">07 / Join us</div><br>
+ <div class="tag">08 / Join us</div><br>
  <div class="team-panel"><div><h2 class="sec-title">WANT TO BE PART OF <span class="gt">VIBE?</span></h2><p class="sec-desc" style="margin-top:18px">Organizasyon, sosyal medya, tasarım, prodüksiyon veya etkinlik operasyonlarında bizimle çalışmak ister misin?</p><div class="chips"><span>ORGANIZATION</span><span>CREATIVE</span><span>SOCIAL MEDIA</span><span>PRODUCTION</span></div></div>
   <div><p class="sec-desc">Yeni fikirler, yeni insanlar ve aynı frekansta buluşan bir ekip. Bir sonraki hikâyeyi birlikte yazalım.</p><button type="button" class="join-button" id="joinTeamButton">JOIN THE TEAM</button></div></div>
 </div></section>
@@ -378,7 +401,7 @@ html:not(.js-ready) .gate{display:none}
 
 <footer class="site-footer"><div class="container"><div class="ft">
  <div><div class="brand"><span class="brand-mark"><img src="Paragraf metniniz.png" alt="" onerror="this.style.display='none'">V</span><span class="brand-name">VIBE EVENT</span></div><p class="ft-note">Müzik, enerji ve unutulmaz geceler. Kırıkkale'de yeni bir etkinlik kültürü.</p></div>
- <nav class="ft-links"><a href="#events">EVENTS</a><a href="#archive">ARCHIVE</a><a href="#experience">EXPERIENCE</a><a href="#frequency">THE VIBE</a><a href="#collective">COLLABORATE</a><a href="#team">JOIN THE TEAM</a><a href="https://www.instagram.com/vibe.eventt/" target="_blank" rel="noopener noreferrer">INSTAGRAM</a><button type="button" id="shareBtn" class="share-btn">PAYLAŞ</button></nav>
+ <nav class="ft-links"><a href="#events">EVENTS</a><a href="#archive">ARCHIVE</a><a href="#experience">EXPERIENCE</a><a href="#beat">BEAT</a><a href="#frequency">THE VIBE</a><a href="#collective">COLLABORATE</a><a href="#team">JOIN THE TEAM</a><a href="https://www.instagram.com/vibe.eventt/" target="_blank" rel="noopener noreferrer">INSTAGRAM</a><button type="button" id="shareBtn" class="share-btn">PAYLAŞ</button></nav>
 </div><div class="fb"><span>© 2026 VIBE EVENT</span><span>KIRIKKALE · TURKEY</span><span>INDEPENDENT EVENT CULTURE · KIRIKKALE, TURKEY</span></div></div></footer>
 
 <script>
@@ -685,7 +708,7 @@ if(sb)sb.addEventListener("click",async()=>{const data={title:document.title,tex
 <script>
 (function(){
 const calm=matchMedia("(prefers-reduced-motion:reduce)").matches;
-const secs=[["home","HOME","#f2f5ff"],["events","EVENTS","#ffb3dc"],["archive","ARCHIVE","#ffc7a3"],["experience","EXPERIENCE","#9fe3ff"],["frequency","THE VIBE","#c9a6ff"],["nightflow","NIGHT FLOW","#b8a4ff"],["collective","COLLAB","#ff9ad0"],["team","TEAM","#a8f0ff"]];
+const secs=[["home","HOME","#f2f5ff"],["events","EVENTS","#ffb3dc"],["archive","ARCHIVE","#ffc7a3"],["experience","EXPERIENCE","#9fe3ff"],["beat","BEAT MAKER","#ff9ad0"],["frequency","THE VIBE","#c9a6ff"],["nightflow","NIGHT FLOW","#b8a4ff"],["collective","COLLAB","#ff9ad0"],["team","TEAM","#a8f0ff"]];
 const nav=document.createElement("nav");nav.className="dots";nav.setAttribute("aria-label","Bölümler");
 secs.forEach(a=>{const l=document.createElement("a");l.href="#"+a[0];l.dataset.l=a[1];l.setAttribute("aria-label",a[1]);nav.appendChild(l)});
 document.body.appendChild(nav);
@@ -723,17 +746,21 @@ const tt=document.querySelector(".ticker-track"),tk=document.querySelector(".tic
 const AC=window.AudioContext||window.webkitAudioContext;if(!AC)return;
 const btn=document.createElement("button");btn.type="button";btn.className="snd";btn.setAttribute("aria-pressed","false");
 btn.innerHTML='<span class="snd-bars"><i></i><i></i><i></i><i></i></span><span>SOUND OFF</span>';document.body.appendChild(btn);
-const label=btn.lastChild,BPM=122,sp=60/BPM/4,bassN=[55,55,65.4,55,73.4,55,65.4,49],arp=[220,261.6,329.6,440,329.6,261.6,392,293.7];
+let BPM=122,sp=60/BPM/4;const label=btn.lastChild,bassN=[55,55,65.4,55,73.4,55,65.4,49],arp=[220,261.6,329.6,440,329.6,261.6,392,293.7];
 let ctx,master,an,data,nb,delay,arpBus,timer,offT,on=false,step=0,nextT=0,bass=0;
 const env=(g,t,a,pk,d)=>{g.gain.cancelScheduledValues(t);g.gain.setValueAtTime(0,t);g.gain.linearRampToValueAtTime(pk,t+a);g.gain.exponentialRampToValueAtTime(.0001,t+a+d)};
 function kick(t){const o=ctx.createOscillator(),g=ctx.createGain();o.frequency.setValueAtTime(160,t);o.frequency.exponentialRampToValueAtTime(42,t+.14);env(g,t,.002,1,.38);o.connect(g);g.connect(master);o.start(t);o.stop(t+.42)}
 function noise(t,type,fr,pk,d){const s=ctx.createBufferSource();s.buffer=nb;const fl=ctx.createBiquadFilter();fl.type=type;fl.frequency.value=fr;const g=ctx.createGain();env(g,t,.001,pk,d);s.connect(fl);fl.connect(g);g.connect(master);s.start(t);s.stop(t+d+.05)}
 function tone(t,type,fr,pk,d,cut,dest){const o=ctx.createOscillator(),fl=ctx.createBiquadFilter(),g=ctx.createGain();o.type=type;o.frequency.value=fr;fl.type="lowpass";fl.frequency.value=cut;env(g,t,.005,pk,d);o.connect(fl);fl.connect(g);g.connect(dest||master);o.start(t);o.stop(t+d+.05)}
+const grid=[[0,4,8,12],[4,12],[2,6,10,14],[2,6,10,14],[1,3,5,7,9,11,13,15]].map(a=>{const r=Array(16).fill(false);a.forEach(i=>r[i]=true);return r});
+const q=[];let cur=-1,paint=()=>{};
 function play(i,t){
- if(i%4===0)kick(t);
- if(i%4===2){noise(t,"highpass",7500,.14,.07);tone(t,"sawtooth",bassN[(i>>1)%8],.5,.2,500)}
- if(i%8===4)noise(t,"bandpass",1800,.35,.14);
- if(i%2===1)tone(t,"triangle",arp[(i*3)%8]*(i%16>7?1.5:1),.16,.2,3500,arpBus);
+ q.push({t:t,i:i});
+ if(grid[0][i])kick(t);
+ if(grid[1][i])noise(t,"bandpass",1800,.35,.14);
+ if(grid[2][i])noise(t,"highpass",7500,.14,.07);
+ if(grid[3][i])tone(t,"sawtooth",bassN[(i>>1)%8],.5,.2,500);
+ if(grid[4][i])tone(t,"triangle",arp[(i*3)%8]*(i%16>7?1.5:1),.16,.2,3500,arpBus);
 }
 function sched(){while(nextT<ctx.currentTime+.14){play(step%16,nextT);nextT+=sp;step++}}
 function bars(){return document.querySelectorAll("#eq i")}
@@ -747,17 +774,43 @@ async function toggle(){
   await ctx.resume();clearInterval(timer);nextT=ctx.currentTime+.08;step=0;timer=setInterval(sched,25);
   master.gain.setTargetAtTime(.75,ctx.currentTime,.25);on=true;
  }else{
-  on=false;master.gain.setTargetAtTime(0,ctx.currentTime,.15);offT=setTimeout(()=>{clearInterval(timer);ctx.suspend()},700);
+  on=false;q.length=0;cur=-1;paint();master.gain.setTargetAtTime(0,ctx.currentTime,.15);offT=setTimeout(()=>{clearInterval(timer);ctx.suspend()},700);
   bars().forEach(el=>{el.style.animation="";el.style.height=""});
  }
- btn.setAttribute("aria-pressed",String(on));btn.classList.toggle("on",on);label.textContent=on?"SOUND ON":"SOUND OFF";
+ btn.setAttribute("aria-pressed",String(on));btn.classList.toggle("on",on);label.textContent=on?"SOUND ON":"SOUND OFF";document.dispatchEvent(new Event("vibe-audio"));
 }
 btn.addEventListener("click",toggle);
 (function vis(){requestAnimationFrame(vis);let b=0;
+ while(q.length&&ctx&&q[0].t<=ctx.currentTime){cur=q.shift().i;paint()}
  if(on&&an){an.getByteFrequencyData(data);b=(data[0]+data[1]+data[2])/3/255;
   bars().forEach((el,i)=>{el.style.animation="none";el.style.height=Math.max(8,data[1+Math.floor(Math.pow(i/28,1.6)*110)]/255*100)+"%"})}
  bass+=(b-bass)*.4;window.__vibeBass=bass;document.documentElement.style.setProperty("--bass",bass.toFixed(3));
 })();
+
+/* BEAT MAKER: kendi ritmini kur */
+const gridEl=document.getElementById("seqGrid");
+if(gridEl){
+ const names=["KICK","CLAP","HAT","BAS","ARP"],cols=["#ff2998","#a14dff","#40c8ff","#ff824d","#ffffff"],cells=[];
+ grid.forEach((row,r)=>{
+  const line=document.createElement("div");line.className="seq-row";line.style.setProperty("--c",cols[r]);
+  const lb=document.createElement("span");lb.className="seq-lb";lb.textContent=names[r];line.appendChild(lb);
+  const wrap=document.createElement("div");wrap.className="seq-cells";
+  row.forEach((v,i)=>{const c=document.createElement("button");c.type="button";c.className="seq-c"+(v?" on":"")+(i%4===0?" b":"");
+   c.setAttribute("aria-label",names[r]+" "+(i+1));c.setAttribute("aria-pressed",String(v));
+   c.addEventListener("click",()=>{grid[r][i]=!grid[r][i];c.classList.toggle("on",grid[r][i]);c.setAttribute("aria-pressed",String(grid[r][i]));if(!on)toggle()});
+   (cells[i]=cells[i]||[]).push(c);wrap.appendChild(c)});
+  line.appendChild(wrap);gridEl.appendChild(line)});
+ const refresh=()=>cells.forEach((col,i)=>col.forEach((c,r)=>{c.classList.toggle("on",grid[r][i]);c.setAttribute("aria-pressed",String(grid[r][i]))}));
+ paint=()=>cells.forEach((col,i)=>col.forEach(c=>c.classList.toggle("cur",i===cur)));
+ const pb=document.getElementById("seqPlay"),bi=document.getElementById("seqBpm"),bv=document.getElementById("seqBpmV");
+ const sync=()=>{if(pb)pb.textContent=on?"DURDUR":"RİTMİ BAŞLAT"};
+ document.addEventListener("vibe-audio",sync);
+ if(pb)pb.addEventListener("click",()=>toggle());
+ if(bi)bi.addEventListener("input",()=>{BPM=+bi.value;sp=60/BPM/4;if(delay)delay.delayTime.value=sp*3;bv.textContent=BPM});
+ const rs=document.getElementById("seqReset"),rd=document.getElementById("seqRand");
+ if(rs)rs.addEventListener("click",()=>{grid.forEach(r=>r.fill(false));refresh()});
+ if(rd)rd.addEventListener("click",()=>{const p=[.12,.1,.4,.3,.35];grid.forEach((r,k)=>{for(let i=0;i<16;i++)r[i]=(k===0&&i%4===0)||(k===1&&(i===4||i===12))||Math.random()<p[k]});refresh();if(!on)toggle()});
+}
 })();
 </script>
 <script>
