@@ -13,6 +13,7 @@
 
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=DM+Mono:wght@400;500&family=Plus+Jakarta+Sans:wght@400;600;800;900&family=Unbounded:wght@500;800&display=swap" rel="stylesheet">
+<script>document.documentElement.classList.add("gated")</script>
 <style>
 :root{--pink:#ff2998;--purple:#a14dff;--blue:#40c8ff;--orange:#ff824d;--white:#fbf8ff;--muted:#a79db5;--line:#ffffff20;--panel:#100a19;--ease:cubic-bezier(.16,1,.3,1);--font2:var(--font);--bg:#05030a;--w:#fbf8ff;--m:#a79db5;--pk:#ff2998;--pu:#a14dff;--bl:#40c8ff;--or:#ff824d;--ln:#ffffff1f;--mono:"DM Mono",monospace;--font:"Plus Jakarta Sans",sans-serif;--disp:"Unbounded","Plus Jakarta Sans",sans-serif}
 @property --a{syntax:"<angle>";inherits:false;initial-value:0deg}
@@ -213,10 +214,36 @@ html:not(.js-ready) .reveal{opacity:1;transform:none;filter:none}
 .hero-glow{scale:calc(1 + var(--bass,0)*.16)}
 .holo{box-shadow:0 0 calc(24px + var(--bass,0)*90px) #ff29984d}
 .ticker{will-change:transform}
+html.gated,html.gated body{overflow:hidden}
+.gate{position:fixed;inset:0;z-index:10050;display:grid;place-items:center;padding:24px;text-align:center;background:radial-gradient(ellipse at 50% 40%,#2a0c3a,#05030a 70%);animation:gateIn .7s 2.7s both}
+.gate.out{animation:gateOut .9s forwards;pointer-events:none}
+@keyframes gateIn{from{opacity:0;visibility:hidden}to{opacity:1;visibility:visible}}
+@keyframes gateOut{from{opacity:1;transform:scale(1)}to{opacity:0;visibility:hidden;transform:scale(1.1)}}
+.gate-title{margin:22px 0;font:800 clamp(2.6rem,12vw,7rem)/.95 var(--disp);letter-spacing:-.05em}
+.gate-sub{font:11px var(--mono);letter-spacing:.14em;color:var(--m)}
+.gate-actions{display:flex;flex-direction:column;gap:12px;width:min(100%,320px);margin:28px auto 0}
+html:not(.js-ready) .gate{display:none}
+@media(min-width:700px){.gate-actions{flex-direction:row;width:auto;justify-content:center}}
+.frame.need-tap:after{content:"DOKUN VE İZLE";position:absolute;inset:0;z-index:5;display:grid;place-items:center;background:#07050c99;font:800 clamp(1rem,4vw,1.5rem) var(--disp);letter-spacing:.06em;cursor:pointer}
+.show{position:relative;height:clamp(380px,70vw,680px);overflow:hidden;border:1px solid #ffffff2b;border-radius:24px;background:#0b0713;touch-action:pan-y}
+.show:after{content:"";position:absolute;inset:0;z-index:2;pointer-events:none;background:linear-gradient(to top,#07050ce0,transparent 45%)}
+.show .hud{inset:14px;z-index:3}
+.slide{position:absolute;inset:0;opacity:0;transition:opacity 1.3s ease}.slide.on{opacity:1}
+.slide img{width:100%;height:100%;object-fit:cover;transform:scale(1.02)}
+.slide.on img{animation:kb 8s ease-out forwards}
+@keyframes kb{to{transform:scale(1.14) translate(-1.5%,-1%)}}
+@keyframes fill5{from{width:0}to{width:100%}}
+.show-ui{position:absolute;left:18px;right:18px;bottom:16px;z-index:4;display:flex;align-items:center;gap:12px;font:10px var(--mono);letter-spacing:.14em}
+.show-prog{flex:1;height:2px;border-radius:2px;background:#ffffff26;overflow:hidden}
+.show-prog b{display:block;height:100%;width:0;background:linear-gradient(90deg,var(--pk),var(--bl));animation:fill5 5.2s linear forwards}
+.show-btn{width:40px;height:40px;border:1px solid #ffffff33;border-radius:50%;background:#07050c99;font-size:20px;cursor:pointer}
+.show.single .show-btn,.show.single .show-prog{display:none}
+.show-empty{position:absolute;inset:0;display:grid;place-items:center;font:800 1.1rem var(--disp);color:#8c829b}
 </style>
 </head>
 <body>
 <div class="prog" id="prog"></div><div class="glow" id="glow"></div>
+<div class="gate" id="gate" role="dialog" aria-label="VIBE EVENT giriş"><div class="gate-in"><div class="tag">Kırıkkale node · online</div><h2 class="gate-title"><span class="gt">ENTER</span><br>THE VIBE</h2><p class="gate-sub">EN İYİ DENEYİM İÇİN SESİ AÇ</p><div class="gate-actions"><button type="button" class="btn btn-p" id="enterSound">SESLİ GİR</button><button type="button" class="btn btn-s" id="enterQuiet">SESSİZ GİR</button></div></div></div>
 
 <div class="intro" id="intro" aria-label="VIBE EVENT açılışı"><div class="boot">
  <p>&gt; VIBE_OS v2.6 <b>[OK]</b></p><p>&gt; FREKANS YÜKLENİYOR <b>[OK]</b></p><p>&gt; KIRIKKALE NODE <b>[ONLINE]</b></p><p>&gt; ENTER THE VIBE_</p>
@@ -280,7 +307,7 @@ html:not(.js-ready) .reveal{opacity:1;transform:none;filter:none}
 <section class="section reveal" id="experience"><div class="container">
  <div class="tag">03 / Experience</div>
  <div class="sec-head"><h2 class="sec-title">FEEL THE<br><span class="gt">VIBE.</span></h2><p class="sec-desc">The music. The crowd. The lights. The moments you don't forget.</p></div>
- <div class="frame"><video id="hypeVideo" muted loop playsinline preload="none" poster="DJ-TINA.jpeg"><source data-src="./VIBE-HYPE.mp4" type="video/mp4"></video>
+ <div class="frame"><video id="hypeVideo" muted loop playsinline preload="metadata" poster="DJ-TINA.jpeg"><source src="./VIBE-HYPE.mp4" type="video/mp4"></video>
   <div class="hype-placeholder" id="hypePlaceholder"><div><h3>THIS IS VIBE.</h3><p>Etkinlik görüntüleri ve gecenin enerjisi.</p></div></div>
   <div class="hud"><i></i><i></i><i></i><i></i></div>
   <div class="cap"><span>MUSIC · PEOPLE · ENERGY</span><span>● REC</span></div></div>
@@ -288,12 +315,8 @@ html:not(.js-ready) .reveal{opacity:1;transform:none;filter:none}
 
 <section class="section reveal" id="archive"><div class="container">
  <div class="tag">04 / Archive</div>
- <div class="sec-head"><h2 class="sec-title">WE'VE<br><span class="gt">BEEN THERE.</span></h2><p class="sec-desc">Her gece bir hikâye. Kaydır, anıları gez.</p></div>
- <div class="rail">
-  <article class="card"><div class="bg t"></div><div class="ov"></div><div class="ix">ARCHIVE / 001</div><div class="in"><small>2026 · VIBE EVENT</small><h3>OPEN YOUR EYES</h3><p>The beginning of another story.</p></div></article>
-  <article class="card"><div class="bg f1"></div><div class="ov"></div><div class="ix">ARCHIVE / 002</div><div class="in"><small>VIBE EVENT</small><h3>MORE SOON.</h3><p>New nights are on the way.</p></div></article>
-  <article class="card"><div class="bg f2"></div><div class="ov"></div><div class="ix">ARCHIVE / 003</div><div class="in"><small>VIBE ARCHIVE</small><h3>STAY TUNED.</h3><p>The next chapter starts soon.</p></div></article>
- </div>
+ <div class="sec-head"><h2 class="sec-title">WE'VE<br><span class="gt">BEEN THERE.</span></h2><p class="sec-desc">Partiden kareler. Her gece bir hikâye.</p></div>
+ <div class="show" id="show"><div class="show-stage"></div><div class="hud"><i></i><i></i><i></i><i></i></div><div class="show-ui"><span class="show-count">-- / --</span><div class="show-prog"><b></b></div><button class="show-btn" id="prev" type="button" aria-label="Önceki">‹</button><button class="show-btn" id="next" type="button" aria-label="Sonraki">›</button></div></div>
 </div></section>
 
 <section class="section night-section reveal" id="nightflow">
@@ -320,7 +343,7 @@ html:not(.js-ready) .reveal{opacity:1;transform:none;filter:none}
     <h2 class="collab-title">LET'S MAKE<br><span class="gradient-text">SOME NOISE.</span></h2>
     <p>DJ misin, mekân mı işletiyorsun, içerik mi üretiyorsun ya da VIBE'la bir fikir paylaşmak mı istiyorsun? Yeni iş birliklerine açığız.</p>
     <div class="collab-tags"><span>ARTISTS</span><span>VENUES</span><span>CREATORS</span><span>BRANDS</span></div>
-    <a class="collab-cta" href="https://www.instagram.com/vibe.eventt/" target="_blank" rel="noopener noreferrer"><span>LET'S TALK ON INSTAGRAM</span><span aria-hidden="true">↗</span></a>
+    <a class="collab-cta" href="https://www.instagram.com/vibe.eventt/" target="_blank" rel="noopener noreferrer"><span>LET'S TALK ON INSTAGRAM</span><span aria-hidden="true"></span></a>
    </div>
    <div class="collab-side" aria-hidden="true"><div class="collab-disc"><div class="collab-disc-label">VIBE<br>EVENT</div><div class="collab-disc-hole"></div></div><div class="collab-side-caption">INDEPENDENT EVENT CULTURE<br>KIRIKKALE · TURKEY</div></div>
   </div>
@@ -344,12 +367,12 @@ html:not(.js-ready) .reveal{opacity:1;transform:none;filter:none}
   <div class="team-field"><label for="ta">Hangi Alanda Yer Almak İstiyorsun?</label><select id="ta" name="area" required><option value="" disabled selected>Bir alan seç</option><option>Organizasyon</option><option>Sosyal Medya</option><option>Tasarım</option><option>Fotoğraf / Video</option><option>Prodüksiyon</option><option>DJ / Müzik</option><option>Gönüllü / Etkinlik Ekibi</option><option>Diğer</option></select></div>
   <div class="team-field"><label for="tb">Bize Biraz Kendinden Bahset</label><textarea id="tb" name="about" placeholder="Neler yapıyorsun, neden VIBE'ın parçası olmak istiyorsun?" required></textarea></div>
   <button type="submit" class="team-submit">SEND APPLICATION</button><div class="note">Gönderince başvurun kopyalanır, Instagram DM'inden bize iletirsin.</div></form></div>
- <div class="team-success" id="teamSuccess"><h3>BAŞVURUN HAZIR ✓</h3><p>Metni kopyaladık. Instagram'da bize DM olarak yapıştırman yeterli.</p><textarea readonly id="appText" style="width:100%;min-height:130px;margin-top:14px;padding:12px;border:1px solid #ffffff21;border-radius:12px;background:#ffffff0b;font-size:11px"></textarea><a class="btn btn-p" href="https://ig.me/m/vibe.eventt" target="_blank" rel="noopener noreferrer" style="margin-top:16px">INSTAGRAM'DAN GÖNDER ↗</a></div>
+ <div class="team-success" id="teamSuccess"><h3>BAŞVURUN HAZIR ✓</h3><p>Metni kopyaladık. Instagram'da bize DM olarak yapıştırman yeterli.</p><textarea readonly id="appText" style="width:100%;min-height:130px;margin-top:14px;padding:12px;border:1px solid #ffffff21;border-radius:12px;background:#ffffff0b;font-size:11px"></textarea><a class="btn btn-p" href="https://ig.me/m/vibe.eventt" target="_blank" rel="noopener noreferrer" style="margin-top:16px">INSTAGRAM'DAN GÖNDER</a></div>
 </div></div>
 
 <footer class="site-footer"><div class="container"><div class="ft">
  <div><div class="brand"><span class="brand-mark"><img src="Paragraf metniniz.png" alt="" onerror="this.style.display='none'">V</span><span class="brand-name">VIBE EVENT</span></div><p class="ft-note">Müzik, enerji ve unutulmaz geceler. Kırıkkale'de yeni bir etkinlik kültürü.</p></div>
- <nav class="ft-links"><a href="#events">EVENTS</a><a href="#frequency">THE VIBE</a><a href="#experience">EXPERIENCE</a><a href="#archive">ARCHIVE</a><a href="#collective">COLLABORATE</a><a href="#team">JOIN THE TEAM</a><a href="https://www.instagram.com/vibe.eventt/" target="_blank" rel="noopener noreferrer">INSTAGRAM</a><button type="button" id="shareBtn" class="share-btn">PAYLAŞ ↗</button></nav>
+ <nav class="ft-links"><a href="#events">EVENTS</a><a href="#frequency">THE VIBE</a><a href="#experience">EXPERIENCE</a><a href="#archive">ARCHIVE</a><a href="#collective">COLLABORATE</a><a href="#team">JOIN THE TEAM</a><a href="https://www.instagram.com/vibe.eventt/" target="_blank" rel="noopener noreferrer">INSTAGRAM</a><button type="button" id="shareBtn" class="share-btn">PAYLAŞ</button></nav>
 </div><div class="fb"><span>© 2026 VIBE EVENT</span><span>KIRIKKALE · TURKEY</span><span>INDEPENDENT EVENT CULTURE · KIRIKKALE, TURKEY</span></div></div></footer>
 
 <script>
@@ -635,11 +658,19 @@ if(fine&&!calm){
   b.addEventListener("pointerleave",()=>{b.style.transform=""});
  });
 }
-const v=document.getElementById("hypeVideo");
-if(v&&"IntersectionObserver" in window)new IntersectionObserver(en=>{
- if(en[0].isIntersecting){const s=v.querySelector("source");if(s&&s.dataset.src){s.src=s.dataset.src;delete s.dataset.src;v.load();}v.play().catch(()=>{});}else v.pause();
-},{rootMargin:"300px"}).observe(v);
-else if(v){const s=v.querySelector("source");if(s&&s.dataset.src){s.src=s.dataset.src;v.load();v.play().catch(()=>{});}}
+const v=document.getElementById("hypeVideo"),fr=v&&v.closest(".frame");
+if(v){
+ const alt=["vibe-hype.mp4","VIBE-HYPE.MP4","VIBE-HYPE.mov","vibe-hype.mov","VIBE-HYPE.webm"];let ni=0,vis=false;
+ const src=v.querySelector("source");
+ if(src)src.addEventListener("error",()=>{if(ni>=alt.length){console.warn("VIBE video bulunamadi veya oynatilamiyor. Denenen adlar: VIBE-HYPE.mp4, "+alt.join(", "));return}
+  const u=alt[ni++];src.src="./"+u;src.type=/webm$/i.test(u)?"video/webm":/mov$/i.test(u)?"video/quicktime":"video/mp4";v.load();v.play().catch(()=>{})});
+ const tap=()=>{if(fr&&vis&&v.paused&&v.readyState>=2)fr.classList.add("need-tap")};
+ v.addEventListener("loadeddata",()=>setTimeout(tap,1000));
+ v.addEventListener("playing",()=>fr&&fr.classList.remove("need-tap"));
+ if(fr)fr.addEventListener("click",()=>{if(fr.classList.contains("need-tap"))v.play().then(()=>fr.classList.remove("need-tap")).catch(()=>{})});
+ if("IntersectionObserver" in window)new IntersectionObserver(en=>{vis=en[0].isIntersecting;if(vis)v.play().catch(()=>{});else v.pause()},{rootMargin:"200px"}).observe(v);
+ else v.play().catch(()=>{});
+}
 const sb=document.getElementById("shareBtn");
 if(sb)sb.addEventListener("click",async()=>{const data={title:document.title,text:"VIBE EVENT — Kırıkkale'de müzik, enerji ve unutulmaz geceler.",url:location.href};
  try{if(navigator.share){await navigator.share(data);return}await navigator.clipboard.writeText(data.url);toast("Link kopyalandı ✓")}catch(e){}});
@@ -721,6 +752,44 @@ btn.addEventListener("click",toggle);
   bars().forEach((el,i)=>{el.style.animation="none";el.style.height=Math.max(8,data[1+Math.floor(Math.pow(i/28,1.6)*110)]/255*100)+"%"})}
  bass+=(b-bass)*.4;window.__vibeBass=bass;document.documentElement.style.setProperty("--bass",bass.toFixed(3));
 })();
+})();
+</script>
+<script>
+(function(){
+const calm=matchMedia("(prefers-reduced-motion:reduce)").matches;
+/* ENTER KAPISI */
+const gate=document.getElementById("gate"),root=document.documentElement;
+const go=snd=>{if(!gate||gate.classList.contains("out"))return;
+ if(snd){const b=document.querySelector(".snd");if(b&&!b.classList.contains("on"))b.click()}
+ gate.classList.add("out");root.classList.remove("gated");setTimeout(()=>gate.remove(),1000)};
+const es=document.getElementById("enterSound"),eq=document.getElementById("enterQuiet");
+if(es)es.addEventListener("click",()=>go(true));if(eq)eq.addEventListener("click",()=>go(false));
+setTimeout(()=>{if(es&&gate&&gate.isConnected)es.focus({preventScroll:true})},3400);
+/* ANILAR SLAYT GÖSTERİSİ: DJ-TINA.jpeg + foto1.jpg, foto2.jpg ... (jpg/jpeg/png/webp) */
+const host=document.getElementById("show");if(!host)return;
+const stage=host.querySelector(".show-stage"),cnt=host.querySelector(".show-count"),bar=host.querySelector(".show-prog b");
+const EXT=["jpg","jpeg","png","webp"],MAX=20,DUR=5200;
+let slides=[],cur=0,timer,paused=false,vis=false,started=false;
+const probe=u=>new Promise(r=>{const im=new Image();im.onload=()=>r(im);im.onerror=()=>r(null);im.src=u});
+async function base(b){for(const e of EXT){const im=await probe(b+"."+e);if(im)return im}return null}
+async function load(){const l=[];const f=await probe("DJ-TINA.jpeg");if(f)l.push(f);
+ let miss=0;for(let i=1;i<=MAX&&miss<2;i++){const im=await base("foto"+i);if(im){l.push(im);miss=0}else miss++}return l}
+function restart(){bar.style.animation="none";void bar.offsetWidth;bar.style.animation="";clearTimeout(timer);
+ if(slides.length>1&&!paused&&!calm)timer=setTimeout(()=>{vis?show(cur+1):restart()},DUR)}
+function show(n){cur=(n+slides.length)%slides.length;slides.forEach((s,i)=>s.classList.toggle("on",i===cur));
+ cnt.textContent=String(cur+1).padStart(2,"0")+" / "+String(slides.length).padStart(2,"0");restart()}
+function build(l){
+ if(!l.length){stage.innerHTML='<div class="show-empty">FOTOĞRAFLAR YAKINDA</div>';cnt.textContent="00 / 00";return}
+ l.forEach((im,i)=>{const d=document.createElement("div");d.className="slide";im.alt="VIBE EVENT anı "+(i+1);d.appendChild(im);stage.appendChild(d);slides.push(d)});
+ host.classList.toggle("single",l.length<2);show(0)}
+document.getElementById("prev").addEventListener("click",()=>show(cur-1));
+document.getElementById("next").addEventListener("click",()=>show(cur+1));
+host.addEventListener("pointerenter",e=>{if(e.pointerType==="mouse"){paused=true;clearTimeout(timer);bar.style.animationPlayState="paused"}});
+host.addEventListener("pointerleave",e=>{if(e.pointerType==="mouse"){paused=false;bar.style.animationPlayState="";restart()}});
+let x0=null;host.addEventListener("pointerdown",e=>{x0=e.clientX});
+addEventListener("pointerup",e=>{if(x0===null)return;const dx=e.clientX-x0;x0=null;if(Math.abs(dx)>45&&slides.length>1)show(cur+(dx<0?1:-1))});
+if("IntersectionObserver" in window)new IntersectionObserver(en=>{vis=en[0].isIntersecting;if(vis&&!started){started=true;load().then(build)}},{rootMargin:"400px"}).observe(host);
+else load().then(build);
 })();
 </script>
 </body>
