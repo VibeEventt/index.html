@@ -89,15 +89,15 @@ body.menu-open,body.modal-open{overflow:hidden}
 .hero-content{width:min(100%,980px)}
 .status{display:inline-flex;align-items:center;gap:9px;padding:9px 13px;border:1px solid #ffffff29;border-radius:999px;background:#ffffff09;font:9px var(--mono);letter-spacing:.12em;color:#d1c9dc}
 .dot{width:6px;height:6px;border-radius:50%;background:#64ffba;box-shadow:0 0 12px #64ffba;animation:pulse 1.5s infinite}
-.art-spacer{width:min(94vw,820px);aspect-ratio:1.4;margin:12px auto 0}
+.art-spacer{width:min(94vw,720px);aspect-ratio:1.4;margin:12px auto 0}
 .hero-content>*{position:relative;z-index:1}
-.hero-brand-art{position:fixed;left:50%;top:50%;transform:translate(-50%,-50%);z-index:0;display:grid;place-items:center;width:min(94vw,820px);aspect-ratio:1.4;margin:0;isolation:isolate;pointer-events:none}
+.hero-brand-art{position:fixed;left:50%;top:50%;transform:translate(-50%,-50%);z-index:0;display:grid;place-items:center;width:min(94vw,720px);aspect-ratio:1.4;margin:0;isolation:isolate;pointer-events:none}
 .hero-content>.hero-brand-art{position:fixed;z-index:0}
 .hero-title{position:relative;z-index:2;margin:0;font-size:clamp(5.5rem,22vw,15rem);line-height:.78;font-weight:900;letter-spacing:-.12em;filter:drop-shadow(0 4px 0 #454650) drop-shadow(0 8px 0 #171820) drop-shadow(0 14px 22px #0009);transform:translateX(-.035em)}
 .hero-title span{background:linear-gradient(180deg,#fff 0%,#d8d9e0 8%,#50515a 17%,#fff 24%,#a5a7b1 33%,#34353e 43%,#fefeff 51%,#70727d 61%,#fff 70%,#454650 82%,#e9eaf0 92%,#fff 100%);background-size:100% 240%;animation:chrome 4s ease-in-out infinite;-webkit-background-clip:text;background-clip:text;color:transparent;-webkit-text-stroke:1px #ffffff75}
 .hero-sub{max-width:440px;margin:2px auto 0;color:#b6aec3;font-size:13px;line-height:1.9}.hero-sub strong{color:#fff}
 .telemetry{display:flex;justify-content:center;flex-wrap:wrap;gap:8px 18px;margin-top:18px;font:9px var(--mono);letter-spacing:.12em;color:#8c829b}
-.hero-actions{display:flex;flex-direction:column;gap:12px;width:min(100%,380px);margin:26px auto 0}
+.hero-actions{display:flex;flex-direction:column;gap:12px;width:min(100%,340px);margin:26px auto 0}
 
 .ticker{position:relative;z-index:1;overflow:hidden;padding:18px 0;border-block:1px solid var(--ln);background:#ffffff04}
 .ticker-track{display:flex;width:max-content;animation:ticker 26s linear infinite}
@@ -179,7 +179,7 @@ html:not(.js-ready) .reveal{opacity:1;transform:none;filter:none}
 .reveal{opacity:0;transform:translateY(46px) scale(.97);filter:blur(14px);transition:opacity .9s ease,transform 1s cubic-bezier(.16,1,.3,1),filter .9s ease}.reveal.visible{opacity:1;transform:none;filter:none}
 @media(min-width:700px){
  .desktop-nav{display:flex}.menu-toggle{display:none}.clock{display:block}
- .hero-actions{width:auto;flex-direction:row;justify-content:center}.btn{min-width:200px}
+ .btn{min-width:200px}
  .section{padding:120px 0}.sec-head{flex-direction:row;align-items:flex-end;justify-content:space-between}
  .event-layout{grid-template-columns:minmax(0,1.5fr) minmax(250px,.7fr)}.holo{min-height:620px}.holo-body{padding:34px}
  .ev-bottom{flex-direction:row;align-items:center;justify-content:space-between}
@@ -242,11 +242,13 @@ html:not(.js-ready) .gate{display:none}
 .show.single .show-btn,.show.single .show-prog{display:none}
 .show-empty{position:absolute;inset:0;display:grid;place-items:center;font:800 1.1rem var(--disp);color:#8c829b}
 .gate-actions .btn{min-width:240px;min-height:56px;font-size:11px}
+.btn-t{border:1px solid #ff299990;background:#ff299918;color:#fff;box-shadow:0 0 24px #ff299933}
+.hero-ig{display:inline-flex;align-items:center;gap:8px;margin-top:20px;font:11px var(--mono);letter-spacing:.1em;color:#c1b9cc;text-decoration:none;transition:color .2s}.hero-ig:hover{color:var(--pk)}
 </style>
 </head>
 <body>
 <div class="prog" id="prog"></div><div class="glow" id="glow"></div>
-<div class="gate" id="gate" role="dialog" aria-label="VIBE EVENT giriş"><div class="gate-in"><div class="tag">Kırıkkale node · online</div><h2 class="gate-title"><span class="gt">ENTER</span><br>THE VIBE</h2><p class="gate-sub">EN İYİ DENEYİM İÇİN SESİ AÇ</p><div class="gate-actions"><button type="button" class="btn btn-p" id="enterSound">SESLİ GİR</button></div></div></div>
+<div class="gate" id="gate" role="dialog" aria-label="VIBE EVENT giriş"><div class="gate-in"><div class="tag">Kırıkkale node · online</div><h2 class="gate-title"><span class="gt">ENTER</span><br>THE VIBE</h2><p class="gate-sub">EN İYİ DENEYİM İÇİN SESİ AÇ</p><div class="gate-actions"><button type="button" class="btn btn-p" id="enterSound">VIBE'IN İÇİNE DAL</button></div></div></div>
 
 <div class="intro" id="intro" aria-label="VIBE EVENT açılışı"><div class="boot">
  <p>&gt; VIBE_OS v2.6 <b>[OK]</b></p><p>&gt; FREKANS YÜKLENİYOR <b>[OK]</b></p><p>&gt; KIRIKKALE NODE <b>[ONLINE]</b></p><p>&gt; ENTER THE VIBE_</p>
@@ -254,12 +256,12 @@ html:not(.js-ready) .gate{display:none}
 
 <header class="site-header" id="siteHeader"><div class="nav-inner">
  <a href="#home" class="brand"><span class="brand-mark"><img src="Paragraf metniniz.png" alt="" onerror="this.style.display='none'">V</span><span class="brand-name">VIBE EVENT</span></a>
- <nav class="desktop-nav"><a href="#events">EVENTS</a><a href="#frequency">THE VIBE</a><a href="#experience">EXPERIENCE</a><a href="#archive">ARCHIVE</a><a href="#collective">COLLAB</a><a href="#team">TEAM</a></nav>
+ <nav class="desktop-nav"><a href="#events">EVENTS</a><a href="#archive">ARCHIVE</a><a href="#experience">EXPERIENCE</a><a href="#frequency">THE VIBE</a><a href="#collective">COLLAB</a><a href="#team">TEAM</a></nav>
  <div class="nav-actions"><span class="clock" id="clock">--:--:--</span><a href="#events" class="nav-ticket">NEXT EVENT</a><button class="menu-toggle" id="menuButton" type="button" aria-label="Menüyü aç" aria-expanded="false"><span></span><span></span></button></div>
 </div></header>
 
 <div class="full-menu" id="mobileMenu" aria-hidden="true"><div class="full-menu-label">EXPLORE THE UNIVERSE</div>
- <ul class="full-menu-links"><li><a href="#events">EVENTS</a></li><li><a href="#frequency">THE VIBE</a></li><li><a href="#experience">EXPERIENCE</a></li><li><a href="#archive">ARCHIVE</a></li><li><a href="#collective">COLLABORATE</a></li><li><a href="#team">THE TEAM</a></li></ul></div>
+ <ul class="full-menu-links"><li><a href="#events">EVENTS</a></li><li><a href="#archive">ARCHIVE</a></li><li><a href="#experience">EXPERIENCE</a></li><li><a href="#frequency">THE VIBE</a></li><li><a href="#collective">COLLABORATE</a></li><li><a href="#team">THE TEAM</a></li></ul></div>
 
 <main>
 <section class="hero" id="home">
@@ -270,7 +272,8 @@ html:not(.js-ready) .gate{display:none}
   <div class="hero-brand-art" aria-label="VIBE yazısı ve etrafında dönen 3D sıvı metal halka"><h1 class="hero-title"><span>VIBE</span></h1></div>
   <p class="hero-sub">We don't just organize events.<br><strong>We create experiences.</strong></p>
   <div class="telemetry"><span>LAT 39.84°N</span><span>LON 33.51°E</span><span>SIGNAL ▮▮▮▮▯</span></div>
-  <div class="hero-actions"><a href="#events" class="btn btn-p">DISCOVER THE VIBE</a><a href="#team" class="btn btn-s">JOIN THE MOVEMENT</a></div>
+  <div class="hero-actions"><a href="#events" class="btn btn-p">DISCOVER THE VIBE</a><a href="#team" class="btn btn-s">JOIN THE TEAM</a><a href="https://www.instagram.com/vibe.eventt/" class="btn btn-t" target="_blank" rel="noopener noreferrer">BİLET AL</a></div>
+  <a href="https://www.instagram.com/vibe.eventt/" class="hero-ig" target="_blank" rel="noopener noreferrer" aria-label="Instagram: @vibe.eventt"><svg viewBox="0 0 24 24" width="17" height="17" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="3" width="18" height="18" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.5" r=".9" fill="currentColor" stroke="none"/></svg>@vibe.eventt</a>
  </div>
 </section>
 
@@ -293,19 +296,11 @@ html:not(.js-ready) .gate{display:none}
  </div>
 </div></section>
 
-<section class="section frequency-section reveal" id="frequency">
- <div class="frequency-atmosphere" aria-hidden="true"></div>
- <div class="container">
-  <div class="tag">02 / THE FREQUENCY · THE VIBE CODE</div>
-  <div class="frequency-heading"><h2 class="frequency-title">MORE THAN<br><span class="gradient-text">THE MUSIC.</span></h2><p class="frequency-intro">Bir geceyi unutulmaz yapan tek bir şey değil. Ses, ışık, kalabalık ve eve dönerken bile üzerinde kalan o his.</p></div>
-  <div class="frequency-grid">
-   <article class="frequency-card frequency-card-sound reveal"><div class="frequency-card-top"><span>01 / SOUND</span><span class="frequency-glyph" aria-hidden="true">)))</span></div><div class="frequency-visual sound-visual" aria-hidden="true"><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i></div><h3>FEEL THE<br>LOW END.</h3><p>Ritmi sadece duymadığın, içinde hissettiğin anlar.</p></article>
-   <article class="frequency-card frequency-card-light reveal"><div class="frequency-card-top"><span>02 / LIGHT</span><span class="frequency-glyph" aria-hidden="true">✳</span></div><div class="frequency-visual light-visual" aria-hidden="true"><i></i><i></i><i></i></div><h3>OWN THE<br>NIGHT.</h3><p>Işıklar sönerken değil, bütün gece boyunca akılda kalan görüntüler.</p></article>
-   <article class="frequency-card frequency-card-people reveal"><div class="frequency-card-top"><span>03 / PEOPLE</span><span class="frequency-glyph" aria-hidden="true">✳</span></div><div class="frequency-visual people-visual" aria-hidden="true"><i></i><i></i><i></i><i></i><i></i><i></i><i></i></div><h3>STRANGERS<br>TO STORIES.</h3><p>Aynı ritimde buluşan insanlar, sonradan anlatılan hikâyeler.</p></article>
-   <article class="frequency-card frequency-card-memory reveal"><div class="frequency-card-top"><span>04 / MEMORY</span><span class="frequency-glyph" aria-hidden="true">∞</span></div><div class="frequency-visual memory-visual" aria-hidden="true"><div class="memory-orbit"></div><div class="memory-core">V</div></div><h3>TAKE THE<br>FEELING HOME.</h3><p>Müzik biter. Gecenin sende bıraktığı şey kalır.</p></article>
-  </div>
- </div>
-</section>
+<section class="section reveal" id="archive"><div class="container">
+ <div class="tag">02 / Archive</div>
+ <div class="sec-head"><h2 class="sec-title">WE'VE<br><span class="gt">BEEN THERE.</span></h2><p class="sec-desc">Partiden kareler. Her gece bir hikâye.</p></div>
+ <div class="show" id="show"><div class="show-stage"></div><div class="hud"><i></i><i></i><i></i><i></i></div><div class="show-ui"><span class="show-count">-- / --</span><div class="show-prog"><b></b></div><button class="show-btn" id="prev" type="button" aria-label="Önceki">‹</button><button class="show-btn" id="next" type="button" aria-label="Sonraki">›</button></div></div>
+</div></section>
 
 <section class="section reveal" id="experience"><div class="container">
  <div class="tag">03 / Experience</div>
@@ -316,11 +311,19 @@ html:not(.js-ready) .gate{display:none}
   <div class="cap"><span>MUSIC · PEOPLE · ENERGY</span><span>● REC</span></div></div>
 </div></section>
 
-<section class="section reveal" id="archive"><div class="container">
- <div class="tag">04 / Archive</div>
- <div class="sec-head"><h2 class="sec-title">WE'VE<br><span class="gt">BEEN THERE.</span></h2><p class="sec-desc">Partiden kareler. Her gece bir hikâye.</p></div>
- <div class="show" id="show"><div class="show-stage"></div><div class="hud"><i></i><i></i><i></i><i></i></div><div class="show-ui"><span class="show-count">-- / --</span><div class="show-prog"><b></b></div><button class="show-btn" id="prev" type="button" aria-label="Önceki">‹</button><button class="show-btn" id="next" type="button" aria-label="Sonraki">›</button></div></div>
-</div></section>
+<section class="section frequency-section reveal" id="frequency">
+ <div class="frequency-atmosphere" aria-hidden="true"></div>
+ <div class="container">
+  <div class="tag">04 / THE FREQUENCY · THE VIBE CODE</div>
+  <div class="frequency-heading"><h2 class="frequency-title">MORE THAN<br><span class="gradient-text">THE MUSIC.</span></h2><p class="frequency-intro">Bir geceyi unutulmaz yapan tek bir şey değil. Ses, ışık, kalabalık ve eve dönerken bile üzerinde kalan o his.</p></div>
+  <div class="frequency-grid">
+   <article class="frequency-card frequency-card-sound reveal"><div class="frequency-card-top"><span>01 / SOUND</span><span class="frequency-glyph" aria-hidden="true">)))</span></div><div class="frequency-visual sound-visual" aria-hidden="true"><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i></div><h3>FEEL THE<br>LOW END.</h3><p>Ritmi sadece duymadığın, içinde hissettiğin anlar.</p></article>
+   <article class="frequency-card frequency-card-light reveal"><div class="frequency-card-top"><span>02 / LIGHT</span><span class="frequency-glyph" aria-hidden="true">✳</span></div><div class="frequency-visual light-visual" aria-hidden="true"><i></i><i></i><i></i></div><h3>OWN THE<br>NIGHT.</h3><p>Işıklar sönerken değil, bütün gece boyunca akılda kalan görüntüler.</p></article>
+   <article class="frequency-card frequency-card-people reveal"><div class="frequency-card-top"><span>03 / PEOPLE</span><span class="frequency-glyph" aria-hidden="true">✳</span></div><div class="frequency-visual people-visual" aria-hidden="true"><i></i><i></i><i></i><i></i><i></i><i></i><i></i></div><h3>STRANGERS<br>TO STORIES.</h3><p>Aynı ritimde buluşan insanlar, sonradan anlatılan hikâyeler.</p></article>
+   <article class="frequency-card frequency-card-memory reveal"><div class="frequency-card-top"><span>04 / MEMORY</span><span class="frequency-glyph" aria-hidden="true">∞</span></div><div class="frequency-visual memory-visual" aria-hidden="true"><div class="memory-orbit"></div><div class="memory-core">V</div></div><h3>TAKE THE<br>FEELING HOME.</h3><p>Müzik biter. Gecenin sende bıraktığı şey kalır.</p></article>
+  </div>
+ </div>
+</section>
 
 <section class="section night-section reveal" id="nightflow">
  <div class="container">
@@ -354,7 +357,7 @@ html:not(.js-ready) .gate{display:none}
 </section>
 
 <section class="section reveal" id="team"><div class="container">
- <div class="tag">06 / Join us</div><br>
+ <div class="tag">07 / Join us</div><br>
  <div class="team-panel"><div><h2 class="sec-title">WANT TO BE PART OF <span class="gt">VIBE?</span></h2><p class="sec-desc" style="margin-top:18px">Organizasyon, sosyal medya, tasarım, prodüksiyon veya etkinlik operasyonlarında bizimle çalışmak ister misin?</p><div class="chips"><span>ORGANIZATION</span><span>CREATIVE</span><span>SOCIAL MEDIA</span><span>PRODUCTION</span></div></div>
   <div><p class="sec-desc">Yeni fikirler, yeni insanlar ve aynı frekansta buluşan bir ekip. Bir sonraki hikâyeyi birlikte yazalım.</p><button type="button" class="join-button" id="joinTeamButton">JOIN THE TEAM</button></div></div>
 </div></section>
@@ -375,7 +378,7 @@ html:not(.js-ready) .gate{display:none}
 
 <footer class="site-footer"><div class="container"><div class="ft">
  <div><div class="brand"><span class="brand-mark"><img src="Paragraf metniniz.png" alt="" onerror="this.style.display='none'">V</span><span class="brand-name">VIBE EVENT</span></div><p class="ft-note">Müzik, enerji ve unutulmaz geceler. Kırıkkale'de yeni bir etkinlik kültürü.</p></div>
- <nav class="ft-links"><a href="#events">EVENTS</a><a href="#frequency">THE VIBE</a><a href="#experience">EXPERIENCE</a><a href="#archive">ARCHIVE</a><a href="#collective">COLLABORATE</a><a href="#team">JOIN THE TEAM</a><a href="https://www.instagram.com/vibe.eventt/" target="_blank" rel="noopener noreferrer">INSTAGRAM</a><button type="button" id="shareBtn" class="share-btn">PAYLAŞ</button></nav>
+ <nav class="ft-links"><a href="#events">EVENTS</a><a href="#archive">ARCHIVE</a><a href="#experience">EXPERIENCE</a><a href="#frequency">THE VIBE</a><a href="#collective">COLLABORATE</a><a href="#team">JOIN THE TEAM</a><a href="https://www.instagram.com/vibe.eventt/" target="_blank" rel="noopener noreferrer">INSTAGRAM</a><button type="button" id="shareBtn" class="share-btn">PAYLAŞ</button></nav>
 </div><div class="fb"><span>© 2026 VIBE EVENT</span><span>KIRIKKALE · TURKEY</span><span>INDEPENDENT EVENT CULTURE · KIRIKKALE, TURKEY</span></div></div></footer>
 
 <script>
@@ -682,7 +685,7 @@ if(sb)sb.addEventListener("click",async()=>{const data={title:document.title,tex
 <script>
 (function(){
 const calm=matchMedia("(prefers-reduced-motion:reduce)").matches;
-const secs=[["home","HOME","#f2f5ff"],["events","EVENTS","#ffb3dc"],["frequency","THE VIBE","#c9a6ff"],["experience","EXPERIENCE","#9fe3ff"],["archive","ARCHIVE","#ffc7a3"],["nightflow","NIGHT FLOW","#b8a4ff"],["collective","COLLAB","#ff9ad0"],["team","TEAM","#a8f0ff"]];
+const secs=[["home","HOME","#f2f5ff"],["events","EVENTS","#ffb3dc"],["archive","ARCHIVE","#ffc7a3"],["experience","EXPERIENCE","#9fe3ff"],["frequency","THE VIBE","#c9a6ff"],["nightflow","NIGHT FLOW","#b8a4ff"],["collective","COLLAB","#ff9ad0"],["team","TEAM","#a8f0ff"]];
 const nav=document.createElement("nav");nav.className="dots";nav.setAttribute("aria-label","Bölümler");
 secs.forEach(a=>{const l=document.createElement("a");l.href="#"+a[0];l.dataset.l=a[1];l.setAttribute("aria-label",a[1]);nav.appendChild(l)});
 document.body.appendChild(nav);
