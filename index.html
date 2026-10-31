@@ -16,7 +16,7 @@
 <script>document.documentElement.classList.add("gated")</script>
 <style>
 :root{--pink:#ff2998;--purple:#a14dff;--blue:#40c8ff;--orange:#ff824d;--white:#fbf8ff;--muted:#a79db5;--line:#ffffff20;--panel:#100a19;--ease:cubic-bezier(.16,1,.3,1);--font2:var(--font);--bg:#05030a;--w:#fbf8ff;--m:#a79db5;--pk:#ff2998;--pu:#a14dff;--bl:#40c8ff;--or:#ff824d;--ln:#ffffff1f;--mono:"DM Mono",monospace;--font:"Plus Jakarta Sans",sans-serif;--disp:"Unbounded","Plus Jakarta Sans",sans-serif}
-@property --a{syntax:"<angle>";inherits:false;initial-value:0deg}
+@property --a{syntax:"<angle>";inherits:true;initial-value:0deg}
 *{box-sizing:border-box;margin:0;padding:0;-webkit-tap-highlight-color:transparent}
 html{scroll-behavior:smooth;scroll-padding-top:80px;background:var(--bg)}
 body{min-height:100vh;overflow-x:hidden;background:var(--bg);color:var(--w);font-family:var(--font)}
@@ -258,9 +258,25 @@ html:not(.js-ready) .gate{display:none}
 .seq-c.cur{transform:translateY(-3px);border-color:#fff}
 .seq-c.on.cur{background:#fff;box-shadow:0 0 20px #fff}
 @media(min-width:700px){.seq{padding:34px}.seq-row{display:flex;align-items:center;gap:14px}.seq-lb{width:56px;margin:0}.seq-cells{flex:1}.seq-c{height:52px}}
+/* SIVI CAM */
+html :is(.holo,.panel,.frequency-card,.collab-panel,.team-panel,.seq,.team-modal-inner,.desktop-nav,.snd){
+ background:radial-gradient(220px circle at var(--mx,25%) var(--my,0%),rgba(255,255,255,.26),transparent 62%),linear-gradient(135deg,rgba(255,255,255,.15),rgba(255,255,255,.04) 45%,rgba(255,255,255,.09)),rgba(10,6,20,.3);
+ -webkit-backdrop-filter:blur(16px) saturate(1.7) brightness(1.1);backdrop-filter:blur(16px) saturate(1.7) brightness(1.1);
+ border:1px solid rgba(255,255,255,.2);
+ box-shadow:inset 1px 1px 0 rgba(255,255,255,.4),inset -1px -1px 0 rgba(255,255,255,.07),inset 0 0 36px rgba(255,255,255,.05),0 18px 50px rgba(0,0,0,.38)}
+html .holo{box-shadow:inset 1px 1px 0 rgba(255,255,255,.4),inset -1px -1px 0 rgba(255,255,255,.07),0 0 calc(24px + var(--bass,0)*90px) #ff29984d,0 18px 50px rgba(0,0,0,.38)}
+html .snd,html .desktop-nav{border-radius:999px}
+.holo:after{content:"";position:absolute;inset:-1px;padding:1px;border-radius:inherit;pointer-events:none;background:conic-gradient(from var(--a),var(--pk),var(--pu),var(--bl),var(--or),var(--pk));-webkit-mask:linear-gradient(#000 0 0) content-box,linear-gradient(#000 0 0);-webkit-mask-composite:xor;mask:linear-gradient(#000 0 0) content-box,linear-gradient(#000 0 0);mask-composite:exclude}
+html.lg-refract :is(.holo,.panel,.frequency-card,.snd,.desktop-nav){-webkit-backdrop-filter:url(#lgRefract) blur(10px) saturate(1.7) brightness(1.1);backdrop-filter:url(#lgRefract) blur(10px) saturate(1.7) brightness(1.1)}
+html :is(.btn-s,.btn-t,.nav-ticket,.toast){-webkit-backdrop-filter:blur(14px) saturate(1.6);backdrop-filter:blur(14px) saturate(1.6);box-shadow:inset 1px 1px 0 rgba(255,255,255,.35),inset -1px -1px 0 rgba(255,255,255,.06),0 8px 26px rgba(0,0,0,.3)}
+html :is(.btn-s,.nav-ticket,.toast){background:linear-gradient(135deg,rgba(255,255,255,.16),rgba(255,255,255,.05))}
+html .btn-t{background:linear-gradient(135deg,rgba(255,41,152,.36),rgba(255,41,152,.1))}
+html :is(.frame,.show){box-shadow:inset 1px 1px 0 rgba(255,255,255,.3),inset -1px -1px 0 rgba(255,255,255,.06),0 18px 50px rgba(0,0,0,.38)}
+html :is(.frequency-card,.panel,.collab-panel){transition:transform .25s cubic-bezier(.16,1,.3,1),border-color .35s,box-shadow .35s}
 </style>
 </head>
 <body>
+<svg width="0" height="0" style="position:absolute" aria-hidden="true" focusable="false"><filter id="lgRefract" x="0" y="0" width="100%" height="100%"><feTurbulence type="fractalNoise" baseFrequency=".008 .012" numOctaves="2" seed="3" result="n"/><feGaussianBlur in="n" stdDeviation="2" result="nb"/><feDisplacementMap in="SourceGraphic" in2="nb" scale="26" xChannelSelector="R" yChannelSelector="G"/></filter></svg>
 <div class="prog" id="prog"></div><div class="glow" id="glow"></div>
 <div class="gate" id="gate" role="dialog" aria-label="VIBE EVENT giriş"><div class="gate-in"><div class="tag">Kırıkkale node · online</div><h2 class="gate-title"><span class="gt">ENTER</span><br>THE VIBE</h2><p class="gate-sub">EN İYİ DENEYİM İÇİN SESİ AÇ</p><div class="gate-actions"><button type="button" class="btn btn-p" id="enterSound">VIBE'IN İÇİNE DAL</button></div></div></div>
 
@@ -849,6 +865,22 @@ let x0=null;host.addEventListener("pointerdown",e=>{x0=e.clientX});
 addEventListener("pointerup",e=>{if(x0===null)return;const dx=e.clientX-x0;x0=null;if(Math.abs(dx)>45&&slides.length>1)show(cur+(dx<0?1:-1))});
 if("IntersectionObserver" in window)new IntersectionObserver(en=>{vis=en[0].isIntersecting;if(vis&&!started){started=true;load().then(build)}},{rootMargin:"400px"}).observe(host);
 else load().then(build);
+})();
+</script>
+<script>
+(function(){
+const sel=".holo,.panel,.frequency-card,.collab-panel,.team-panel,.seq,.team-modal-inner,.desktop-nav,.snd";
+document.addEventListener("pointermove",e=>{const c=e.target.closest&&e.target.closest(sel);if(!c)return;const r=c.getBoundingClientRect();c.style.setProperty("--mx",(e.clientX-r.left)+"px");c.style.setProperty("--my",(e.clientY-r.top)+"px")},{passive:true});
+try{if(window.chrome&&CSS.supports("backdrop-filter","url(#a)")&&matchMedia("(pointer:fine)").matches)document.documentElement.classList.add("lg-refract")}catch(e){}
+})();
+</script>
+<script>
+(function(){
+if(!matchMedia("(pointer:fine)").matches||matchMedia("(prefers-reduced-motion:reduce)").matches)return;
+document.querySelectorAll(".frequency-card,.panel,.collab-panel").forEach(c=>{
+ c.addEventListener("pointermove",e=>{const r=c.getBoundingClientRect(),x=(e.clientX-r.left)/r.width-.5,y=(e.clientY-r.top)/r.height-.5;c.style.transform="perspective(900px) rotateY("+(x*7).toFixed(2)+"deg) rotateX("+(-y*7).toFixed(2)+"deg) translateY(-4px)"});
+ c.addEventListener("pointerleave",()=>{c.style.transform=""});
+});
 })();
 </script>
 </body>
