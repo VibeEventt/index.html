@@ -411,8 +411,8 @@ html :is(.frequency-card,.panel,.collab-panel){transition:transform .25s cubic-b
   <div class="team-field"><label for="tc">Şehir</label><input id="tc" name="city" placeholder="Kırıkkale" required></div>
   <div class="team-field"><label for="ta">Hangi Alanda Yer Almak İstiyorsun?</label><select id="ta" name="area" required><option value="" disabled selected>Bir alan seç</option><option>Organizasyon</option><option>Sosyal Medya</option><option>Tasarım</option><option>Fotoğraf / Video</option><option>Prodüksiyon</option><option>DJ / Müzik</option><option>Gönüllü / Etkinlik Ekibi</option><option>Diğer</option></select></div>
   <div class="team-field"><label for="tb">Bize Biraz Kendinden Bahset</label><textarea id="tb" name="about" placeholder="Neler yapıyorsun, neden VIBE'ın parçası olmak istiyorsun?" required></textarea></div>
-  <button type="submit" class="team-submit">SEND APPLICATION</button><div class="note">Gönderince başvurun kopyalanır, Instagram DM'inden bize iletirsin.</div></form></div>
- <div class="team-success" id="teamSuccess"><h3>BAŞVURUN HAZIR ✓</h3><p>Metni kopyaladık. Instagram'da bize DM olarak yapıştırman yeterli.</p><textarea readonly id="appText" style="width:100%;min-height:130px;margin-top:14px;padding:12px;border:1px solid #ffffff21;border-radius:12px;background:#ffffff0b;font-size:11px"></textarea><a class="btn btn-p" href="https://ig.me/m/vibe.eventt" target="_blank" rel="noopener noreferrer" style="margin-top:16px">INSTAGRAM'DAN GÖNDER</a></div>
+  <input name="website" tabindex="-1" autocomplete="off" aria-hidden="true" style="position:absolute;left:-9999px;opacity:0"><button type="submit" class="team-submit">SEND APPLICATION</button><div class="note">Başvurun doğrudan ekibe iletilir.</div></form></div>
+ <div class="team-success" id="teamSuccess"><h3>BAŞVURUN ALINDI ✓</h3><p>Başvurun ekibe iletildi. İstersen Instagram'dan da bize yazabilirsin.</p><textarea readonly id="appText" style="display:none;width:100%;min-height:130px;margin-top:14px;padding:12px;border:1px solid #ffffff21;border-radius:12px;background:#ffffff0b;font-size:11px"></textarea><a class="btn btn-p" href="https://ig.me/m/vibe.eventt" target="_blank" rel="noopener noreferrer" style="margin-top:16px">INSTAGRAM'DAN BİZE YAZ</a></div>
 </div></div>
 
 <footer class="site-footer"><div class="container"><div class="ft">
@@ -747,7 +747,6 @@ if(form)form.addEventListener("submit",()=>{
  const g=n=>(form.elements[n]&&form.elements[n].value||"").trim();
  const msg="VIBE EVENT — EKİP BAŞVURUSU\nAd Soyad: "+g("name")+"\nInstagram: "+g("instagram")+"\nTelefon: "+g("phone")+"\nŞehir: "+g("city")+"\nAlan: "+g("area")+"\nHakkımda: "+g("about");
  const box=document.getElementById("appText");if(box)box.value=msg;
- if(navigator.clipboard)navigator.clipboard.writeText(msg).catch(()=>{});
 });
 })();
 </script>
@@ -880,6 +879,26 @@ if(!matchMedia("(pointer:fine)").matches||matchMedia("(prefers-reduced-motion:re
 document.querySelectorAll(".frequency-card,.panel,.collab-panel").forEach(c=>{
  c.addEventListener("pointermove",e=>{const r=c.getBoundingClientRect(),x=(e.clientX-r.left)/r.width-.5,y=(e.clientY-r.top)/r.height-.5;c.style.transform="perspective(900px) rotateY("+(x*7).toFixed(2)+"deg) rotateX("+(-y*7).toFixed(2)+"deg) translateY(-4px)"});
  c.addEventListener("pointerleave",()=>{c.style.transform=""});
+});
+})();
+</script>
+<script>
+/* BAŞVURU FORMU -> Google Apps Script. Sütun adları: name, instagram, phone, city, area, about, source, time */
+(function(){
+const URL_="https://script.google.com/macros/s/AKfycbxejTiHAugr3PL6NVcwkvAN_gA-zAPo8WJwZDLWgnZGfedGiHo3BwG9FvnYkYnXeYI/exec";
+const MODE="form"; /* "form" = e.parameter ile okunur, "json" = JSON.parse(e.postData.contents) ile okunur */
+const form=document.getElementById("teamForm");if(!form)return;let last=0;
+form.addEventListener("submit",()=>{
+ if(!form.checkValidity())return;
+ const g=n=>(form.elements[n]&&form.elements[n].value||"").trim();
+ if(g("website"))return;
+ if(Date.now()-last<15000)return;last=Date.now();
+ const data={name:g("name"),instagram:g("instagram"),phone:g("phone"),city:g("city"),area:g("area"),about:g("about"),source:"vibe-site",time:new Date().toISOString()};
+ const json=MODE==="json";
+ fetch(URL_,{method:"POST",mode:"no-cors",body:json?JSON.stringify(data):new URLSearchParams(data),headers:json?{"Content-Type":"text/plain;charset=utf-8"}:undefined}).catch(()=>{
+  const h=document.querySelector("#teamSuccess h3"),p=document.querySelector("#teamSuccess p"),t=document.getElementById("appText");
+  if(h)h.textContent="GÖNDERİLEMEDİ";if(p)p.textContent="Bağlantı kurulamadı. Aşağıdaki metni kopyalayıp Instagram'dan bize yazabilirsin.";if(t)t.style.display="block";
+ });
 });
 })();
 </script>
