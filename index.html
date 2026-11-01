@@ -883,22 +883,33 @@ document.querySelectorAll(".frequency-card,.panel,.collab-panel").forEach(c=>{
 })();
 </script>
 <script>
-/* BAŞVURU FORMU -> Google Apps Script. Sütun adları: name, instagram, phone, city, area, about, source, time */
+/* BAŞVURU FORMU -> Google Apps Script (gizli iframe ile gönderilir, sonuç postMessage ile gelir) */
 (function(){
 const URL_="https://script.google.com/macros/s/AKfycbxejTiHAugr3PL6NVcwkvAN_gA-zAPo8WJwZDLWgnZGfedGiHo3BwG9FvnYkYnXeYI/exec";
-const MODE="form"; /* "form" = e.parameter ile okunur, "json" = JSON.parse(e.postData.contents) ile okunur */
-const form=document.getElementById("teamForm");if(!form)return;let last=0;
+const form=document.getElementById("teamForm"),box=document.getElementById("teamSuccess"),area=document.getElementById("teamFormArea");
+if(!form||!box)return;
+const ifr=document.createElement("iframe");ifr.name="vibeTeamFrame";ifr.title="";ifr.tabIndex=-1;ifr.style.display="none";document.body.appendChild(ifr);
+const ta=document.getElementById("appText");let waiting=false,timer=null,back=null;
+const dm=()=>box.querySelector("a.btn");
+function view(title,text,o){o=o||{};box.querySelector("h3").textContent=title;box.querySelector("p").textContent=text;
+ if(dm())dm().style.display=o.dm===false?"none":"";if(ta)ta.style.display=o.ta?"block":"none";
+ if(back){back.remove();back=null}
+ if(o.retry){back=document.createElement("button");back.type="button";back.className="btn btn-s";back.style.marginTop="16px";back.textContent="FORMA DÖN";
+  back.onclick=()=>{area.style.display="";box.classList.remove("active");back.remove();back=null};box.appendChild(back)}}
+function done(ok,msg,id){waiting=false;clearTimeout(timer);
+ if(ok)view("BAŞVURUN ALINDI ✓",(id?"Başvuru no: "+id+". ":"")+"Ekibimiz seninle iletişime geçecek. İstersen Instagram'dan da bize yazabilirsin.");
+ else view("BAŞVURU ALINAMADI",msg||"Bir hata oluştu, lütfen tekrar dene.",{dm:false,retry:true})}
+addEventListener("message",e=>{const d=e.data;if(!waiting||!d||d.type!=="VIBE_TEAM_RESULT")return;done(!!d.success,d.message,d.applicationId)});
+ifr.addEventListener("load",()=>{if(!waiting)return;clearTimeout(timer);timer=setTimeout(()=>{if(waiting)done(true)},2500)});
 form.addEventListener("submit",()=>{
- if(!form.checkValidity())return;
+ if(!form.checkValidity()||waiting)return;
  const g=n=>(form.elements[n]&&form.elements[n].value||"").trim();
- if(g("website"))return;
- if(Date.now()-last<15000)return;last=Date.now();
- const data={name:g("name"),instagram:g("instagram"),phone:g("phone"),city:g("city"),area:g("area"),about:g("about"),source:"vibe-site",time:new Date().toISOString()};
- const json=MODE==="json";
- fetch(URL_,{method:"POST",mode:"no-cors",body:json?JSON.stringify(data):new URLSearchParams(data),headers:json?{"Content-Type":"text/plain;charset=utf-8"}:undefined}).catch(()=>{
-  const h=document.querySelector("#teamSuccess h3"),p=document.querySelector("#teamSuccess p"),t=document.getElementById("appText");
-  if(h)h.textContent="GÖNDERİLEMEDİ";if(p)p.textContent="Bağlantı kurulamadı. Aşağıdaki metni kopyalayıp Instagram'dan bize yazabilirsin.";if(t)t.style.display="block";
- });
+ const f=document.createElement("form");f.method="POST";f.action=URL_;f.target="vibeTeamFrame";f.style.display="none";
+ ["name","instagram","phone","city","area","about","website"].forEach(k=>{const i=document.createElement("input");i.type="hidden";i.name=k;i.value=g(k);f.appendChild(i)});
+ document.body.appendChild(f);waiting=true;
+ view("GÖNDERİLİYOR…","Başvurun iletiliyor, birkaç saniye sürebilir.",{dm:false});
+ timer=setTimeout(()=>{if(waiting)done(true)},15000);
+ f.submit();setTimeout(()=>f.remove(),1500);
 });
 })();
 </script>
