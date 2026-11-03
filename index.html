@@ -301,6 +301,12 @@ a,button,input,select,textarea,label,.seq-c{touch-action:manipulation}
 .btn:active,.nav-ticket:active,.join-button:active,.team-submit:active,.hero-ig:active,.share-btn:active,.seq-c:active,.menu-toggle:active{transform:scale(.95);filter:brightness(1.3)}
 html.zoomed *{-webkit-backdrop-filter:none!important;backdrop-filter:none!important}
 html.zoomed .reveal{transition:none!important}
+/* BAŞVURU PENCERESİ + MENÜ: ağır bulanıklık yok, pencere kendi içinde kayar, girişte otomatik yakınlaşma yok */
+.team-modal{background:rgba(5,3,10,.95)!important;-webkit-backdrop-filter:none!important;backdrop-filter:none!important;align-items:flex-start;overflow-y:auto;overscroll-behavior:contain;-webkit-overflow-scrolling:touch}
+.team-modal-inner{margin:auto;max-height:none!important;overflow:visible!important;background:#0d0914!important;-webkit-backdrop-filter:none!important;backdrop-filter:none!important}
+.full-menu{background:rgba(5,3,10,.97)!important;-webkit-backdrop-filter:none!important;backdrop-filter:none!important}
+html:has(body.modal-open),html:has(body.menu-open){overflow:hidden}
+@media(pointer:coarse){input,select,textarea{font-size:16px!important}}
 </style>
 </head>
 <body>
@@ -706,7 +712,7 @@ function init(T){
  size();
  if("ResizeObserver" in window)new ResizeObserver(()=>{size();if(still)draw(4);}).observe(back);
  else window.addEventListener("resize",size);
- const loop=ms=>{requestAnimationFrame(loop);const dt=ms-last;last=ms;slow=dt>34?slow+1:Math.max(0,slow-1);if(slow>90){slow=0;if(cap>1.25){cap=1.25;size();}else if(!LON){LON=true;document.documentElement.classList.add("lite","weak");size();}}fc++;{const dp=sm/innerHeight,st=(LON&&dp>.3?2:1)*(dp>3?4:dp>1.2?2:1);if(on&&!window.__zoomed&&fc%st===0)draw(ms/1000)}};
+ const loop=ms=>{requestAnimationFrame(loop);const dt=ms-last;last=ms;slow=dt>34?slow+1:Math.max(0,slow-1);if(slow>90){slow=0;if(cap>1.25){cap=1.25;size();}else if(!LON){LON=true;document.documentElement.classList.add("lite","weak");size();}}fc++;{const dp=sm/innerHeight,st=(LON&&dp>.3?2:1)*(dp>3?4:dp>1.2?2:1);if(on&&!window.__zoomed&&!document.body.classList.contains("modal-open")&&!document.body.classList.contains("menu-open")&&fc%st===0)draw(ms/1000)}};
  if(still)draw(4);else requestAnimationFrame(loop);
 }
 })();
