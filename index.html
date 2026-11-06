@@ -328,7 +328,7 @@ html.lite .btn-big{animation:gflow 6s linear infinite}html.lite .btn-big:before{
 .pchip.hot{border-color:var(--pk);box-shadow:0 0 14px #ff299966}
 .poster figcaption{padding:16px 20px 20px}
 .pl{position:absolute;inset:0;z-index:3}
-.holo-poster{position:absolute;inset:0;background:linear-gradient(to top,rgba(7,5,12,.94) 0%,rgba(7,5,12,.8) 42%,rgba(7,5,12,.3) 74%,rgba(7,5,12,.12) 100%),url("NO-MORE-STRESS.jpeg") center top/cover no-repeat;pointer-events:none}
+.holo-poster{position:absolute;inset:0;background:linear-gradient(to top,rgba(7,5,12,.94) 0%,rgba(7,5,12,.8) 42%,rgba(7,5,12,.3) 74%,rgba(7,5,12,.12) 100%),var(--nms,linear-gradient(transparent,transparent)) center top/cover no-repeat;pointer-events:none}
 </style>
 </head>
 <body>
@@ -391,7 +391,7 @@ html.lite .btn-big{animation:gflow 6s linear infinite}html.lite .btn-big:before{
  <div class="show" id="show"><div class="show-stage"></div><div class="hud"><i></i><i></i><i></i><i></i></div><div class="show-ui"><span class="show-count">-- / --</span><div class="show-prog"><b></b></div><button class="show-btn" id="prev" type="button" aria-label="Önceki">‹</button><button class="show-btn" id="next" type="button" aria-label="Sonraki">›</button></div></div>
  <div class="posters">
   <figure class="poster"><div class="pf"><span class="pchip">ARŞİV</span><div class="poster-art">OPEN<br>YOUR EYES</div><img src="DJ-TINA.jpeg" alt="OPEN YOUR EYES — DJ TINA afişi" decoding="async" onerror="this.style.display='none'"></div><figcaption><small>22 EYLÜL 2026 · VIBE EVENT</small><h3>OPEN YOUR EYES</h3><p>DJ TINA</p></figcaption></figure>
-  <figure class="poster poster-next"><a class="pl" href="#events" aria-label="NO MORE STRESS etkinliğine git"></a><div class="pf"><span class="pchip hot">SIRADAKİ</span><div class="poster-art">NO MORE<br>STRESS</div><img src="NO-MORE-STRESS.jpeg" alt="NO MORE STRESS afişi" decoding="async" onerror="this.style.display='none'"></div><figcaption><small>24 KASIM 2026 · TERAPİ CAFE</small><h3>NO MORE STRESS</h3><p>ALPERBZ × ERBILELLEZ</p></figcaption></figure>
+  <figure class="poster poster-next"><a class="pl" href="#events" aria-label="NO MORE STRESS etkinliğine git"></a><div class="pf"><span class="pchip hot">SIRADAKİ</span><div class="poster-art">NO MORE<br>STRESS</div><img id="nmsImg" alt="NO MORE STRESS afişi" decoding="async" style="display:none"></div><figcaption><small>24 KASIM 2026 · TERAPİ CAFE</small><h3>NO MORE STRESS</h3><p>ALPERBZ × ERBILELLEZ</p></figcaption></figure>
  </div>
 </div></section>
 
@@ -1024,6 +1024,18 @@ document.addEventListener("click",e=>{const a=e.target.closest&&e.target.closest
 const f=()=>{const z=vv?vv.scale>1.08:false;window.__zoomed=z;h.classList.toggle("zoomed",z)};
 if(vv)vv.addEventListener("resize",f);f();
 document.addEventListener("touchstart",function(){},{passive:true});})();
+</script>
+<script>
+/* NO MORE STRESS afişini bul: dosya adı farklı yazılmış olsa da (uzantı, büyük/küçük harf) ilk yüklenen kullanılır */
+(function(){
+const names=["NO-MORE-STRESS.jpeg.JPG","NO-MORE-STRESS.jpeg%20.JPG","NO-MORE-STRESS.jpeg","NO-MORE-STRESS.JPG","NO-MORE-STRESS.jpg","NO-MORE-STRESS.png","NO-MORE-STRESS.webp","IMG_5432.JPG"];
+const img=document.getElementById("nmsImg");let i=0;
+function next(){if(i>=names.length){console.warn("NO MORE STRESS afişi bulunamadı. Denenen adlar:",names.join(", "));return}
+ const u=names[i++],p=new Image();
+ p.onload=()=>{document.documentElement.style.setProperty("--nms",'url("'+u+'")');if(img){img.src=u;img.style.display=""}};
+ p.onerror=next;p.src=u}
+next();
+})();
 </script>
 </body>
 </html>
